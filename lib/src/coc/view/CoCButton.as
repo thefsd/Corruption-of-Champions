@@ -14,8 +14,12 @@ package coc.view {
 	import flash.display.MovieClip;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
+	import flash.text.Font;
 
 	import flash.events.MouseEvent;
+
+	import ButtonLabelFont;
 
 	public class CoCButton extends MovieClip {
 		public static const
@@ -32,10 +36,7 @@ package coc.view {
 			toolTipText :String;
 
 		public function CoCButton( labelField :TextField = null, backgroundGraphic :MovieClip = null ) :void {
-			if( ! labelField ) {
-				labelField = createLabelField();
-			}
-
+			// Set up the BG...
 			if( ! backgroundGraphic ) {
 				backgroundGraphic = createBackgroundGraphic();
 			}
@@ -44,8 +45,14 @@ package coc.view {
 				this.y = backgroundGraphic.y;
 			}
 
-			this.labelField = labelField;
 			this.backgroundGraphic = backgroundGraphic;
+
+			// Set up the TF...
+			if( ! labelField ) {
+				labelField = createLabelField();
+			}
+
+			this.labelField = labelField;
 
 			this.mouseChildren = false;
 
@@ -60,7 +67,23 @@ package coc.view {
 
 		public static function createLabelField() :TextField {
 			var tf :TextField,
-				tfFormat :TextFormat;
+				tfFormat :TextFormat,
+				buttonFont :Font;
+
+			buttonFont = new ButtonLabelFont;
+
+			tfFormat = new TextFormat;
+
+			tfFormat.font = buttonFont.fontName;
+			tfFormat.size = 18;
+			tfFormat.leading = 2;
+			tfFormat.align = TextFormatAlign.CENTER;
+
+			tf = new TextField;
+
+			tf.defaultTextFormat = tfFormat;
+			tf.height = LABEL_FIELD_HEIGHT;
+			tf.embedFonts = true;
 
 			return tf;
 		};
@@ -110,6 +133,7 @@ package coc.view {
 			this._labelField.x = 0;
 			this._labelField.y = LABEL_FIELD_Y_OFFSET;
 			this._labelField.width = this.width;
+			trace( "CoCButton: Label field width:", this._labelField.width );
 			this._labelField.height = LABEL_FIELD_HEIGHT;
 		};
 

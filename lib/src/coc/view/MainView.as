@@ -25,17 +25,6 @@ package coc.view {
 
 	import coc.model.GameModel;
 
-	import buttonBackground0;
-	import buttonBackground1;
-	import buttonBackground2;
-	import buttonBackground3;
-	import buttonBackground4;
-	import buttonBackground5;
-	import buttonBackground6;
-	import buttonBackground7;
-	import buttonBackground8;
-	import buttonBackground9;
-
 	public class MainView extends MovieClip {
 		// Menu button names.
 		public static const MENU_NEW_MAIN :String = 'newGame';
@@ -192,30 +181,17 @@ package coc.view {
 			this.bottomButtonBGs = [];
 			this.bottomButtons = [];
 
-			bgClasses = [
-				buttonBackground0,
-				buttonBackground1,
-				buttonBackground2,
-				buttonBackground3,
-				buttonBackground4,
-				buttonBackground5,
-				buttonBackground6,
-				buttonBackground7,
-				buttonBackground8,
-				buttonBackground9 ];
-
 			backgroundChildIndex = this.getChildIndex( background );
 
 			for( bi = 0; bi < BOTTOM_BUTTON_COUNT; ++bi ) {
-				// TODO: Move coordinate calculations to point to the button, not it's BG.
 				// TODO?: Longer term: make a field that autopositions a desired number of buttons through out a set space rather than does this all hard coded?
-				b = new (bgClasses[ bi ])();
-				b.name = 'b' + String( (bi + 1) % 10 ) + 'BG';
 
 				r = (bi / BOTTOM_BUTTON_PER_ROW_COUNT) << 0;
 				c = bi % BOTTOM_BUTTON_PER_ROW_COUNT;
-				
-				button = new CoCButton( this.bottomButtonTexts[ bi ] );
+
+				// button = new CoCButton( this.bottomButtonTexts[ bi ] );
+				this.removeChild( this.bottomButtonTexts[ bi ] );
+				button = new CoCButton();
 
 				button.x = BUTTON_X_OFFSET + c * BUTTON_X_DELTA;
 				button.y = BUTTON_Y_OFFSET + r * BUTTON_Y_DELTA;
