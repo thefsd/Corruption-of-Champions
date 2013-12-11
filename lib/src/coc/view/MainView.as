@@ -23,18 +23,18 @@ package coc.view {
 	import fl.controls.ComboBox; 
 	import fl.data.DataProvider; 
 
-    import coc.model.GameModel;
+	import coc.model.GameModel;
 
-    import buttonBackground0;
-    import buttonBackground1;
-    import buttonBackground2;
-    import buttonBackground3;
-    import buttonBackground4;
-    import buttonBackground5;
-    import buttonBackground6;
-    import buttonBackground7;
-    import buttonBackground8;
-    import buttonBackground9;
+	import buttonBackground0;
+	import buttonBackground1;
+	import buttonBackground2;
+	import buttonBackground3;
+	import buttonBackground4;
+	import buttonBackground5;
+	import buttonBackground6;
+	import buttonBackground7;
+	import buttonBackground8;
+	import buttonBackground9;
 
 	public class MainView extends MovieClip {
 		// Menu button names.
@@ -207,18 +207,20 @@ package coc.view {
 			backgroundChildIndex = this.getChildIndex( background );
 
 			for( bi = 0; bi < BOTTOM_BUTTON_COUNT; ++bi ) {
+				// TODO: Move coordinate calculations to point to the button, not it's BG.
+				// TODO?: Longer term: make a field that autopositions a desired number of buttons through out a set space rather than does this all hard coded?
 				b = new (bgClasses[ bi ])();
 				b.name = 'b' + String( (bi + 1) % 10 ) + 'BG';
 
 				r = (bi / BOTTOM_BUTTON_PER_ROW_COUNT) << 0;
 				c = bi % BOTTOM_BUTTON_PER_ROW_COUNT;
+				
+				button = new CoCButton( this.bottomButtonTexts[ bi ] );
 
-				b.x = BUTTON_X_OFFSET + c * BUTTON_X_DELTA;
-				b.y = BUTTON_Y_OFFSET + r * BUTTON_Y_DELTA;
-				b.width = BUTTON_REAL_WIDTH;   //The button symbols are actually 135 wide
-				b.height = BUTTON_REAL_HEIGHT; //and 38 high. Not sure why the difference here.
-
-				button = new CoCButton( this.bottomButtonTexts[ bi ], b );
+				button.x = BUTTON_X_OFFSET + c * BUTTON_X_DELTA;
+				button.y = BUTTON_Y_OFFSET + r * BUTTON_Y_DELTA;
+				button.width = BUTTON_REAL_WIDTH;   //The button symbols are actually 135 wide
+				button.height = BUTTON_REAL_HEIGHT; //and 38 high. Not sure why the difference here.
 
 				this.bottomButtonBGs.push( b );
 				this.bottomButtons.push( button );

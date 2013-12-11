@@ -13,6 +13,7 @@ package coc.view {
 
 	import flash.display.MovieClip;
 	import flash.text.TextField;
+	import flash.text.TextFormat;
 
 	import flash.events.MouseEvent;
 
@@ -31,7 +32,14 @@ package coc.view {
 			toolTipText :String;
 
 		public function CoCButton( labelField :TextField = null, backgroundGraphic :MovieClip = null ) :void {
-			if( backgroundGraphic ) {
+			if( ! labelField ) {
+				labelField = createLabelField();
+			}
+
+			if( ! backgroundGraphic ) {
+				backgroundGraphic = createBackgroundGraphic();
+			}
+			else {
 				this.x = backgroundGraphic.x;
 				this.y = backgroundGraphic.y;
 			}
@@ -44,6 +52,21 @@ package coc.view {
 			this.addEventListener( MouseEvent.ROLL_OVER, this.hover );
 			this.addEventListener( MouseEvent.ROLL_OUT, this.dim );
 			this.addEventListener( MouseEvent.CLICK, this.click );
+		};
+
+
+
+		//////// Auto-creator funcs ////////
+
+		public static function createLabelField() :TextField {
+			var tf :TextField,
+				tfFormat :TextFormat;
+
+			return tf;
+		};
+
+		public static function createBackgroundGraphic() :MovieClip {
+			return new CoCButtonBG();
 		};
 
 
