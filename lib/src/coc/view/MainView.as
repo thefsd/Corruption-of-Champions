@@ -129,8 +129,6 @@ package coc.view {
 		//////// Initialization methods. /////////
 
 		protected function formatMiscItems() :void {
-			// this.mainText = this.getChildByName( "mainText" );
-
 			this.nameBox.maxChars = 54;
 
 			this.aCb = new ComboBox(); 

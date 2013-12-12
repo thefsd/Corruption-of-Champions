@@ -36,7 +36,17 @@ package coc.view {
 			toolTipText :String;
 
 		public function CoCButton( labelField :TextField = null, backgroundGraphic :MovieClip = null ) :void {
-			// Set up the BG...
+			this.setupBackgroundGraphic( backgroundGraphic );
+			this.setupLabelField( labelField );
+
+			this.mouseChildren = false;
+
+			this.addEventListener( MouseEvent.ROLL_OVER, this.hover );
+			this.addEventListener( MouseEvent.ROLL_OUT, this.dim );
+			this.addEventListener( MouseEvent.CLICK, this.click );
+		};
+
+		protected function setupBackgroundGraphic( backgroundGraphic ) :void {
 			if( ! backgroundGraphic ) {
 				backgroundGraphic = createBackgroundGraphic();
 			}
@@ -46,19 +56,14 @@ package coc.view {
 			}
 
 			this.backgroundGraphic = backgroundGraphic;
+		};
 
-			// Set up the TF...
+		protected function setupLabelField( labelField ) :void {
 			if( ! labelField ) {
 				labelField = createLabelField();
 			}
 
 			this.labelField = labelField;
-
-			this.mouseChildren = false;
-
-			this.addEventListener( MouseEvent.ROLL_OVER, this.hover );
-			this.addEventListener( MouseEvent.ROLL_OUT, this.dim );
-			this.addEventListener( MouseEvent.CLICK, this.click );
 		};
 
 
