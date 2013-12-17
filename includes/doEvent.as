@@ -57,7 +57,7 @@ public function doEvent(eventNo:Number):void
 		{
 			outputText("\n\nJojo nods respectfully at you when the meditation session is over and smiles.  ");
 			//Forest Jojo Eligible for Invite After Meditation but There's Trash in Camp -Z
-			if (flags[FUCK_FLOWER_LEVEL] >= 4 && flags[FUCK_FLOWER_KILLED] == 0 && temp % 5 == 0)
+			if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && temp % 5 == 0)
 			{
 				//replaces 'Jojo nods respectfully at you [...] "It seems you have quite a talent for this. [...]"' invite paragraphs while Treefingers is getting slut all over your campsite
 				//gives Small Talisman if PC never had follower Jojo or used it and ran from the fight
@@ -212,100 +212,8 @@ public function doEvent(eventNo:Number):void
 	//Minotaur shows up...rape?
 	else if (eventNo == 2008)
 	{
-		outputText("As you take the winding path up through the rocky trail, you come upon the opening to a cave. Peering inside, the stench of an overpowering musk washes over you. The primal scent excites you, causing you to become aroused almost immediately.  Not thinking as clearly as you normally might, you slowly sneak your way into the cave. Signs of life litter the cave floor.\n\n", true);
-		stats(0, 0, 0, 0, 0, 0, 10 + player.lib / 5, 0);
-		//Detect minotaur coming
-		if (rand(30) + player.inte / 5 > 18)
-		{
-			outputText("You spot a shadow moving and spin around to see a minotaur lumbering after you from the back of the cave!", false);
-			startCombat(4);
-			return;
-		}
-		outputText("Suddenly you're grabbed from behind, your arms held together by a single massive, furry hand. A heavy, snorting breath brushes the top of your head. You turn your neck to see a massive bull-man. His impressive dick presses ", false);
-		if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
-			outputText("against your buttocks", false);
-		else
-			outputText("into the small of your back", false);
-		outputText(" as it grows larger and harder, smearing its pre-cum into your skin and making you shiver.  ", false);
-		//High str escape
-		if (rand(20) + player.str / 3 > 18)
-		{
-			outputText("\n\nYou twist around using the additional lubrication and squirm free!  Rolling away, you come up in a crouch, ready to fight!", false);
-			startCombat(4);
-			return;
-		}
-		if (player.vaginas.length > 0)
-		{
-			outputText("The bull-man roughly grabs your hair and begins rubbing the flared head of his penis along your " + vaginaDescript(0) + ".  ", false);
-			if (player.averageVaginalWetness() < 2)
-				outputText("You aren't very wet, and fear the damage this beast will inflict on your " + vaginaDescript(0) + ".  ", false);
-			else
-				outputText("You're shamefully wet by this point, and your knees are ready to buckle.  ", false);
-		}
-		//BUTTSECKS!
-		else
-		{
-			outputText("The bull-man roughly grabs your hair and repositions himself to press against your asshole, slowly building the pressure until suddenly, the flared head pops into you.  ", false);
-			buttChange(100, true);
-		}
-		if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
-			outputText("Grabbing your buttocks with his huge hands, he lifts your buttocks, and violently drive his shaft as far into you as he can manage. You cry out, your whole lower body in fire, as your rear legs dangle helplessly. Unhindered by your weight, he uses your lower body as a cock-sleeve, as you try your best to keep your front legs from buckling.  ", false);
-		else
-		{
-			outputText("\n\nHe lifts you into the air, with little effort hefting your insignificant weight, and roughly impales you onto his shaft, forcing himself as far into you as he can manage. You cry out, and looking down you can see your stomach distending to accommodate his incredible size. Using you like a human cock-sleeve, he simply holds you by the torso and begins lifting you up and down.  ", false);
-			if (player.biggestTitSize() > 0 && player.mostBreastsPerRow() > 1 && player.breastRows.length > 0)
-			{
-				outputText("He manhandles your tits as he does so, almost violently squeezing and stretching them to his enjoyment.  ", false);
-				if (player.biggestLactation() > 1.5)
-					outputText("He then gives a grunt in what you take to be approval as your milk begins to squirt out. He licks a milk-coated finger in satisfaction.  ", false);
-			}
-		}
-		if (player.cockTotal() == 1)
-			outputText("The bull-man bends forward a little, and grabs your " + cockDescript(0) + " in a crushing grip. He makes short jerking motions as he keeps thrusting into you.", false);
-		if (player.cockTotal() > 1)
-			outputText("The bull-man bends forward a little, and grabs one of your " + cockDescript(0) + "s in a crushing grip. He makes short jerking motions as he keeps thrusting into you.", false);
-		outputText("\n\nFinally, you can feel he's ready to cum. His thrusts become shorter and faster, and just when you think you can't stand it anymore he starts shooting his sperm into you. You notice your stomach beginning to round out from the sheer amount of bull seed being pumped into your belly.  ", false);
-		stats(0, 0, 0, 0, 1, -.5, 0, 1);
-		if (player.vaginas.length > 0)
-		{
-			if (player.averageVaginalWetness() >= 2)
-			{
-				if (player.averageVaginalWetness() < 4)
-					outputText("You squirm and quiver, orgasming from the beast's rough usage.  ", false);
-				if (player.averageVaginalWetness() == 4)
-					outputText("You squirm and quiver, orgasming from the beast's rough usage, soaking him with your " + vaginaDescript(0) + ".  ", false);
-				if (player.averageVaginalWetness() == 5)
-					outputText("You orgasm on his massive rod, splattering the beast with girlcum.  ", false);
-				stats(0, 0, 0, 0, .5, 0, -100, 1);
-			}
-			if (player.averageVaginalWetness() < 2)
-			{
-				outputText("You gasp in pain, your cunt rubbed raw by the rough and violent penetration.  ", false);
-				stats(0, -.5, 0, 0, 0, 0, -5, 1);
-			}
-			//Preggers chance!
-			player.knockUp(2, 432, 101);
-		}
-		slimeFeed();
-		if (player.cockTotal() > 0 && (player.sens + rand(40) > 50))
-		{
-			outputText("You orgasm, ", false);
-			if (player.cumQ() < 25)
-				outputText("spurting your seed helplessly from the brutal rape.  ", false);
-			if (player.cumQ() >= 25 && player.cumQ() < 250)
-				outputText("squirting thick ropes of cum over the cave.  ", false);
-			if (player.cumQ() >= 250 && player.cumQ() < 500)
-				outputText("erupting potent ropes of seed in thick bursts, splattering the cave walls and floors.  ", false);
-			if (player.cumQ() >= 500)
-				outputText("erupting a thick torrent of seed that seems to go on forever, spurred by the constant pressure of the huge minotaur cock.  You paint the cave wall with cum, the beast egging you on as it roughly jacks your " + cockDescript(0) + ".  You are vaguely aware of your orgasm dragging on and on, until eventually your orgasm stops, leaving a sizable puddle of cum on the floor.  ", false);
-			stats(0, 0, 0, 0, .5, 0, -100, 1);
-		}
-		//Need to figure out minotaur cock volume for new function UNFINISHED
-		if (player.vaginas.length > 0)
-			cuntChange((24 * 3), true);
-		outputText("The bull-man relaxes for a moment, then shoves you off of him and to the cold ground.\n\nYou awaken several hours later. The bull-man is nowhere to be seen, so you make a hasty exit.", false);
-		doNext(15);
-		return;
+		// This event body was almost entirely an older version of the scene we're going to call instead
+		getRapedByMinotaur(true);
 	}
 	//Tentacle's appear!
 	else if (eventNo == 2009)
@@ -899,7 +807,7 @@ public function doEvent(eventNo:Number):void
 	{
 		spriteSelect(23);
 		outputText("Which book are you interested in perusing?", true);
-		if (flags[UNKNOWN_FLAG_NUMBER_00244] > 0)
+		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00244] > 0)
 			simpleChoices("Dangerous Plants", 2029, "Traveler's Guide", 2031, "Hentai Comic", 2033, "Yoga Guide", 2940, "Back", 2015);
 		else
 			simpleChoices("Dangerous Plants", 2029, "Traveler's Guide", 2031, "Hentai Comic", 2033, "", 0, "Back", 2015);
@@ -1028,7 +936,7 @@ public function doEvent(eventNo:Number):void
 			outputText("The Succubus stops, turns and points to you in derision. \"<i>And YOU! You no-cock, no-cunt having pissant! Take your ass back to the lab before they find out you escaped!!!!!</i>\"\n\n", false);
 			
 			outputText("The Succubus resumes her stormy exit. You look at the bottle of Cerulean Potion and wonder if it REALLY had some psychotropics in it. What the hell just happened?!", false);
-			flags[CERULEAN_POTION_NEUTER_ATTEMPTED] = 1;
+			flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] = 1;
 			doNext(1);
 			return;
 		}
@@ -1036,7 +944,7 @@ public function doEvent(eventNo:Number):void
 			outputText("\"<i>Awwww! Did my blue skin and pointy teeth scare you?</i>\" she says in a childish voice. \"<i>Believe me stud, if I wanted to harm you, I would not have let you wake up at all. I am here because you have 'called' me.</i>\" She teases you with the empty blue bottle you bought from the merchant. \"<i>My essence is in this bottle. Any man who drinks this, I am compelled to return the pleasure by drinking his.</i>\" The demon woman reaches her skinny hand down to your crotch where you see you have become fiercely erect. The demon gently strokes your cock until you begin oozing generous amounts of your own natural lubricants. The demon takes one of her massive breasts and teases you with her fat nipples. \"<i>Open your mouth,</i>\" she demands. \"<i>Take me into your mouth as I will soon take you into mine.</i>\"\n\n", false);
 		else if (player.gender == 3)
 		{
-			flags[UNKNOWN_FLAG_NUMBER_00111]++;
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00111]++;
 			outputText("\nIt is obvious that you have been confronted by a succubus. As the fire illuminates your captor, her grin widens broadly.\n\n", false);
 			
 			outputText("\"<i>Well, well, well!</i>\" the Succubus jingles. \"<i>What have we here?! A little girl with a big cock!</i>\"\n\n", false);
@@ -1808,16 +1716,16 @@ public function doEvent(eventNo:Number):void
 		temp8 = 0;
 		if (player.hasPerk("Marble's Milk") >= 0 && hasItem("Lactaid", 1))
 			temp2 = 2269;
-		if (hasItem("P.Draft", 1) && flags[MARBLE_DICK_TYPE] == 0)
+		if (hasItem("P.Draft", 1) && flags[kFLAGS.MARBLE_DICK_TYPE] == 0)
 			temp4 = 2273;
-		if (flags[MARBLE_DICK_TYPE] > 0)
+		if (flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
 		{
 			if (hasItem("PinkEgg", 1))
 				temp5 = 2270;
 			if (hasItem("L.PnkEg", 1))
 				temp6 = 2271;
 		}
-		if (flags[MARBLE_BOVA_LEVEL] < 2 && hasItem("ProBova", 1))
+		if (flags[kFLAGS.MARBLE_BOVA_LEVEL] < 2 && hasItem("ProBova", 1))
 			temp7 = 3569;
 		if (hasItem("OviElix", 1))
 			temp3 = 2272;
@@ -1971,7 +1879,7 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2149)
 	{
 		jojoSprite();
-		if (player.hasStatusAffect("Ever Raped Jojo") >= 0 || flags[JOJO_MOVE_IN_DISABLED] == 1)
+		if (player.hasStatusAffect("Ever Raped Jojo") >= 0 || flags[kFLAGS.JOJO_MOVE_IN_DISABLED] == 1)
 		{
 			outputText("You offer Jojo the chance to stay at your camp, but before you can finish your sentance he shakes his head 'no' and stalks off into the woods, remembering.", false);
 			doNext(13);
@@ -1987,13 +1895,13 @@ public function doEvent(eventNo:Number):void
 	{
 		jojoSprite();
 		//Amily meets Jojo:
-		if (flags[AMILY_MET_PURE_JOJO] == 0 && flags[AMILY_FOLLOWER] == 1 && amilyFollower())
+		if (flags[kFLAGS.AMILY_MET_PURE_JOJO] == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyFollower())
 		{
 			amilyMeetsPureJojo();
 			return;
 		}
 		//Rathazul & Jojo
-		if (flags[JOJO_RATHAZUL_INTERACTION_COUNTER] == 1 && rand(2) == 0)
+		if (flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER] == 1 && rand(2) == 0)
 		{
 			catchRathazulNapping();
 			return;
@@ -2987,7 +2895,7 @@ public function doEvent(eventNo:Number):void
 	{
 		outputText("", true);
 		shortName = "BonStrp";
-		flags[ZETAZ_LAIR_TOOK_BONDAGE_STRAPS]++;
+		flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS]++;
 		takeItem();
 		return;
 	}
@@ -3068,7 +2976,7 @@ public function doEvent(eventNo:Number):void
 		if (player.gems < 60)
 		{
 			outputText("You can't afford any minotaur cum right now!", true);
-			if (flags[SALON_PAID] == 0)
+			if (flags[kFLAGS.SALON_PAID] == 0)
 				doNext(2169);
 			else
 				salonPurchaseMenu();
@@ -3194,48 +3102,48 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2830)
 	{
 		//[doughnuts] – some thickness, lots of – tone. (+hips and butt!)
-		flags[TEMP_STORAGE_PASTRY_NAME] = "doughnuts";
-		flags[TEMP_STORAGE_PASTRY_PRICE] = 5;
+		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "doughnuts";
+		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 5;
 		nomnomnom();
 		return;
 	}
 	else if (eventNo == 2831)
 	{
 		//[cookies] – thickness and a little – tone (+hips)
-		flags[TEMP_STORAGE_PASTRY_NAME] = "cookies";
-		flags[TEMP_STORAGE_PASTRY_PRICE] = 4;
+		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "cookies";
+		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 4;
 		nomnomnom();
 		return;
 	}
 	else if (eventNo == 2832)
 	{
 		//[brownies] – lots of thickness (chance of +butt)
-		flags[TEMP_STORAGE_PASTRY_NAME] = "brownies";
-		flags[TEMP_STORAGE_PASTRY_PRICE] = 3;
+		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "brownies";
+		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 3;
 		nomnomnom();
 		return;
 	}
 	else if (eventNo == 2833)
 	{
 		//[cupcakes] – lots of – tone (chance of +hips)
-		flags[TEMP_STORAGE_PASTRY_NAME] = "cupcakes";
-		flags[TEMP_STORAGE_PASTRY_PRICE] = 3;
+		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "cupcakes";
+		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 3;
 		nomnomnom();
 		return;
 	}
 	else if (eventNo == 2834)
 	{
 		//[pound cake] – even split of + thickness and – tone.  (+butt)
-		flags[TEMP_STORAGE_PASTRY_NAME] = "pound cake";
-		flags[TEMP_STORAGE_PASTRY_PRICE] = 4;
+		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "pound cake";
+		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 4;
 		nomnomnom();
 		return;
 	}
 	else if (eventNo == 2835)
 	{
 		//[mino cum eclair] – helps your cravings and – tone!, LUST!
-		flags[TEMP_STORAGE_PASTRY_NAME] = "eclair";
-		flags[TEMP_STORAGE_PASTRY_PRICE] = 10;
+		flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = "eclair";
+		flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = 10;
 		nomnomnom();
 		return;
 	}
@@ -3264,8 +3172,8 @@ public function doEvent(eventNo:Number):void
 	{
 		if (model.time.hours == 19 || model.time.hours == 20)
 		{
-			flags[COUNTDOWN_TO_NIGHT_RAPE]++;
-			if (flags[COUNTDOWN_TO_NIGHT_RAPE] % 4 == 0 && player.gender == 1)
+			flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE]++;
+			if (flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE] % 4 == 0 && player.gender == 1)
 			{
 				nightBazaarButtfuck();
 				return;
@@ -3341,7 +3249,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2884)
 	{
-		flags[UNKNOWN_FLAG_NUMBER_00226] = 1;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] = 1;
 		roxanneDrinkingContest();
 		return;
 	}
@@ -3545,7 +3453,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2968)
 	{
-		flags[UNKNOWN_FLAG_NUMBER_00256] = 1;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00256] = 1;
 		isabellaGreeting();
 		return;
 	}
@@ -3638,13 +3546,13 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3002)
 	{
-		flags[UNKNOWN_FLAG_NUMBER_00275] = 1;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 1;
 		chooseArmorOrRobes();
 		return;
 	}
 	else if (eventNo == 3004)
 	{
-		flags[UNKNOWN_FLAG_NUMBER_00275] = 2;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 2;
 		chooseArmorOrRobes();
 		return;
 	}
@@ -3737,7 +3645,7 @@ public function doEvent(eventNo:Number):void
 	{
 		if (rand(24) == 0 && player.hasCock())
 			catgirlEncounter();
-		else if (rand(24) == 0 && flags[UNKNOWN_FLAG_NUMBER_00293] == 0)
+		else if (rand(24) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00293] == 0)
 			carephCorruptionSlaves();
 		else if (rand(24) <= 1 && player.gender > 0)
 			encounterZetsuko();

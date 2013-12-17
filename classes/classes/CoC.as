@@ -1,8 +1,13 @@
 ﻿package classes
 {
+	// BREAKING ALL THE RULES.
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+
+	import classes.CoC_Settings;
+
 	import classes.assClass;
 	import classes.breastRowClass;
-	//import classes.cockClass;
 	
 	import classes.Player;
 	import classes.Cock;
@@ -14,12 +19,16 @@
 	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
 	import classes.InputManager;
 
+	import classes.Parser;
+
 	import classes.Monsters.*;		// import all the various monsters
 	import coc.view.MainView;
 
 	import coc.model.GameModel;
 	import coc.model.TimeModel;
 
+	// Class based content? In my CoC?! It's more likely than you think!
+	import classes.content.*;
 	import fl.controls.ComboBox; 
 	import fl.data.DataProvider; 
 	import flash.display.Loader;
@@ -56,6 +65,7 @@
 		include "../../includes/input.as";
 		include "../../includes/OnLoadVariables.as";
 		include "../../includes/startUp.as";
+		include "../../includes/debug.as";
 		
 		include "../../includes/combat.as";
 		include "../../includes/doEvent.as";
@@ -76,9 +86,10 @@
 		include "../../includes/saves.as";
 		
 		// Lots of constants
-		include "../../includes/flagDefs.as";
+		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
+		public var umasShop:UmasShop = new UmasShop();
 		
 		include "../../includes/akbal.as";
 		include "../../includes/amily.as";
@@ -166,7 +177,7 @@
 		include "../../includes/niamh.as";
 		include "../../includes/oasis.as";
 		include "../../includes/ooze.as";
-		include "../../includes/parser.as";
+		//include "../../includes/parser.as";
 		include "../../includes/perkPicker.as";
 		include "../../includes/pregnancy.as";
 		include "../../includes/Raphael.as";
@@ -222,9 +233,7 @@
 
 		public var model :GameModel;
 
-		//public var mainView :MainView;
-		//public var model :GameModel;
-
+		public var parser:Parser;
 
 		// ALL THE VARIABLES:
 		// Declare the various global variables as class variables.
@@ -275,9 +284,16 @@
 
 		public function CoC()
 		{
+			// Cheatmode.
+			kGAMECLASS = this;
 			// This is a flag used to prevent the game from exiting when running under the automated tester
 			// (the chaos monkey)
-			this.testingBlockExiting = false;
+			testingBlockExiting = false;
+			
+			// Used for stopping chaos monkey on syntax errors. Separate flag so we can make stopping optional
+			CoC_Settings.haltOnErrors = false;
+			
+			this.parser = new classes.Parser(this);
 
 
 			this.model = new GameModel();
@@ -318,8 +334,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.3e3";
-			version = "v0.8.3e3 (<b>Pregnant Lynnette</b>)";
+			ver = "0.8.3f1";
+			version = "v0.8.3f1 (<b>Uma Likes 'em Pretty</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
@@ -366,12 +382,6 @@
 			flags = new DefaultDict();
 			model.flags = flags;
 
-			/*
-			for (var i = 0; i < 3000; i++)
-			{
-				flags.push(0);
-			}
-			*/
 
 			///Used everywhere to establish what the current game state is
 			// Key system variables
@@ -467,8 +477,6 @@
 			shortName = "";
 			//}endregion
 
-			//Keyboard listener!
-			// stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
 
 			// These are toggled between by the [home] key.
 			mainView.textBGWhite.visible = false;
@@ -505,20 +513,10 @@
 
 			// ******************************************************************************************
 
-
-			//var mainView.aCb:ComboBox = new ComboBox(); 
-			//mainView.aCb.dropdownWidth = 200; 
-			//mainView.aCb.width = 200; 
-			//mainView.aCb.scaleY = 1.1;
-			//mainView.aCb.move(-1250, -1550); 
-			//mainView.aCb.prompt = "Choose a perk"; 
 			mainView.aCb.dataProvider = new DataProvider(perkList); 
 			mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
 			 
-			//addChild(mainView.aCb);
-
-
-			// ******************************************************************************************
+			//mainView._getButtonToolTipText = getButtonToolTipText;
 
 
 			//Register the classes we need to be able to serialize and reconstitute so
@@ -538,17 +536,10 @@
 			//registerClassAlias("Enum", Enum);
 			//registerClassAlias("cockClass", cockClass);
 
-			//Invert shit
-			//invertGo();
 			//Hide sprites
 			mainView.hideSprite();
 			//Hide up/down arrows
 			mainView.statsView.hideUpDown();
-			//Hide choice buttons
-			//choices("one", 0, "two", 0, "three", 0, "four", 0, "five", 0, "six", 0, "seven", 0, "eight", 0, "nine", 0, "ten", 0);
-			//Call up the title screen
-
-
 
 
 			this.addFrameScript( 0, this.run );

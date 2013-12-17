@@ -1,4 +1,4 @@
-
+﻿
 public function inCombat():Boolean {
 	if(gameState == 1 || gameState == 2) return true;
 	return false;
@@ -179,7 +179,7 @@ public function doCombat(eventNum:Number):void
 	var pSpecials:int = 5161;
 	
 	if(eventNum == 5000) {
-		flags[IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
+		flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
 		mainView.hideMenuButton( MainView.MENU_DATA );
 		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 		mainView.hideMenuButton( MainView.MENU_PERKS );
@@ -419,15 +419,15 @@ public function doCombat(eventNum:Number):void
 				player.gems -= temp;
 				gameState = 0;
 				//BUNUS XPZ
-				if(flags[COMBAT_BONUS_XP_VALUE] > 0) {
-					player.XP += flags[COMBAT_BONUS_XP_VALUE];
-					outputText("  Somehow you managed to gain " + flags[COMBAT_BONUS_XP_VALUE] + " XP from the situation.", false);
-					flags[COMBAT_BONUS_XP_VALUE] = 0;
+				if(flags[kFLAGS.COMBAT_BONUS_XP_VALUE] > 0) {
+					player.XP += flags[kFLAGS.COMBAT_BONUS_XP_VALUE];
+					outputText("  Somehow you managed to gain " + flags[kFLAGS.COMBAT_BONUS_XP_VALUE] + " XP from the situation.", false);
+					flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = 0;
 				}
 				//Bonus lewts
-				if(flags[UNKNOWN_FLAG_NUMBER_00234] != "") {
-					outputText("  Somehow you came away from the encounter with " + itemLongName(flags[UNKNOWN_FLAG_NUMBER_00234]) + ".\n\n", false);
-					shortName = flags[UNKNOWN_FLAG_NUMBER_00234];
+				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] != "") {
+					outputText("  Somehow you came away from the encounter with " + itemLongName(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234]) + ".\n\n", false);
+					shortName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234];
 					menuLoc = 18;
 					takeItem();
 				}
@@ -448,7 +448,7 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Sheila") {
-			if(flags[SHEILA_DEMON] == 1) beatUpDemonSheila();
+			if(flags[kFLAGS.SHEILA_DEMON] == 1) beatUpDemonSheila();
 			else sheilaGotWhomped();
 			return;
 		}
@@ -473,7 +473,7 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Kelt") {
-			if(flags[KELT_BREAK_LEVEL] == 1) defeatKellyNDBREAKHIM();
+			if(flags[kFLAGS.KELT_BREAK_LEVEL] == 1) defeatKellyNDBREAKHIM();
 			else breakingKeltNumeroThree();
 			return;
 		}
@@ -903,7 +903,7 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Sheila") {
-			if(flags[SHEILA_DEMON] == 1) beatUpDemonSheila();
+			if(flags[kFLAGS.SHEILA_DEMON] == 1) beatUpDemonSheila();
 			else sheilaGotWhomped();
 			return;
 		}
@@ -928,7 +928,7 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Kelt") {
-			if(flags[KELT_BREAK_LEVEL] == 1) defeatKellyNDBREAKHIM();
+			if(flags[kFLAGS.KELT_BREAK_LEVEL] == 1) defeatKellyNDBREAKHIM();
 			else breakingKeltNumeroThree();
 			return;
 		}
@@ -1364,7 +1364,7 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Sheila") {
-			if(flags[SHEILA_DEMON] == 1) loseToSheila();
+			if(flags[kFLAGS.SHEILA_DEMON] == 1) loseToSheila();
 			else getBeatUpBySheila();
 			return;
 		}
@@ -1704,7 +1704,7 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Sheila") {
-			if(flags[SHEILA_DEMON] == 1) loseToSheila();
+			if(flags[kFLAGS.SHEILA_DEMON] == 1) loseToSheila();
 			else getBeatUpBySheila();
 			return;
 		}
@@ -1729,8 +1729,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Kelt") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nKelt recoils for a moment before assuming a look of superiority...");
@@ -1763,8 +1763,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "kitsune") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe kitsune recoils before running off, no longer interested in you...");
@@ -1776,8 +1776,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "satyr") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe satyr laughs heartily at your eagerness...");
@@ -1789,8 +1789,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "sandtrap" || monster.short == "sand tarp") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe sand trap seems bemused by the insects your body houses...");
@@ -1802,8 +1802,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "chameleon girl") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe chameleon girl recoils.  \"<i>Ew, gross!</i>\" she screetches as she runs away, leaving you to recover from your defeat alone.");
@@ -1824,8 +1824,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "lusty demons") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe demons smile to one at another as they watch your display, then close in...");
@@ -1854,8 +1854,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "mob of spiders-morphs") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe spiders smile to one at another as they watch your display, then close in...");
@@ -1867,8 +1867,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Goo Armor") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe armored goo sighs while you exhaust yourself...");
@@ -1882,8 +1882,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Hel" || monster.short == "salamander") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nHelia waits it out in stoic silence...");
@@ -1896,8 +1896,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "goo-girl") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe goo-girl seems confused but doesn't mind.");
@@ -1920,8 +1920,8 @@ public function doCombat(eventNum:Number):void
 			else if(monster.hasStatusAffect("spar") >= 0)
 				sparWithFriendlyKihaLose();
 			else {
-				if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-					flags[CAME_WORMS_AFTER_COMBAT] = 1;
+				if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+					flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 					infestOrgasm();
 					//Mob reaction
 					outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");
@@ -1934,8 +1934,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "minotaur gang" || monster.short == "minotaur tribe") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe minutaurs share a laugh while you cum, but their throbbing erections don't subside in the slightest.");
@@ -1947,8 +1947,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "corrupted drider") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe drider licks her lips in anticipation...");
@@ -1960,8 +1960,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "basilisk") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe basilisk smirks, but waits for you to finish...");
@@ -1973,8 +1973,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "male spider-morph") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe spider flashes a predatory grin while he waits it out...");
@@ -1986,8 +1986,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "female spider-morph") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe spider flashes a predatory grin while she waits it out...");
@@ -1999,8 +1999,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Isabella") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\n\"<i>Ick,</i>\" Isabella tuts as she turns to leave...");
@@ -2012,8 +2012,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Izma") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\n\"<i>Gross!</i>\" Izma cries as she backs away, leaving you to recover alone.");
@@ -2025,8 +2025,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "gnoll spear-thrower") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
@@ -2043,8 +2043,8 @@ public function doCombat(eventNum:Number):void
 				phyllaGnollBeatsPC();
 				return;
 			}
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
@@ -2056,8 +2056,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Zetaz") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem put off enough to care...");
@@ -2069,8 +2069,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Vala") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
@@ -2082,8 +2082,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "anemone") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem to mind at all...");
@@ -2095,8 +2095,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "imp horde") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foes don't seem put off enough to leave...");
@@ -2108,8 +2108,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Tamani's daughters") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foes seem visibly disgusted and leave, telling you to, \"<i>quit being so fucking gross...</i>\"");
@@ -2124,8 +2124,8 @@ public function doCombat(eventNum:Number):void
 			if(monster.hasStatusAffect("bimboBrawl") >= 0)
 				debimboSophieBeatsYouUp();
 			else { 
-				if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-					flags[CAME_WORMS_AFTER_COMBAT] = 1;
+				if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+					flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 					infestOrgasm();
 					//Mob reaction
 					outputText("\n\nYour foe seems disgusted by the display and leaves you to recover alone...");
@@ -2138,8 +2138,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "harpy") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
@@ -2151,8 +2151,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Ceraph") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
@@ -2180,8 +2180,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Akbal") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
@@ -2204,8 +2204,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "shark-girl") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
@@ -2219,7 +2219,7 @@ public function doCombat(eventNum:Number):void
 		if(monster.short == "Tamani") {
 			if(player.totalCocks() > 0) {
 				//hypnoslut loss scene
-				if(flags[TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
+				if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
 					getRapedByTamaniYouHypnoSlut();
 					return;
 				}
@@ -2298,8 +2298,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "secretarial succubus") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem to care...");
@@ -2311,8 +2311,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "incubus mechanic") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem to care...");
@@ -2324,8 +2324,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Omnibus Overseer") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem to care...");
@@ -2606,27 +2606,52 @@ public function doCombat(eventNum:Number):void
 	}
 	//Sand witch bad end
 	//GAME OVERS
-	if(eventNum == 5025) {
-		outputText("<b>GAME OVER</b>", true);
-		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
-		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus",10035, "BLAH", 0, "LULZ", 0);
-		mainView.showMenuButton( MainView.MENU_DATA );
-		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-		mainView.hideMenuButton( MainView.MENU_LEVEL );
-		mainView.hideMenuButton( MainView.MENU_PERKS );
-		gameState = 0;
+	if(eventNum == 5025) 
+	{
+		if (!this.testingBlockExiting)
+		{
+			outputText("<b>GAME OVER</b>", true);
+			if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
+			else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus",10035, "BLAH", 0, "LULZ", 0);
+			mainView.showMenuButton( MainView.MENU_DATA );
+			mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+			mainView.hideMenuButton( MainView.MENU_LEVEL );
+			mainView.hideMenuButton( MainView.MENU_PERKS );
+
+			gameState = 0;
+
+			// Prevent ChaosMonkah instances from getting stuck
+		}
+		else
+		{
+			gameState = 0;
+			doNext(13);
+
+		}
+
 		inDungeon = false;
 	}
 	//Soft Game Over - for when you want to leave the text on-screen
 	if(eventNum == 5035) {
-		outputText("\n\n<b>GAME OVER</b>", false);
-		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
-		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
-		mainView.showMenuButton( MainView.MENU_DATA );
-		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-		mainView.hideMenuButton( MainView.MENU_LEVEL );
-		mainView.hideMenuButton( MainView.MENU_PERKS );
-		gameState = 0;
+		
+		if (!this.testingBlockExiting)
+		{
+			outputText("\n\n<b>GAME OVER</b>", false);
+			if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
+			else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
+			mainView.showMenuButton( MainView.MENU_DATA );
+			mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+			mainView.hideMenuButton( MainView.MENU_LEVEL );
+			mainView.hideMenuButton( MainView.MENU_PERKS );
+			
+			gameState = 0;
+		}
+		else
+		{
+			// Prevent ChaosMonkah instances from getting stuck
+			gameState = 0;
+			doNext(13);
+		}
 		inDungeon = false;
 	}
 	//Sand which(lol) end Pt 1
@@ -2849,7 +2874,7 @@ public function doCombat(eventNum:Number):void
 			combatRoundOver();
 			return;
 		}
-		//Determine damage - str modified by enemy toughness!
+		//Determine damage - str modified by enemy toughness!		
 		temp = int((monster.str + monster.weaponAttack) - rand(player.tou) - player.armorDef);
 		if(temp > 0) temp = takeDamage(temp);
 		if(temp <= 0) {
@@ -2948,6 +2973,7 @@ public function doCombat(eventNum:Number):void
 	//confront worm combat
 	if(eventNum == 5056) {
 		outputText("You turn to confront the worms and combat begins!", true);
+		spriteSelect(76);
 		startCombat(8);
 	}
 	//Do nothing
@@ -3022,7 +3048,7 @@ public function doCombat(eventNum:Number):void
 	if(eventNum == 5071) {
 		//Gain fatigue if not fighting sand tarps
 		if(monster.hasStatusAffect("level") < 0) fatigue(-5);
-		flags[IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
+		flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
 		if(monster.hasStatusAffect("PCTailTangle") >= 0) {
 			kitsuneWait();
 			return;
@@ -3836,7 +3862,7 @@ public function attack():void {
 		enemyAI();
 		return;
 	}
-	if(flags[PC_FETISH] >= 3 && !isUrta()) {
+	if(flags[kFLAGS.PC_FETISH] >= 3 && !isUrta()) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;
@@ -3851,13 +3877,13 @@ public function attack():void {
 		outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
 		trapLevel(-4);
 	}
-	if(player.hasPerk("Double Attack") >= 0 && player.spe >= 50 && flags[DOUBLE_ATTACK_STYLE] < 2) {
+	if(player.hasPerk("Double Attack") >= 0 && player.spe >= 50 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] < 2) {
 		if(player.hasStatusAffect("FirstAttack") >= 0) player.removeStatusAffect("FirstAttack");
 		else {
 			//Always!
-			if(flags[DOUBLE_ATTACK_STYLE] == 0) player.createStatusAffect("FirstAttack",0,0,0,0);
+			if(flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) player.createStatusAffect("FirstAttack",0,0,0,0);
 			//Alternate!
-			else if(player.str < 61 && flags[DOUBLE_ATTACK_STYLE] == 1) player.createStatusAffect("FirstAttack",0,0,0,0);
+			else if(player.str < 61 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) player.createStatusAffect("FirstAttack",0,0,0,0);
 		}
 	}
 	else if(player.hasPerk("Brawler") >= 0 && player.weaponName == "fists") {
@@ -3957,7 +3983,7 @@ public function attack():void {
 	}*/
 	//BASIC DAMAGE STUFF
 	//Double Attack Hybrid Reductions
-	if(player.hasPerk("Double Attack") >= 0 && player.spe >= 50 && player.str > 61 && flags[DOUBLE_ATTACK_STYLE] == 0) {
+	if(player.hasPerk("Double Attack") >= 0 && player.spe >= 50 && player.str > 61 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) {
 		damage = 60.5;
 	}
 	else damage = player.str;
@@ -3993,6 +4019,10 @@ public function attack():void {
 	//Thunderous Strikes
 	if(player.hasPerk("Thunderous Strikes") >= 0 && player.str >= 80) 
 		damage *= 1.2;
+		
+	if (player.hasPerk(UmasShop.NEEDLEWORK_MAGIC_PERK_NAME) >= 0) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
+	if (player.hasPerk(UmasShop.NEEDLEWORK_ATTACK_PERK_NAME) >= 0) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
+	
 	//One final round
 	damage = Math.round(damage);
 	
@@ -4452,15 +4482,26 @@ public function doDamage(damage:Number):Number {
 		if(monster.hasPerk("Last Strike") >= 0) doNext(monster.perks[monster.hasPerk("Last Strike")].value1);
 		else doNext(5008);
 	}
+	
+	// Uma's Massage Bonuses
+	var statIndex:int = player.hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME);
+	if (statIndex >= 0)
+	{
+		if (player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_POWER)
+		{
+			damage *= player.statusAffects[statIndex].value2;
+		}
+	}
+	
 	damage = Math.round(damage);
 	
 	if(damage < 0) damage = 1;
 	monster.HP -= damage;
 	//Isabella gets mad
 	if(monster.short == "Isabella") {
-		flags[ISABELLA_AFFECTION]--;
+		flags[kFLAGS.ISABELLA_AFFECTION]--;
 		//Keep in bounds
-		if(flags[ISABELLA_AFFECTION] < 0) flags[ISABELLA_AFFECTION] = 0;
+		if(flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
 	}
 	//Interrupt gigaflare if necessary.
 	if(monster.hasStatusAffect("Gigafire") >= 0) monster.addStatusValue("Gigafire",1,damage);
@@ -4468,9 +4509,10 @@ public function doDamage(damage:Number):Number {
 	if(monster.HP < 0) monster.HP = 0;
 	return damage;
 }
+
 public function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	//EZ MOAD half damage
-	if(flags[EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
 	if(player.hasStatusAffect("Shielding") >= 0) {
 		damage -= 30;
 		if(damage < 1) damage = 1;
@@ -4490,6 +4532,23 @@ public function takeDamage(damage:Number, noMod:Boolean = false):Number {
 		damage = Math.round(damage * .8);
 		if(damage < 1) damage = 1;
 	}
+	
+	// Uma's Massage bonuses
+	var statIndex:int = player.hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME);
+	if (statIndex >= 0)
+	{
+		if (player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_RELAXATION && !noMod)
+		{
+			damage = Math.round(damage * player.statusAffects[statIndex].value2);
+		}
+	}
+	
+	// Uma's Accupuncture Bonuses
+	var modArmorDef:Number = 0;
+	if (player.hasPerk(UmasShop.NEEDLEWORK_DEFENSE_PERK_NAME) >= 0) modArmorDef = ((player.armorDef * UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI) - player.armorDef);
+	if (player.hasPerk(UmasShop.NEEDLEWORK_ATTACK_PERK_NAME) >= 0) modArmorDef = ((player.armorDef * UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI) - player.armorDef);
+	damage -= modArmorDef;
+		
 	//Prevent negatives
 	if(player.HP - damage < 1) {
 		player.HP = 0;
@@ -4506,7 +4565,7 @@ public function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	if(damage < 1) damage = 1;
 	//Else deduct.
 	else player.HP-=damage;
-	if(flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
+	if(flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 		stats(0,0,0,0,0,0,int(damage/2),0);
 	}
 	mainView.statsView.showStatDown( 'hp' );
@@ -4909,11 +4968,11 @@ public function clearStatuses(visibility:Boolean):void {
 	if(player.hasStatusAffect("Disarmed") >= 0) {
 		player.removeStatusAffect("Disarmed");
 		if(player.weaponName == "fists") {
-			player.weaponName = flags[UNKNOWN_FLAG_NUMBER_00268];
-			player.weaponAttack = fixedDamage(flags[UNKNOWN_FLAG_NUMBER_00268]);
+			player.weaponName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268];
+			player.weaponAttack = fixedDamage(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268]);
 		}
 		else {
-			flags[UNKNOWN_FLAG_NUMBER_00234] = lootWeaponName(flags[UNKNOWN_FLAG_NUMBER_00268]);
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = lootWeaponName(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268]);
 		}
 	}
 	if(player.hasStatusAffect("Anemone Venom") >= 0) {
@@ -5207,35 +5266,35 @@ public function combatStatusesUpdate():void {
 		}
 		monster.lust += monster.lustVuln * (2 + rand(4));
 	}
-	if(player.hasStatusAffect("Bound") >= 0 && flags[PC_FETISH] >= 2) {
+	if(player.hasStatusAffect("Bound") >= 0 && flags[kFLAGS.PC_FETISH] >= 2) {
 		outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n", false);
 		stats(0,0,0,0,0,0,3,0);
 	}
 	if(monster.hasStatusAffect("QueenBind") >= 0) {
 		outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");
-		if(flags[PC_FETISH] >= 2) stats(0,0,0,0,0,0,3,0);
+		if(flags[kFLAGS.PC_FETISH] >= 2) stats(0,0,0,0,0,0,3,0);
 	}
 	if(player.hasStatusAffect("GooArmorBind") >= 0) {
-		if(flags[PC_FETISH] >= 2) {
+		if(flags[kFLAGS.PC_FETISH] >= 2) {
 			outputText("The feel of the all-encapsulating goo immobilizing your helpless body turns you on more and more.  Maybe you should just wait for it to completely immobilize you, have you at its mercy.\n\n");
 			stats(0,0,0,0,0,0,3,0);
 		}
 		else outputText("You're utterly immobilized by the goo flowing around you.  You'll have to struggle free!\n\n");
 	}
 	if(player.hasStatusAffect("HarpyBind") >= 0) {
-		if(flags[PC_FETISH] >= 2) {
+		if(flags[kFLAGS.PC_FETISH] >= 2) {
 			outputText("The harpies are holding you down and restraining you, making the struggle all the sweeter!\n\n");
 			stats(0,0,0,0,0,0,3,0);
 		}
 		else outputText("You're restrained by the harpies so that they can beat on you with impunity.  You'll need to struggle to break free!\n\n");
 	}
-	if(player.hasStatusAffect("Naga Bind") >= 0 && flags[PC_FETISH] >= 2) {
+	if(player.hasStatusAffect("Naga Bind") >= 0 && flags[kFLAGS.PC_FETISH] >= 2) {
 		outputText("Coiled tightly by the naga and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n", false);
 		stats(0,0,0,0,0,0,5,0);
 	}
 	if(player.hasStatusAffect("TentacleBind") >= 0) {
 		outputText("You are firmly trapped in the tentacle's coils.  <b>The only thing you can try to do is struggle free!</b>\n\n", false);
-		if(flags[PC_FETISH] >= 2) {
+		if(flags[kFLAGS.PC_FETISH] >= 2) {
 			outputText("Wrapped tightly in the tentacles, you find it hard to resist becoming more and more aroused...\n\n", false);
 			stats(0,0,0,0,0,0,3,0);
 		}
@@ -5380,7 +5439,7 @@ public function combatStatusesUpdate():void {
 		}
 	}
 	//Bondage straps + bondage fetish
-	if(flags[PC_FETISH] >= 2 && player.armorName == "barely-decent bondage straps") {
+	if(flags[kFLAGS.PC_FETISH] >= 2 && player.armorName == "barely-decent bondage straps") {
 		outputText("The feeling of the tight, leather straps holding tightly to your body while exposing so much of it turns you on a little bit more.\n\n", false);
 		stats(0,0,0,0,0,0,2,0);
 	}
@@ -5509,6 +5568,8 @@ public function startCombat(monsterNum:Number):void {
 	//clear nipples pierced - only used on drider
 	if(monster.nipplesPierced > 0) monster.nipplesPierced = 0;
 	//load enemy based on number.
+
+
 	//LOAD IMP
 	if(monsterNum == 1) {
 		monster = new classes.Monsters.Imp(this);
@@ -5521,151 +5582,7 @@ public function startCombat(monsterNum:Number):void {
 	}
 	//LOAD JOJO
 	if(monsterNum == 3) {
-		monster.short="Jojo";
-		monster.imageName="jojo";
-		monster.plural = false;
-		monster.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He wears loose white clothes wrapped in prayer beads and tattered prayer papers.";
-		monster.a ="";
-		monster.capitalA ="";
-		monster.temperment = 1;
-		monster.special1 = 5021;
-		monster.special2 = 0;
-		monster.special3 = 0;
-		monster.pronoun1 = "he";
-		monster.pronoun2 = "him";
-		monster.pronoun3 = "his";
-		
-		//Clothing/Armor
-		monster.armorName = "robes";
-		monster.weaponName = "paw";
-		monster.weaponVerb = "punch";
-		monster.armorDef = 0;
-		monster.armorPerk = "";
-		monster.weaponAttack = 0;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 35;
-		monster.tou = 40;
-		monster.spe = 65;
-		monster.inte = 55;
-		monster.lib = 15;
-		monster.sens = 40;
-		monster.cor = 0;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.HP = eMaxHP();
-		monster.lust = 15;
-		monster.lustVuln = .9;
-		
-		//Level Stats
-		monster.level = 4;
-		monster.XP = totalXP();
-		monster.gems = rand(5) + 2;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 1;
-		monster.tallness = 61;
-		monster.hairColor = "white";
-		monster.hairLength = 2;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_FUR;
-		monster.skinTone = "white";
-		monster.skinDesc = "fur";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.wingDesc = "";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 2;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 2;
-		//Create jojo sex attributes
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 0;
-		monster.breastRows[0].nipplesPerBreast = 1;
-		monster.createCock();
-		monster.cocks[0].cockLength = 7.5;
-		monster.cocks[0].cockThickness = 1.8;
-		monster.cumMultiplier = 1;
-		monster.hoursSinceCum = 1000;
-		monster.ass.analLooseness = 1;
-		monster.ass.analWetness = 1;
-		//Variations based on jojo's corruption.
-		if(monk == 3) {
-			monster.lust += 30;
-			monster.cocks[0].cockThickness += .2;
-			monster.cocks[0].cockLength += 1.5;
-			if(player.gender == 1 || player.gender == 3) monster.ass.analLooseness = 2;
-		}
-		if(monk == 4) {
-			monster.lust += 40;
-			monster.cocks[0].cockThickness += .5;
-			monster.cocks[0].cockLength += 3.5;
-			if(player.gender == 1 || player.gender == 3) monster.ass.analLooseness = 3;
-		}
-		if(monk == 5) {
-			monster.lust += 50;
-			monster.cocks[0].cockThickness += 1;
-			monster.cocks[0].cockLength += 5.5;
-			monster.str -= 20;
-			monster.tou += 30;
-			monster.HP += 60;
-			if(player.gender == 1 || player.gender == 3) monster.ass.analLooseness = 4;
-			monster.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He's naked, with a large tainted throbbing member bouncing at attention.  A fuzzy sack with painfully large looking balls dangles between his legs.";
-		}
+		monster = new classes.Monsters.Jojo(this);
 		doNext(1);
 	}
 	if(monsterNum == 4) {
@@ -5674,781 +5591,37 @@ public function startCombat(monsterNum:Number):void {
 	}
 	//Fertile-Caste Bee
 	if(monsterNum == 5) {
-		monster.short="bee-girl";
-		monster.imageName="beegirl";
-		monster.plural = false;
-		monster.long = "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
-		monster.a ="a ";
-		monster.capitalA ="A ";
-		monster.temperment = 3;
-		monster.special1 = 5036;
-		monster.special2 = 0;
-		monster.special3 = 0;
-		monster.pronoun1 = "she";
-		monster.pronoun2 = "her";
-		monster.pronoun3 = "her";
-		
-		//Clothing/Armor
-		monster.armorName = "chitin";
-		monster.weaponName = "chitin-plated fist";
-		monster.weaponVerb = "armored punch";
-		monster.armorDef = 9;
-		monster.armorPerk = "";
-		monster.weaponAttack = 0;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 30;
-		monster.tou = 30;
-		monster.spe = 30;
-		monster.inte = 20;
-		monster.lib = 60;
-		monster.sens = 55;
-		monster.lust = 20 + rand(40);
-		monster.cor = 0;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.bonusHP = 0;
-		monster.HP = eMaxHP();
-		monster.lustVuln = 0.9;
-		
-		//Level Stats
-		monster.level = 4;
-		monster.XP = totalXP();
-		monster.gems = rand(15) + 1;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 2;
-		monster.tallness = rand(14) + 59;
-		//randomly assign hair color
-		if(rand(2) == 0) monster.hairColor = "black";
-		else monster.hairColor = "black and yellow";
-		monster.hairLength = 6;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "yellow";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		//3 - cowface
-		monster.faceType = FACE_COW_MINOTAUR;
-		monster.antennae = ANTENNAE_BEE;
-		monster.wingDesc = "insect-like wings";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_BEE_LIKE_SMALL;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		//7 - cow!
-		monster.tailType = TAIL_TYPE_BEE_ABDOMEN;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 100;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 13;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 13;
-		//Create imp sex attributes
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 5;
-		monster.breastRows[0].nipplesPerBreast = 1;
-		monster.createVagina();
-		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
-		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
-		monster.cumMultiplier = 1.5;
-		monster.hoursSinceCum = 10 + rand(100);
-		monster.ass.analLooseness = 4;
-		monster.ass.analWetness = 1;
+		monster = new classes.Monsters.BeeGirl(this);
 		doNext(1);
 	}
 	//Green Slime
 	if(monsterNum == 6) {
-		monster.short="green slime";
-		monster.imageName="greenslime";
-		monster.plural = false;
-		monster.long = "The green slime has a normally featureless face that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the lump of ooze on the ground that serves as a makeshift form of locomotion.";
-		monster.a ="a ";
-		monster.capitalA ="A ";
-		monster.temperment = 3;
-		monster.special1 = 5040;
-		monster.special2 = 5039;
-		monster.special3 = 5039;
-		monster.pronoun1 = "it";
-		monster.pronoun2 = "it";
-		monster.pronoun3 = "its";
+		monster = new classes.Monsters.GreenSlime(this);
 		
-		//Clothing/Armor
-		monster.armorName = "gelatinous skin";
-		monster.weaponName = "hands";
-		monster.weaponVerb = "slap";
-		monster.armorDef = 0;
-		monster.armorPerk = "";
-		monster.weaponAttack = 0;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 25;
-		monster.tou = 20;
-		monster.spe = 10;
-		monster.inte = 5;
-		monster.lib = 50;
-		monster.sens = 60;
-		monster.cor = 20;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.bonusHP = 30;
-		monster.HP = eMaxHP();
-		monster.lust = 30;
-		
-		//Level Stats
-		monster.level = 2;
-		monster.XP = totalXP();
-		monster.gems = rand(5)+1;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 1;
-		monster.tallness = rand(8) + 80;
-		monster.hairColor = "green";
-		monster.hairLength = 0;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "green";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 6;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 8;
-		//Create imp sex attributes
-		monster.createCock();
-		monster.cocks[0].cockLength = 18;
-		monster.cocks[0].cockThickness = 2;
-		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
-		monster.balls = 0;
-		monster.cumMultiplier = 3;
-		monster.ballSize = 1;
-		monster.hoursSinceCum = 20;
-		monster.ass.analLooseness = 4;
-		monster.ass.analWetness = 5;
 		doNext(1);
 	}
 	//LOAD DEMON PACK
 	if(monsterNum == 7) {
-		monster.short="demons";
-		monster.imageName="demonmob";
-		monster.plural = true;
-		monster.long = "The group is composed of roughly twenty tan-skinned demons, mostly humanoid in shape with many and varied corruptions across the mob. You see demonic high heels, twisting horns and swinging cocks of all shapes and sizes. There even seems to be a bull head in there somewhere. You also make out plenty of breasts ranging from tiny ones to a pair that requires a second person to carry them, and with those breasts a wide range of pussies, dripping and dry, sometimes nestled below some form of demonic dick.  The small tribe carries no weapons and what little clothing they wear is well-shredded, except for one hefty male wearing a cloak of what appears to be snakeskin across his broad shoulders.";
-		if(silly()) monster.long += "  You spot an odd patch that reads, \"<i>41st Engineer Company: Vaginal Clearance</i>\" on his shoulder.";
-		monster.a ="the ";
-		monster.capitalA ="The ";
-		monster.temperment = 3;
-		//Regular attack
-		monster.special1 = 5043;
-		//Lust attack
-		monster.special2 = 5044;
-		monster.special3 = 0;
-		monster.pronoun1 = "they";
-		monster.pronoun2 = "them";
-		monster.pronoun3 = "their";
+		monster = new classes.Monsters.DemonPack(this);
 		
-		//Clothing/Armor
-		monster.armorName = "demonic skin";
-		monster.weaponName = "claws";
-		monster.weaponVerb = "claw";
-		monster.armorDef = 0;
-		monster.armorPerk = "";
-		monster.weaponAttack = 0;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 80;
-		monster.tou = 10;
-		monster.spe = 10;
-		monster.inte = 5;
-		monster.lib = 50;
-		monster.sens = 60;
-		monster.cor = 20;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.bonusHP = 200;
-		monster.HP = eMaxHP();
-		monster.lust = 30;
-		
-		//Level Stats
-		monster.level = 6;
-		monster.XP = totalXP();
-		monster.gems = rand(25)+10;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 3;
-		monster.tallness = rand(8) + 70;
-		monster.hairColor = "black";
-		monster.hairLength = 15;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "red";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_DEMON;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_DEMONIC;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 8;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 8;
-		//Create imp sex attributes
-		monster.createCock();
-		monster.cocks[0].cockLength = 18;
-		monster.cocks[0].cockThickness = 2;
-		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
-		monster.createCock();
-		monster.cocks[1].cockLength = 18;
-		monster.cocks[1].cockThickness = 2;
-		monster.cocks[1].cockType = CockTypesEnum.HUMAN;
-		monster.createVagina();
-		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
-		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
-		monster.balls = 0;
-		monster.cumMultiplier = 3;
-		monster.ballSize = 1;
-		monster.ass.analLooseness = 4;
-		monster.ass.analWetness = 5;
 		doNext(1);
 	}
 	//LOAD WORM COLONY
 	if(monsterNum == 8) {
-		monster.short="worms";
-		monster.imageName="worms";
-		monster.plural = true;
-		monster.long = "Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.";
-		monster.a ="the ";
-		monster.capitalA ="The ";
-		monster.temperment = 3;
-		//Regular attack
-		monster.special1 = 5054;
-		//Lust attack
-		monster.special2 = 5055;
-		monster.special3 = 0;
-		monster.pronoun1 = "they";
-		monster.pronoun2 = "them";
-		monster.pronoun3 = "their";
-		
-		//Clothing/Armor
-		monster.armorName = "skin";
-		monster.weaponName = "worm";
-		monster.weaponVerb = "slap";
-		monster.armorDef = 0;
-		monster.armorPerk = "";
-		monster.weaponAttack = 0;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 35;
-		monster.tou = 5;
-		monster.spe = 10;
-		monster.inte = 1;
-		monster.lib = 90;
-		monster.sens = 60;
-		monster.cor = 90;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.HP = 40;
-		monster.lust = 30;
-		monster.lustVuln = 0;
-		
-		//Level Stats
-		monster.level = 3;
-		monster.XP = totalXP();
-		monster.gems = 0;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 1;
-		monster.tallness = 1;
-		monster.hairColor = "none";
-		monster.hairLength = 0;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "white";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 2;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 0;
-		//Create imp sex attributes
-		monster.balls = 0;
-		monster.cumMultiplier = 3;
-		monster.ballSize = 0;
-		monster.ass.analLooseness = 0;
-		monster.ass.analWetness = 0;
+		monster = new classes.Monsters.WormMass(this);
+
 		doNext(1);
 	}
 	//LOAD FETISH CULTIST
 	if(monsterNum == 9) {
-		monster.short="fetish cultist";
-		monster.imageName="fetishcultist";
-		monster.plural = false;
-		monster.long = "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath. She is wearing a religious outfit that closely hugs her curvacious shape, with a skirt so short that you can clearly see her pussy's lips.\n\nShe has clealy lost her grasp on sanity, and filled the void with pure perversion.";
-		monster.a ="the ";
-		monster.capitalA ="The ";
-		monster.temperment = 3;
-		//Regular attack
-		monster.special1 = 5062;
-		//Lust attack
-		monster.special2 = 5063;
-		monster.special3 = 5062;
-		monster.pronoun1 = "she";
-		monster.pronoun2 = "her";
-		monster.pronoun3 = "her";
-		
-		//Clothing/Armor
-		monster.armorName = "fetishy outfit";
-		monster.weaponName = "whip";
-		monster.weaponVerb = "whip-crack";
-		monster.armorDef = 0;
-		monster.armorPerk = "";
-		monster.weaponAttack = 0;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 35;
-		monster.tou = 25;
-		monster.spe = 30;
-		monster.inte = 1;
-		monster.lib = 75;
-		monster.sens = 80;
-		monster.cor = 90;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.HP = eMaxHP();
-		monster.lust = 25;
-		
-		//Level Stats
-		monster.level = 2;
-		monster.XP = totalXP();
-		monster.gems = 5+rand(10);
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 2;
-		monster.tallness = 67;
-		monster.hairColor = "black";
-		monster.hairLength = 15;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "pale";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 6;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 8;
-		//Create imp sex attributes
-		monster.balls = 0;
-		monster.createVagina();
-		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
-		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 5;
-		monster.cumMultiplier = 3;
-		monster.ballSize = 0;
-		monster.ass.analLooseness = 2;
-		monster.ass.analWetness = 1;
+		monster = new classes.Monsters.FetishCultist(this);
+	
 		doNext(1);
 	}
 	//LOAD HELLHOUND
 	if(monsterNum == 10) {
-		monster.short="hellhound";
-		monster.imageName="hellhound";
-		monster.plural = false;
-		monster.long = "It looks like a large demon on all fours with two heads placed side-by-side. The heads are shaped almost like human heads, but they have dog ears on the top and have a long dog snout coming out where their mouths and noses would be.  Its eyes and mouth are filled with flames and its hind legs capped with dog paws, but its front ones almost look like human hands.  Its limbs end in large, menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads look at you hungrily as the hellhound circles around you. You get the feeling that reasoning with this beast will be impossible.";
-		monster.a ="the ";
-		monster.capitalA ="The ";
-		monster.temperment = 3;
-		//Regular attack
-		monster.special1 = 5066;
-		//Lust attack
-		monster.special2 = 5067;
-		monster.special3 = 0;
-		monster.pronoun1 = "he";
-		monster.pronoun2 = "him";
-		monster.pronoun3 = "his";
-		
-		//Clothing/Armor
-		monster.armorName = "thick fur";
-		monster.weaponName = "claws";
-		monster.weaponVerb = "claw";
-		monster.armorDef = 0;
-		monster.armorPerk = "";
-		monster.weaponAttack = 10;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		
-		//Primary stats
-		monster.str = 55;
-		monster.tou = 60;
-		monster.spe = 40;
-		monster.inte = 1;
-		monster.lib = 95;
-		monster.sens = 20;
-		monster.cor = 100;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.HP = eMaxHP();
-		monster.lust = 25;
-		
-		//Level Stats
-		monster.level = 5;
-		monster.XP = totalXP();
-		monster.gems = 10+rand(10);
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 1;
-		monster.tallness = 47;
-		monster.hairColor = "red";
-		monster.hairLength = 3;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "black";
-		monster.skinDesc = "fur";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_DOG;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 4;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 5;
-		//Create imp sex attributes
-		monster.balls = 2;
-		monster.ballSize = 4;
-		monster.createCock();
-		monster.createCock();
-		monster.cocks[0].cockLength = 8;
-		monster.cocks[1].cockLength = 8;
-		monster.cocks[0].cockThickness = 2;
-		monster.cocks[1].cockThickness = 2;
-		monster.cumMultiplier = 5;
-		monster.ass.analLooseness = 2;
-		monster.ass.analWetness = 1;
+		monster = new classes.Monsters.HellHound(this);
+	
 		doNext(1);
 	}
 	//LOAD SUCCUBUS
@@ -6858,404 +6031,25 @@ public function startCombat(monsterNum:Number):void {
 		doNext(1);
 	}
 	//LOAD Tentacle beast
-	if(monsterNum == 14) {
-		monster.short="tentacle beast";
-		monster.imageName="tentaclebeast";
-		monster.plural = false;
-		monster.long = "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
-		monster.a ="the ";
-		monster.capitalA ="The ";
-		monster.temperment = 3;
-		//Regular attack
-		monster.special1 = 5072;
-		//Lust attack
-		monster.special2 = 5073;
-		monster.special3 = 5072;
-		monster.pronoun1 = "it";
-		monster.pronoun2 = "it";
-		monster.pronoun3 = "its";
-		
-		//Clothing/Armor
-		monster.armorName = "rubbery skin";
-		monster.weaponName = "whip-tendril";
-		monster.weaponVerb = "thorny tendril";
-		monster.armorDef = 1;
-		monster.armorPerk = "";
-		monster.weaponAttack = 1;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 58;
-		monster.tou = 25;
-		monster.spe = 45;
-		monster.inte = 45;
-		monster.lib = 90;
-		monster.sens = 20;
-		monster.cor = 100;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.bonusHP = 350;
-		monster.HP = eMaxHP();
-		monster.lustVuln = 0.8;
-		
-		monster.lust = 10;
-		
-		//Level Stats
-		monster.level = 6;
-		monster.XP = totalXP();
-		monster.gems = rand(15)+5;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 0;
-		monster.tallness = rand(9) + 70;
-		monster.hairColor = "green";
-		monster.hairLength = 1;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "green";
-		monster.skinDesc = "bark";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		//5 - demonic heels
-		//6 - demon foot-claws
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_DEMONIC;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 0;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 0;
-		//Create succubus sex attributes
-		monster.cumMultiplier = 3;
-		monster.createCock();
-		monster.cocks[0].cockLength = 40;
-		monster.cocks[0].cockThickness = 1.5;
-		monster.createCock();
-		monster.cocks[1].cockLength = 60;
-		monster.cocks[1].cockThickness = 1.5;
-		monster.createCock();
-		monster.cocks[2].cockLength = 50;
-		monster.cocks[2].cockThickness = 1.5;
-		monster.createCock();
-		monster.cocks[3].cockLength = 20;
-		monster.cocks[3].cockThickness = 1.5;
-		monster.ass.analLooseness = 1;
-		monster.ass.analWetness = 35;
+	if(monsterNum == 14) 
+	{
+		monster = new classes.Monsters.TentacleBeast(this);
+
 		doNext(1);
 	}
 	//LOAD GOBLIN
-	if(monsterNum == 15) {
-		monster.short="goblin";
-		monster.imageName="goblin";
-		monster.plural = false;
-		monster.long = "The goblin before you is a typical example of her species, with dark green skin, pointed ears, and purple hair that would look more at home on a punk-rocker.  She's only about three feet tall, but makes up for it with her curvy body, sporting hips and breasts that would entice any of the men in your village were she full-size.  There isn't a single scrap of clothing on her, just lewd leather straps and a few clinking pouches.  She does sport quite a lot of piercings – the most noticeable being large studs hanging from her purple nipples.  Her eyes are fiery red, and practically glow with lust.  This one isn't going to be satisfied until she has her way with you.  It shouldn't be too hard to subdue such a little creature, right?";
-		monster.a ="the ";
-		monster.capitalA ="The ";
-		monster.temperment = 2;
-		//Regular attack
-		monster.special1 = 5087;
-		//Lust attack
-		monster.special2 = 5088;
-		monster.special3 = 0;
-		monster.pronoun1 = "she";
-		monster.pronoun2 = "her";
-		monster.pronoun3 = "her";
-		
-		//Clothing/Armor
-		monster.armorName = "leather straps";
-		monster.weaponName = "fists";
-		monster.weaponVerb = "tiny punch";
-		monster.armorDef = 0;
-		monster.armorPerk = "";
-		monster.weaponAttack = 0;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 12;
-		monster.tou = 13;
-		monster.spe = 35;
-		monster.inte = 42;
-		monster.lib = 45;
-		monster.sens = 45;
-		monster.cor = 60;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.bonusHP = 0;
-		monster.HP = eMaxHP();
-		
-		monster.lust = 50;
-		
-		//Level Stats
-		monster.level = 1;
-		monster.XP = totalXP();
-		monster.gems = rand(5) + 5;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 2;
-		monster.tallness = 35 + rand(4);
-		monster.hairColor = "purple";
-		monster.hairLength = 4;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "dark green";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		//5 - demonic heels
-		//6 - demon foot-claws
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 8;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 8;
-		//Create goblin sex attributes
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 7;
-		monster.createVagina();
-		monster.createStatusAffect("Bonus vCapacity",40,0,0,0);
-		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
-		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
-		monster.vaginas[0].virgin = false;
-		monster.ass.analLooseness = 1;
-		monster.createStatusAffect("Bonus aCapacity",30,0,0,0);
-		monster.ass.analWetness = 0;
+	if(monsterNum == 15) 
+	{
+		monster = new classes.Monsters.Goblin(this);
+	
 		doNext(1);
 	}
 	//MARBLE BAAAATTTLE
-	if(monsterNum == 16) {
+	if(monsterNum == 16) 
+	{
 		plotFight = true;
-		monster.short="Marble";
-		monster.imageName="marble";
-		monster.plural = false;
-		monster.long = "Before you stands a female humanoid with numerous cow features, such as medium-sized cow horns, cow ears, and a cow tail.  She is very well endowed, with wide hips and a wide ass.  She stands over 6 feet tall.  She is using a large two handed hammer with practiced ease, making it clear she is much stronger then she may appear to be.";
-		monster.a ="";
-		monster.capitalA ="";
-		monster.temperment = 2;
-		//Regular attack
-		monster.special1 = 5092;
-		//Lust attack
-		monster.special2 = 5093;
-		monster.special3 = 0;
-		monster.pronoun1 = "she";
-		monster.pronoun2 = "her";
-		monster.pronoun3 = "her";
-		
-		//Clothing/Armor
-		monster.armorName = "tough hide";
-		monster.weaponName = "large hammer";
-		monster.weaponVerb = "hammer-blow";
-		monster.armorDef = 5;
-		monster.armorPerk = "";
-		monster.weaponAttack = 10;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 75;
-		monster.tou = 70;
-		monster.spe = 35;
-		monster.inte = 40;
-		monster.lib = 25;
-		monster.sens = 45;
-		monster.cor = 40;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.bonusHP = 0;
-		monster.HP = eMaxHP();
-		
-		monster.lust = 0;
-		
-		//Level Stats
-		monster.level = 7;
-		monster.XP = totalXP();
-		monster.gems = rand(5) + 25;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 2;
-		monster.tallness = 76;
-		monster.hairColor = "brown";
-		monster.hairLength = 13;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "pale";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		//5 - demonic heels
-		//6 - demon foot-claws
-		monster.lowerBody = LOWER_BODY_TYPE_CENTAUR;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_COW;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 10;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 8;
-		//Create goblin sex attributes
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 11;
-		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
-		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
-		monster.vaginas[0].virgin = false;
-		monster.ass.analLooseness = 0;
-		monster.ass.analWetness = 0;
+		monster = new classes.Monsters.Marble(this);
+	
 		doNext(1);
 	}
 	//LOAD TAMANI
@@ -7393,1328 +6187,196 @@ public function startCombat(monsterNum:Number):void {
 	}
 	//LOAD SHARK GIRL
 	if(monsterNum == 18) {
-		monster.short="shark-girl";
-		monster.imageName="sharkgirl";
-		monster.plural = false;
-		monster.long = "The shark girl stands just over 5'5\", with grey skin shimmering from water droplets catching the sunlight and slender muscles built for swimming.  Her shoulder-length silver hair brushes past her pretty face and her eyes are a striking shade of red. She has rows of intimidating sharp teeth glinting in the light. A fish-like tail protrudes from her backside, wrapping around her toned legs at every opportunity. She's wearing a rather skimpy black bikini, strings done in such a way that they move around her fin; though the swimwear itself barely covers her perky breasts and tight snatch.";
-		monster.a ="the ";
-		monster.capitalA ="The ";
-		monster.temperment = 2;
-		//Lusty teases
-		monster.special1 = 5097;
-		monster.special2 = 5097;
-		monster.special3 = 0;
-		monster.pronoun1 = "she";
-		monster.pronoun2 = "her";
-		monster.pronoun3 = "her";
-		
-		//Clothing/Armor
-		monster.armorName = "tough skin";
-		monster.weaponName = "shark teeth";
-		monster.weaponVerb = "bite";
-		monster.armorDef = 5;
-		monster.armorPerk = "";
-		monster.weaponAttack = 3;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 40;
-		monster.tou = 40;
-		monster.spe = 55;
-		monster.inte = 42;
-		monster.lib = 75;
-		monster.sens = 35;
-		monster.cor = 40;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.bonusHP = 20;
-		monster.HP = eMaxHP();
-		monster.lustVuln = .9;
-		
-		monster.lust = 40;
-		
-		//Level Stats
-		monster.level = 4;
-		monster.XP = totalXP();
-		monster.gems = rand(15) + 5;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 2;
-		monster.tallness = 65;
-		monster.hairColor = "silver";
-		monster.hairLength = 16;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "gray";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		//5 - demonic heels
-		//6 - demon foot-claws
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 8;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 8;
-		//Create goblin sex attributes
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 4;
-		monster.createVagina();
-		monster.createStatusAffect("Bonus vCapacity",15,0,0,0);
-		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
-		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
-		monster.vaginas[0].virgin = false;
-		monster.ass.analLooseness = 1;
-		monster.createStatusAffect("Bonus aCapacity",40,0,0,0);
-		monster.ass.analWetness = 0;
+		monster = new classes.Monsters.SharkGirl(this);
+
 		doNext(1);
 	}
 	//LOAD FETISH ZEALOT
 	if(monsterNum == 19) {
-		monster.short="fetish zealot";
-		monster.imageName="fetishzealot";
-		monster.plural = false;
-		monster.long = "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.";
-		monster.a ="the ";
-		monster.capitalA ="The ";
-		monster.temperment = 2;
-		//Lusty teases
-		monster.special1 = 5103;
-		monster.special2 = 5104;
-		monster.special3 = 0;
-		monster.pronoun1 = "he";
-		monster.pronoun2 = "him";
-		monster.pronoun3 = "his";
-		
-		//Clothing/Armor
-		monster.armorName = "religious clothes";
-		monster.weaponName = "wavy dagger";
-		monster.weaponVerb = "stab";
-		monster.armorDef = 5;
-		monster.armorPerk = "";
-		monster.weaponAttack = 3;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		
-		//Primary stats
-		monster.str = 35;
-		monster.tou = 35;
-		monster.spe = 30;
-		monster.inte = 1;
-		monster.lib = 75;
-		monster.sens = 80;
-		monster.cor = 90;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.HP = eMaxHP();
-		monster.lust = 25;
-		monster.lustVuln = 0.75;
-		
-		//Level Stats
-		monster.level = 5;
-		monster.XP = totalXP();
-		monster.gems = 5+rand(10);
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 1;
-		monster.tallness = 72;
-		monster.hairColor = "black";
-		monster.hairLength = 4;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "tan";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		//5 - demonic heels
-		//6 - demon foot-claws
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 1;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 2;
-		//Create goblin sex attributes
-		monster.ass.analLooseness = 3;
-		monster.createStatusAffect("Bonus aCapacity",40,0,0,0);
-		monster.ass.analWetness = 0;
-		monster.createCock();
-		monster.cocks[0].cockLength = 7;
-		monster.cocks[0].cockThickness = 1.5;
+		monster = new classes.Monsters.FetishZealot(this);
+	
 		doNext(1);
 	}
+	// Infested Hellhound
 	if(monsterNum == 20) {
-		monster.short="infested hellhound";
-		monster.imageName="infestedhellhound";
-		monster.plural = false;
-		monster.long = "It looks like a large four-legged demon with two heads placed side-by-side. Its eyes and mouth are filled with flames, and covering each of its paws are large and menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads are looking at you hungrily as the hellhound circles around you.  A pair of black, slightly pointed cocks hang exposed, dripping with cum and worms.  You get the feeling reasoning with this beast will be impossible.";
-		monster.a ="the ";
-		monster.capitalA ="The ";
-		monster.temperment = 3;
-		//Regular attack
-		monster.special1 = 5066;
-		//Lust attack
-		monster.special2 = 5067;
-		monster.special3 = 5107;
-		monster.pronoun1 = "he";
-		monster.pronoun2 = "him";
-		monster.pronoun3 = "his";
-		
-		//Clothing/Armor
-		monster.armorName = "thick fur";
-		monster.weaponName = "claws";
-		monster.weaponVerb = "claw";
-		monster.armorDef = 0;
-		monster.armorPerk = "";
-		monster.weaponAttack = 5;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 65;
-		monster.tou = 60;
-		monster.spe = 50;
-		monster.inte = 1;
-		monster.lib = 95;
-		monster.sens = 20;
-		monster.cor = 100;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.HP = monster.tou*2 + 50;
-		monster.lust = 50;
-		monster.lustVuln = 0.87;
-		
-		//Level Stats
-		monster.level = 5;
-		monster.XP = totalXP();
-		monster.gems = 10+rand(10);
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 1;
-		monster.tallness = 47;
-		monster.hairColor = "red";
-		monster.hairLength = 3;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "black";
-		monster.skinDesc = "fur";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_DOG;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 4;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 5;
-		//Create imp sex attributes
-		monster.balls = 2;
-		monster.ballSize = 5;
-		monster.createCock();
-		monster.createCock();
-		monster.cocks[0].cockLength = 9;
-		monster.cocks[1].cockLength = 9;
-		monster.cocks[0].cockThickness = 2;
-		monster.cocks[1].cockThickness = 2;
-		monster.cumMultiplier = 8;
-		monster.ass.analLooseness = 2;
-		monster.ass.analWetness = 1;
+		monster = new classes.Monsters.InfestedHellhound(this);
+	
 		doNext(1);
 	}
 	//LOAD NAGGA PLEAS!
 	if(monsterNum == 21) {
-		monster.short="naga";
-		monster.imageName="naga";
-		monster.plural = false;
-		monster.long = "You are fighting a naga. She resembles a beautiful and slender woman from the waist up, with dark hair hanging down to her neck. Her upper body is deeply tanned, while her lower body is covered with shiny scales, striped in a pattern reminiscent of the dunes around you. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's completely naked, with her round C-cup breasts showing in plain sight. In her mouth you can see a pair of sharp, poisonous fangs and a long forked tongue moving rapidly as she hisses at you.";
-		monster.a ="the ";
-		monster.capitalA ="The ";
-		monster.temperment = 2;
-		//Lusty teases
-		monster.special1 = 5109;
-		monster.special2 = 5110;
-		monster.special3 = 5111;
-		monster.pronoun1 = "she";
-		monster.pronoun2 = "her";
-		monster.pronoun3 = "her";
-		
-		//Clothing/Armor
-		monster.armorName = "scales";
-		monster.weaponName = "fist";
-		monster.weaponVerb = "punch";
-		monster.armorDef = 5;
-		monster.armorPerk = "";
-		monster.weaponAttack = 3;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 28;
-		monster.tou = 20;
-		monster.spe = 35;
-		monster.inte = 42;
-		monster.lib = 55;
-		monster.sens = 55;
-		monster.cor = 40;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.bonusHP = 0;
-		monster.HP = eMaxHP();
-		
-		monster.lust = 30;
-		
-		//Level Stats
-		monster.level = 2;
-		monster.XP = totalXP();
-		monster.gems = rand(5) + 8;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 2;
-		monster.tallness = 70;
-		monster.hairColor = "brown";
-		monster.hairLength = 16;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "mediterranean-toned";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		//5 - demonic heels
-		//6 - demon foot-claws
-		monster.lowerBody = LOWER_BODY_TYPE_GOO;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 8;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 8;
-		//Create goblin sex attributes
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 3;
-		monster.createVagina();
-		monster.createStatusAffect("Bonus vCapacity",40,0,0,0);
-		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
-		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
-		monster.vaginas[0].virgin = false;
-		monster.ass.analLooseness = 1;
-		monster.createStatusAffect("Bonus aCapacity",10,0,0,0);
-		monster.ass.analWetness = 0;
+		monster = new classes.Monsters.Naga(this);
+	
 		doNext(1);
 	}
 	//AKUBAL
 	if(monsterNum == 22) {
-		monster.short="Akbal";
-		monster.imageName="akbal";
-		monster.plural = false;
-		monster.long = "Akbal, 'God of the Terrestrial Fire', circles around you. His sleek yet muscular body is covered in tan fur, with dark spots that seem to dance around as you look upon them.  His mouth holds two ivory incisors that glint in the sparse sunlight as his lips tremble to the sound of an unending growl.  Each paw conceals lethal claws capable of shredding men and demons to ribbons.  His large and sickeningly alluring bright green eyes promise unbearable agony as you look upon them.";
-		monster.a ="";
-		monster.capitalA ="";
-		monster.temperment = 1;
-		monster.special1 = 5125;
-		monster.special2 = 5126;
-		monster.special3 = 5127;
-		monster.pronoun1 = "he";
-		monster.pronoun2 = "him";
-		monster.pronoun3 = "his";
-		
-		//Clothing/Armor
-		monster.armorName = "shimmering pelt";
-		monster.weaponName = "claws";
-		monster.weaponVerb = "claw-slash";
-		monster.armorDef = 5;
-		monster.armorPerk = "";
-		monster.weaponAttack = 5;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 55;
-		monster.tou = 53;
-		monster.spe = 50;
-		monster.inte = 75;
-		monster.lib = 50;
-		monster.sens = 50;
-		monster.cor = 100;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.bonusHP = 20;
-		monster.HP = eMaxHP();
-		monster.lust = 30;
-		monster.lustVuln = 0.8;
-		
-		
-		//Level Stats
-		monster.level = 6;
-		monster.XP = totalXP();
-		monster.gems = 15;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 1;
-		monster.tallness = 48;
-		monster.hairColor = "black";
-		monster.hairLength = 5;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "spotted";
-		monster.skinDesc = "fur";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_DOG;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 2;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 2;
-		//Create imp sex attributes
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 0;
-		monster.breastRows[0].nipplesPerBreast = 0;
-		monster.createCock();
-		monster.cocks[0].cockLength = 15;
-		monster.cocks[0].cockThickness = 2.5;
-		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
-		monster.balls = 2;
-		monster.cumMultiplier = 6;
-		monster.ballSize = 4;
-		monster.hoursSinceCum = 400;
-		monster.ass.analLooseness = 1;
-		monster.ass.analWetness = 1;
+		monster = new classes.Monsters.Akbal(this);
+
 		doNext(1);
 	}
 	//LOAD CERAPH!
 	if(monsterNum == 23) {
-		monster.short="Ceraph";
-		monster.imageName="ceraph";
-		monster.plural = false;		
-		monster.long = "Ceraph the Omnibus is totally nude and reveling in it.  Her large yet perky breasts jiggle heavily against her chest as she moves.  The flawless purple skin of her twin mounds glistens with a thin sheen of sweat, inviting you to touch and rub your fingers along their slippery surface.  Her eyes are solid black, but convey a mix of amusement and desire, in spite of their alien appearance.  The demon's crotch is a combination of both genders – a drooling cunt topped with a thick demonic shaft, sprouting from where a clit should be.";
-		monster.a ="";
-		monster.capitalA ="";
-		monster.temperment = 2;
-		//Lusty teases
-		monster.special1 = 5133;
-		monster.special2 = 5134;
-		monster.special3 = 5135;
-		monster.pronoun1 = "she";
-		monster.pronoun2 = "her";
-		monster.pronoun3 = "her";
-		
-		//Clothing/Armor
-		monster.armorName = "demon-skin";
-		monster.weaponName = "flaming whip";
-		monster.weaponVerb = "flame-whip";
-		monster.armorDef = 0;
-		monster.armorPerk = "";
-		monster.weaponAttack = 15;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 65;
-		monster.tou = 40;
-		monster.spe = 80;
-		monster.inte = 80;
-		monster.lib = 75;
-		monster.sens = 15;
-		monster.cor = 100;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.bonusHP = 200;
-		monster.HP = eMaxHP();
-		monster.lustVuln = 0.75;
-		
-		monster.lust = 30;
-		
-		//Level Stats
-		monster.level = 9;
-		monster.XP = totalXP();
-		monster.gems = rand(5) + 38;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 3;
-		monster.tallness = 66;
-		monster.hairColor = "black";
-		monster.hairLength = 20;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "purple";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		//5 - demonic heels
-		//6 - demon foot-claws
-		monster.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 10;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 6;
-		//Create goblin sex attributes
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 7;
-		monster.createVagina();
-		monster.createStatusAffect("Bonus vCapacity",20,0,0,0);
-		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
-		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
-		monster.vaginas[0].virgin = false;
-		monster.ass.analLooseness = 4;
-		monster.createStatusAffect("Bonus aCapacity",15,0,0,0);
-		monster.ass.analWetness = 0;
-		monster.createCock();
-		monster.cocks[0].cockLength = 10;
-		monster.cocks[0].cockThickness = 2;
-		monster.cocks[0].cockType = CockTypesEnum.DEMON;
+		monster = new classes.Monsters.Ceraph(this);
+
 		doNext(1);
 	}
 	//LOAD TAMANI'S DAUGHTERS
 	if(monsterNum == 24) {
-		monster.short="Tamani's daughters";
-		monster.imageName="tamanisdaughters";
-		monster.plural = true;
-		monster.long = "A large grouping of goblin girls has gathered around you, surrounding you on all sides.  Most have varying shades of green skin, though a few have yellowish or light blue casts to their skin.  All are barely clothed, exposing as much of their flesh as possible in order to excite a potential mate.  Their hairstyles are as varied as their clothing and skin-tones, and the only things they seem to have in common are cute faces and curvy forms.  It looks like they want something from you.";
-		monster.a ="the group of ";
-		monster.capitalA ="The group of ";
-		monster.temperment = 2;
-		//Regular attack
-		monster.special1 = 0;
-		//Lust attack
-		monster.special2 = 0;
-		monster.special3 = 0;
-		monster.pronoun1 = "they";
-		monster.pronoun2 = "them";
-		monster.pronoun3 = "their";
-		
-		//Clothing/Armor
-		monster.armorName = "leather straps";
-		monster.weaponName = "fists";
-		monster.weaponVerb = "tiny punch";
-		monster.armorDef = 0;
-		monster.armorPerk = "";
-		monster.weaponAttack = 0;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 55;
-		monster.tou = 30;
-		monster.spe = 45;
-		monster.inte = 50;
-		monster.lib = 70;
-		monster.sens = 70;
-		monster.cor = 50;
-		monster.fatigue = 0;
-		monster.lustVuln = .65;
-		
-		//Combat Stats
-		//int(player.statusAffectv2("Tamani")/2)
-		monster.bonusHP = 50 + (int(player.statusAffectv2("Tamani")/2)*15);
-		monster.HP = eMaxHP();
-		
-		monster.lust = 30;
-		
-		//Level Stats
-		monster.level = 8 + (Math.floor(player.statusAffectv2("Tamani")/2/10));
-		monster.XP = totalXP();
-		monster.gems = rand(15) + 5;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 2;
-		monster.tallness = 40;
-		monster.hairColor = "pink";
-		monster.hairLength = 16;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "greenish gray";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "non-existant";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		//5 - demonic heels
-		//6 - demon foot-claws
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 7;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 7;
-		//Create goblin sex attributes
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 4;
-		monster.createVagina();
-		monster.createStatusAffect("Bonus vCapacity",40,0,0,0);
-		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
-		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
-		monster.vaginas[0].virgin = false;
-		monster.ass.analLooseness = 1;
-		monster.createStatusAffect("Bonus aCapacity",25,0,0,0);
-		monster.ass.analWetness = 0;
+			monster.short="Tamani's daughters";
+			monster.imageName="tamanisdaughters";
+			monster.plural = true;
+			monster.long = "A large grouping of goblin girls has gathered around you, surrounding you on all sides.  Most have varying shades of green skin, though a few have yellowish or light blue casts to their skin.  All are barely clothed, exposing as much of their flesh as possible in order to excite a potential mate.  Their hairstyles are as varied as their clothing and skin-tones, and the only things they seem to have in common are cute faces and curvy forms.  It looks like they want something from you.";
+			monster.a ="the group of ";
+			monster.capitalA ="The group of ";
+			monster.temperment = 2;
+			//Regular attack
+			monster.special1 = 0;
+			//Lust attack
+			monster.special2 = 0;
+			monster.special3 = 0;
+			monster.pronoun1 = "they";
+			monster.pronoun2 = "them";
+			monster.pronoun3 = "their";
+			
+			//Clothing/Armor
+			monster.armorName = "leather straps";
+			monster.weaponName = "fists";
+			monster.weaponVerb = "tiny punch";
+			monster.armorDef = 0;
+			monster.armorPerk = "";
+			monster.weaponAttack = 0;
+			monster.weaponPerk = "";
+			monster.weaponValue = 0;
+			monster.armorValue = 0;
+			//Primary stats
+			monster.str = 55;
+			monster.tou = 30;
+			monster.spe = 45;
+			monster.inte = 50;
+			monster.lib = 70;
+			monster.sens = 70;
+			monster.cor = 50;
+			monster.fatigue = 0;
+			monster.lustVuln = .65;
+			
+			//Combat Stats
+			//int(player.statusAffectv2("Tamani")/2)
+			monster.bonusHP = 50 + (int(player.statusAffectv2("Tamani")/2)*15);
+			monster.HP = eMaxHP();
+			
+			monster.lust = 30;
+			
+			//Level Stats
+			monster.level = 8 + (Math.floor(player.statusAffectv2("Tamani")/2/10));
+			monster.XP = totalXP();
+			monster.gems = rand(15) + 5;
+			
+			//Appearance Variables
+			//Gender 1M, 2F, 3H
+			monster.gender = 2;
+			monster.tallness = 40;
+			monster.hairColor = "pink";
+			monster.hairLength = 16;
+			//Skintype
+			//0 - skin
+			//1 - furry
+			//2 - scaley
+			monster.skinType = SKIN_TYPE_PLAIN;
+			monster.skinTone = "greenish gray";
+			monster.skinDesc = "skin";
+			//Facetype:
+			//0 - human
+			//1 - horse
+			//2 - dogface
+			monster.faceType = FACE_HUMAN;
+			monster.hornType = HORNS_NONE;
+			monster.wingDesc = "non-existant";
+			//Wingtype
+			//0 - none
+			//1 - bee
+			//2 - large bee
+			//3 - faerie?
+			//4 - avian
+			//5 - dragoooon?
+			monster.wingType = WING_TYPE_NONE;
+			//lowerBody:
+			//0 - normal
+			//1 - hooves
+			//2 - paws
+			//3 - snakelike body
+			//4 - centaur!
+			//5 - demonic heels
+			//6 - demon foot-claws
+			monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
+			//tailType:
+			//0 - none
+			//1 - horse
+			//2 - dog
+			//3 - demon
+			//4 - cow!
+			//5 - spider!
+			//6 - bee!
+			monster.tailType = TAIL_TYPE_NONE;
+			//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
+			monster.tailVenom = 0;
+			//Tail recharge determines how fast venom/webs comes back per hour.
+			monster.tailRecharge = 5;
+			//hipRating
+			//0 - boyish
+			//2 - slender
+			//4 - average
+			//6 - noticable/ample
+			//10 - curvy//flaring
+			//15 - child-bearing/fertile
+			//20 - inhumanly wide
+			monster.hipRating = 7;
+			//buttRating
+			//0 - buttless
+			//2 - tight
+			//4 - average
+			//6 - noticable
+			//8 - large
+			//10 - jiggly
+			//13 - expansive
+			//16 - huge
+			//20 - inconceivably large/big/huge etc
+			monster.buttRating = 7;
+			//Create goblin sex attributes
+			monster.createBreastRow();
+			monster.breastRows[0].breastRating = 4;
+			monster.createVagina();
+			monster.createStatusAffect("Bonus vCapacity",40,0,0,0);
+			monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+			monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
+			monster.vaginas[0].virgin = false;
+			monster.ass.analLooseness = 1;
+			monster.createStatusAffect("Bonus aCapacity",25,0,0,0);
+			monster.ass.analWetness = 0;
 		doNext(1);
 	}
 	//LOAD GENERIC HARPY
 	if(monsterNum == 25) {
-		monster.short="harpy";
-		monster.imageName="harpy";
-		monster.plural = false;
-		monster.long = "You are fighting a tall, deranged harpy. She appears very human, about six feet six inches tall but covered in a fine layer of powder-blue down. Her arms are sinewy and muscular, with a long web connecting them to her ample hips, covered in stringy blue feathers to aid her flight. A larger pair of powdery-blue wings also protrudes from her shoulder blades, flapping idly. She appears quite deranged as she circles you, approaching and backing away erratically. Her face is quite beautiful, with fine lilac makeup adorning the features of a handsome woman, and her lips are traced with rich golden lipstick. As she circles you, squawking frantically and trying to intimidate you, your eyes are drawn to her slender torso and small, pert breasts, each the size of a small fruit and covered in a layer of the softest feathers which ripple and move with the gusts from her wings. As astounding as her breasts are, her egg-bearing hips are even more impressive.  They're twice as wide as her torso, with enormous, jiggling buttocks where her huge, meaty thighs are coming up to meet them. Her legs end in three-pronged talons; their shadowy black curves glinting evilly in the light.";
-		monster.a ="the ";
-		monster.capitalA ="The ";
-		monster.temperment = 2;
-		//Uber
-		monster.special1 = 5136;
-		//Lust attack
-		monster.special2 = 5137;
-		monster.special3 = 0;
-		monster.pronoun1 = "she";
-		monster.pronoun2 = "her";
-		monster.pronoun3 = "her";
-		
-		//Clothing/Armor
-		monster.armorName = "feathers";
-		monster.weaponName = "talons";
-		monster.weaponVerb = "slashing talons";
-		monster.armorDef = 5;
-		monster.armorPerk = "";
-		monster.weaponAttack = 15;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 60;
-		monster.tou = 40;
-		monster.spe = 90;
-		monster.inte = 40;
-		monster.lib = 70;
-		monster.sens = 30;
-		monster.cor = 80;
-		monster.fatigue = 0;
-		monster.lustVuln = .6;
-		
-		//Combat Stats
-		//int(player.statusAffectv2("Tamani")/2)
-		monster.bonusHP = 150;
-		monster.HP = eMaxHP();
-		monster.lustVuln = .7;
-		
-		monster.lust = 10;
-		
-		//Level Stats
-		monster.level = 10;
-		monster.XP = totalXP();
-		monster.gems = 10 + rand(4);
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 2;
-		monster.tallness = 78;
-		monster.hairColor = "blue";
-		monster.hairLength = 16;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "pink";
-		monster.skinDesc = "feathers";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "large feathery wings";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_HARPY;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		//5 - demonic heels
-		//6 - demon foot-claws
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 20;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 13;
-		//Create goblin sex attributes
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 2;
-		monster.createVagina();
-		monster.createStatusAffect("Bonus vCapacity",40,0,0,0);
-		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
-		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING_WIDE;
-		monster.vaginas[0].virgin = false;
-		monster.ass.analLooseness = 1;
-		monster.createStatusAffect("Bonus aCapacity",20,0,0,0);
-		monster.ass.analWetness = 0;
+		monster = new classes.Monsters.Harpy(this);
+
 		doNext(1);
 	}	
 	//LOAD SOPHIE
 	if(monsterNum == 26) {
-		monster.short="Sophie";
-		monster.imageName="sophie";
-		monster.plural = false;
-		monster.long = "Sophie is approximately the size of a normal human woman, not counting the large feathery wings that sprout from her back.  Her face is gorgeous, with large rounded eyes and glimmering amber lip-gloss painted on her lush, kissable lips.  In spite of her beauty, it's clear from the barely discernible laugh lines around her mouth that she's been around long to enough to have quite a few children.  Her feathers are light pink, though the downy plumage that comprises her 'hair' is brighter than the rest.  She moves with practiced grace despite the large, jiggling breasts that hang from her chest.  Judging from her confident movements, she's an experienced fighter.";
-		monster.a ="";
-		monster.capitalA ="";
-		monster.temperment = 2;
-		//Uber
-		monster.special1 = 5136;
-		//Lust attack
-		monster.special2 = 5137;
-		monster.special3 = 0;
-		monster.pronoun1 = "she";
-		monster.pronoun2 = "her";
-		monster.pronoun3 = "her";
-		
-		//Clothing/Armor
-		monster.armorName = "feathers";
-		monster.weaponName = "talons";
-		monster.weaponVerb = "slashing talons";
-		monster.armorDef = 5;
-		monster.armorPerk = "";
-		monster.weaponAttack = 20;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 55;
-		monster.tou = 40;
-		monster.spe = 110;
-		monster.inte = 60;
-		monster.lib = 60;
-		monster.sens = 50;
-		monster.cor = 60;
-		monster.fatigue = 0;
-		monster.lustVuln = .3;
-		
-		//Combat Stats
-		//int(player.statusAffectv2("Tamani")/2)
-		monster.bonusHP = 250;
-		monster.HP = eMaxHP();
-		
-		monster.lust = 10;
-		
-		//Level Stats
-		monster.level = 11;
-		monster.XP = totalXP();
-		monster.gems = 20 + rand(25);
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 2;
-		monster.tallness = 65;
-		monster.hairColor = "pink";
-		monster.hairLength = 16;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "pink";
-		monster.skinDesc = "feathers";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "large feathery wings";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_HARPY;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		//5 - demonic heels
-		//6 - demon foot-claws
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 20;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 13;
-		//Create goblin sex attributes
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 5;
-		monster.createVagina();
-		monster.createStatusAffect("Bonus vCapacity",40,0,0,0);
-		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
-		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING_WIDE;
-		monster.vaginas[0].virgin = false;
-		monster.ass.analLooseness = 1;
-		monster.createStatusAffect("Bonus aCapacity",10,0,0,0);
-		monster.ass.analWetness = 0;
+		monster = new classes.Monsters.Sophie(this);
+
 		doNext(1);
 	}	
 	//IMP WHORED HORDE
 	if(monsterNum == 27) {
 		plotFight = true;
-		monster.short="imp horde";
-		monster.imageName="impmob";
-		monster.plural = true;
-		monster.long = "Imps of all shapes and sizes fill the room around you, keeping you completely surrounded by their myriad forms.  You can see more than a few sporting disproportionate erections, and there's even some with exotic dog-dicks, horse-pricks, and the odd spiny cat-cock.  Escape is impossible, you'll have to fight or seduce your way out of this one!";
-		monster.a ="the ";
-		monster.capitalA ="The ";
-		monster.temperment = 2;
-		//Uber
-		monster.special1 = 0;
-		//Lust attack
-		monster.special2 = 0;
-		monster.special3 = 0;
-		monster.pronoun1 = "they";
-		monster.pronoun2 = "them";
-		monster.pronoun3 = "their";
-		
-		//Clothing/Armor
-		monster.armorName = "skin";
-		monster.weaponName = "fists";
-		monster.weaponVerb = "punches";
-		monster.armorDef = 0;
-		monster.armorPerk = "";
-		monster.weaponAttack = 0;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 20;
-		monster.tou = 10;
-		monster.spe = 25;
-		monster.inte = 12;
-		monster.lib = 45;
-		monster.sens = 45;
-		monster.cor = 100;
-		monster.fatigue = 0;
-		monster.lustVuln = .5;
-		
-		//Combat Stats
-		//int(player.statusAffectv2("Tamani")/2)
-		monster.bonusHP = 450;
-		monster.HP = eMaxHP();
-		
-		monster.lust = 10;
-		
-		//Level Stats
-		monster.level = 10;
-		monster.XP = totalXP();
-		monster.gems = 20 + rand(25);
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 1;
-		monster.tallness = 36;
-		monster.hairColor = "black";
-		monster.hairLength = 1;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "red";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.hornType = HORNS_NONE;
-		monster.wingDesc = "imp wings";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_NONE;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		//5 - demonic heels
-		//6 - demon foot-claws
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 2;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 2;
-		//Create goblin sex attributes
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 0;
-		monster.ass.analLooseness = 1;
-		monster.createStatusAffect("Bonus aCapacity",10,0,0,0);
-		monster.ass.analWetness = 0;
-		monster.createCock();
-		monster.cocks[0].cockLength = 12;
-		monster.cocks[0].cockThickness = 2;
+		monster = new classes.Monsters.ImpHorde(this);
+
 		doNext(1);
 	}
 	//Encapsulation pod
-	if(monsterNum == 28) {
+	if(monsterNum == 28) 
+	{
 		plotFight = true;
 		monster.short="pod";
 		monster.imageName="pod";
@@ -8834,6 +6496,7 @@ public function startCombat(monsterNum:Number):void {
 		//13 - expansive
 		//16 - huge
 		//20 - inconceivably large/big/huge etc
+	
 		doNext(1);
 	}
 	//LOAD ANEMONE!
@@ -9011,22 +6674,22 @@ public function startCombat(monsterNum:Number):void {
 		monster.cor = 50;
 		monster.fatigue = 0;
 		monster.lustVuln = .5;
-		if(flags[TIMES_PC_DEFEATED_VALA] > 0) monster.lustVuln += .25;
-		if(flags[TIMES_PC_DEFEATED_VALA] > 2) monster.lustVuln += .5;
+		if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) monster.lustVuln += .25;
+		if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 2) monster.lustVuln += .5;
 		
 		//Combat Stats
 		monster.bonusHP = 350;
 		monster.HP = eMaxHP();
 		
-		monster.lust = 30 + flags[TIMES_PC_DEFEATED_VALA] * 10;
+		monster.lust = 30 + flags[kFLAGS.TIMES_PC_DEFEATED_VALA] * 10;
 		if(monster.lust > 80) monster.lust = 80;
 		
 		
 		//Level Stats
 		monster.level = 11;
 		monster.XP = totalXP() + 50;
-		if(flags[TIMES_PC_DEFEATED_VALA] > 0) monster.XP = 5;
-		if(flags[TIMES_PC_DEFEATED_VALA] > 2) monster.XP = 1;
+		if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) monster.XP = 5;
+		if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 2) monster.XP = 1;
 		monster.gems = 1;
 		
 		
@@ -10468,11 +8131,11 @@ public function startCombat(monsterNum:Number):void {
 	if(monsterNum == 41) {
 		monster.short="minotaur";
 		monster.imageName="minotaurmob";
-		if(flags[UNKNOWN_FLAG_NUMBER_00326] < 20) monster.short += " gang";
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20) monster.short += " gang";
 		else monster.short += " tribe";
 		monster.plural = true;
-		monster.long = Num2Text(flags[UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear.";
-		if(flags[UNKNOWN_FLAG_NUMBER_00326] >= 20) monster.long += "  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.";
+		monster.long = Num2Text(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear.";
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20) monster.long += "  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.";
 		monster.a ="the ";
 		monster.capitalA ="The ";
 		monster.temperment = 1;
@@ -10504,15 +8167,15 @@ public function startCombat(monsterNum:Number):void {
 		monster.fatigue = 0;
 		
 		//Combat Stats
-		monster.bonusHP = 340 + 50 * (flags[UNKNOWN_FLAG_NUMBER_00326] - 3);
+		monster.bonusHP = 340 + 50 * (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
 		monster.HP = eMaxHP();
 		monster.lustVuln = 0.45;
-		if((flags[UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) monster.lustVuln = .3;
-		else monster.lustVuln -= (flags[UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
+		if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) monster.lustVuln = .3;
+		else monster.lustVuln -= (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
 		monster.lust = 30;
 		
 		//Level Stats
-		monster.level = 11 + Math.round((flags[UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
+		monster.level = 11 + Math.round((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
 		if(monster.level > 14) monster.level = 14;
 		monster.XP = totalXP();
 		monster.gems = rand(15) + 45;
@@ -11005,7 +8668,7 @@ public function startCombat(monsterNum:Number):void {
 		monster.long = "You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
 		monster.a ="the ";
 		monster.capitalA ="The ";
-		if(flags[HEL_TALKED_ABOUT_HER] == 1) {
+		if(flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 1) {
 			monster.short ="Hel";
 			monster.a = "";
 			monster.capitalA = "";
@@ -12088,7 +9751,7 @@ public function startCombat(monsterNum:Number):void {
 		monster.inte = 75;
 		monster.lib = 50;
 		monster.sens = 35;
-		monster.cor = flags[EMBER_COR];
+		monster.cor = flags[kFLAGS.EMBER_COR];
 		monster.fatigue = 0;
 		monster.lustVuln = .25;
 		
@@ -12104,7 +9767,7 @@ public function startCombat(monsterNum:Number):void {
 		
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
-		monster.gender = flags[EMBER_GENDER];
+		monster.gender = flags[kFLAGS.EMBER_GENDER];
 		monster.tallness = rand(8) + 70;
 		monster.hairColor = "black";
 		monster.hairLength = 15;
@@ -12171,13 +9834,13 @@ public function startCombat(monsterNum:Number):void {
 		//20 - inconceivably large/big/huge etc
 		monster.buttRating = 8;
 		//Create imp sex attributes
-		if(flags[EMBER_GENDER] >= 2) {
+		if(flags[kFLAGS.EMBER_GENDER] >= 2) {
 			monster.createVagina();
 			monster.vaginas[0].virgin = false;
 			monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
 			monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		}
-		if(flags[EMBER_GENDER] == 1 || flags[EMBER_GENDER] == 3) {
+		if(flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) {
 			monster.balls = 2;
 			monster.createCock();
 			monster.cocks[0].cockLength = 16;
@@ -12259,7 +9922,7 @@ public function startCombat(monsterNum:Number):void {
 		monster.inte = 85;
 		monster.lib = 50;
 		monster.sens = 45;
-		monster.cor = flags[EMBER_COR];
+		monster.cor = flags[kFLAGS.EMBER_COR];
 		monster.fatigue = 0;
 		monster.lustVuln = .25;
 		
@@ -12627,7 +10290,7 @@ public function startCombat(monsterNum:Number):void {
 		else if(monster.hairColor == "black") monster.long += "lustrous, ass-length black";
 		else monster.long += "unkempt, shoulder-length reddish";
 		monster.long += " hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.";
-		if(rand(3) != 2) flags[redheadIsFuta] = 1;
+		if(rand(3) != 2) flags[kFLAGS.redheadIsFuta] = 1;
 		monster.a ="a ";
 		monster.capitalA ="A ";
 		monster.temperment = 1;
@@ -12672,7 +10335,7 @@ public function startCombat(monsterNum:Number):void {
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
 		monster.gender = 2;
-		if(flags[redheadIsFuta] == 1) monster.gender == 3;
+		if(flags[kFLAGS.redheadIsFuta] == 1) monster.gender == 3;
 		monster.tallness = rand(24) + 60;
 		
 		monster.hairLength = 13+rand(20);
@@ -13164,7 +10827,7 @@ public function startCombat(monsterNum:Number):void {
 		monster.imageName="kelt";
 		monster.plural = false;
 		monster.long = "Kelt has changed for the worse since your first meeting.  Gone is his muscular, barrel chest.  In its place is a softer frame, capped with tiny boobs - remnants of your last treatment.  His jaw is fairly square and chiselled (though less than before).  From the waist down, he has the body of a horse, complete with fairly large pair of balls and a decent-sized dong.  Both are smaller than they used to be, however.  He has his bow strung and out, clearly intent on defending himself from your less than gentle touches.";
-		if(flags[KELT_BREAK_LEVEL] == 2) monster.long = "Kelt is looking less and less like the burly centaur from before, and more and more like a woman.  He looks more like an odd, androgynous hybrid than the beautiful woman you had turned him into.  He currently sports roughly b-cup breasts and a smallish, miniature horse-cock.  There's barely any hair on his human body, aside from a long mane of hair.  Each treatment seems to be more effective than the last, and you can't wait to see what happens after you tame him THIS time.";
+		if(flags[kFLAGS.KELT_BREAK_LEVEL] == 2) monster.long = "Kelt is looking less and less like the burly centaur from before, and more and more like a woman.  He looks more like an odd, androgynous hybrid than the beautiful woman you had turned him into.  He currently sports roughly b-cup breasts and a smallish, miniature horse-cock.  There's barely any hair on his human body, aside from a long mane of hair.  Each treatment seems to be more effective than the last, and you can't wait to see what happens after you tame him THIS time.";
 		monster.a ="";
 		monster.capitalA ="";
 		monster.temperment = 1;
@@ -13424,7 +11087,7 @@ public function startCombat(monsterNum:Number):void {
 		monster.ass.analWetness = 0;
 		monster.createStatusAffect("Bonus aCapacity",20,0,0,0);
 		monster.createStatusAffect("Bonus vCapacity",30,0,0,0);
-		if(flags[SHEILA_DEMON] == 1) {
+		if(flags[kFLAGS.SHEILA_DEMON] == 1) {
 			//-slightly slower, has much more stamina, intel, and HP now
 			monster.spe -= 15;
 			monster.tou += 30
@@ -13446,7 +11109,7 @@ public function startCombat(monsterNum:Number):void {
 				monster.long += " jiggle as she moves, and she shoves them out to make sure you see just how lewd her body has become since your first meeting.";
 			monster.long += "  Straight, jaw-length auburn hair frames her face along with two long, smooth ears that stick out sideways.  Her only nods to civilization are a dangling purple earring and the finger rings that she wears on her hands, and the wild woman stares openly at you, touching herself.";
 		}
-		if(flags[SHEILA_XP] > 3 || flags[SHEILA_DEMON] > 0) {
+		if(flags[kFLAGS.SHEILA_XP] > 3 || flags[kFLAGS.SHEILA_DEMON] > 0) {
 			monster.vaginas[0].virgin = false;
 		}
 		doNext(1);
@@ -14132,7 +11795,7 @@ public function startCombat(monsterNum:Number):void {
 	}
 	//LOAD HOLLI
 	if(monsterNum == 68) {
-		flags[FOUGHT_HOLLI] = 1;
+		flags[kFLAGS.FOUGHT_HOLLI] = 1;
 		monster.short="Holli";
 		monster.imageName="holli";
 		monster.plural = false;
@@ -14269,7 +11932,7 @@ public function startCombat(monsterNum:Number):void {
 	}
 	//LOAD HOLLI
 	if(monsterNum == 69) {
-		monster.short = flags[HELSPAWN_NAME];
+		monster.short = flags[kFLAGS.HELSPAWN_NAME];
 		monster.imageName = "hollispawn"
 		monster.plural = false;
 		monster.long = "Marae's offshoot, Holli stands rooted in front of you.  Solid black eyes with golden pupils stare out at you.  Her normally-nude body is concealed inside her tree, though occasionally she will flash you the devilish grin of a sadistic temptress and the bark will split to reveal a pale, jiggling bit of flesh.  A pair of gnarled oak horns sprout from her forehead; leaves and flowers alternately bloom and wither on them as her face contorts with emotion.";
@@ -14726,6 +12389,7 @@ public function tease():void {
 	if(player.hasPerk("Sensual Lover") >= 0) {
 		chance += 2;
 	}
+	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME) >= 0) chance += UmasShop.NEEDLEWORK_LUST_TEASE_MULTI;
 	//==============================
 	//Determine basic damage.
 	//==============================
@@ -15980,9 +13644,10 @@ public function tease():void {
 			damage *= 1.15;
 			bonusDamage *= 1.15;
 		}
+		if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME) >= 0) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if(monster.plural) damage *= 1.3;
 		enemyTeaseReaction(damage + rand(bonusDamage));
-		if(flags[PC_FETISH] >= 1) {
+		if(flags[kFLAGS.PC_FETISH] >= 1) {
 			if(player.lust < 75) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.", false);
 			else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.", false);
 			stats(0,0,0,0,0,0,2 + rand(3),0);
@@ -16115,6 +13780,7 @@ public function spellMod():Number {
 	if(player.hasPerk("Wizard's Focus") >= 0) {
 		if(player.perkv1("Wizard's Focus") is Number) mod += player.perkv1("Wizard's Focus");
 	}
+	if (player.hasPerk(UmasShop.NEEDLEWORK_MAGIC_PERK_NAME) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 	return mod;
 }
 public function spellArouse():void {
@@ -16128,7 +13794,7 @@ public function spellArouse():void {
 	statScreenRefresh();
 	if(monster.hasStatusAffect("Shell") >= 0) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-		flags[SPELLS_CAST]++;
+		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -16138,7 +13804,7 @@ public function spellArouse():void {
 	if(monster.short == "worms") {
 		outputText("The worms appear to be unaffected by your magic!", false);
 		outputText("\n\n", false);
-		flags[SPELLS_CAST]++;
+		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		doNext(1);
 		if(monster.lust >= 100) doNext(5009);
@@ -16147,7 +13813,7 @@ public function spellArouse():void {
 	}
 	if(monster.lustVuln == 0) {
 		outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n", false);
-		flags[SPELLS_CAST]++;
+		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -16186,7 +13852,7 @@ public function spellArouse():void {
 	}
 	outputText("\n\n", false);
 	doNext(1);
-	flags[SPELLS_CAST]++;
+	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	if(monster.lust >= 100) doNext(5009);
 	else enemyAI();
@@ -16221,7 +13887,7 @@ public function spellHeal():void {
 	}
 	outputText("\n\n", false);
 	statScreenRefresh();
-	flags[SPELLS_CAST]++;
+	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	if(player.lust >= 100) doNext(5011);
 	else enemyAI();
@@ -16277,7 +13943,7 @@ public function spellMight():void {
 	}
 	outputText("\n\n", false);
 	statScreenRefresh();
-	flags[SPELLS_CAST]++;
+	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	if(player.lust >= 100) doNext(5011);
 	else enemyAI();
@@ -16297,7 +13963,7 @@ public function spellChargeWeapon():void {
 	player.createStatusAffect("Charge Weapon",10*spellMod(),0,0,0);
 	player.weaponAttack += player.statusAffectv1("Charge Weapon");
 	statScreenRefresh();
-	flags[SPELLS_CAST]++;
+	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	enemyAI();
 }
@@ -16313,7 +13979,7 @@ public function spellBlind():void {
 	fatigue(20,1);
 	if(monster.hasStatusAffect("Shell") >= 0) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-		flags[SPELLS_CAST]++;
+		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -16333,7 +13999,7 @@ public function spellBlind():void {
 	}
 	else outputText(monster.capitalA + monster.short + " blinked!", false);	
 	outputText("\n\n", false);
-	flags[SPELLS_CAST]++;
+	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	statScreenRefresh();
 	enemyAI();
@@ -16350,7 +14016,7 @@ public function spellWhitefire():void {
 	fatigue(30,1);
 	if(monster.hasStatusAffect("Shell") >= 0) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-		flags[SPELLS_CAST]++;
+		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -16366,7 +14032,7 @@ public function spellWhitefire():void {
 		if(monster.hasPerk("Acid") < 0) monster.createPerk("Acid",0,0,0,0);
 	}
 	outputText("\n\n", false);
-	flags[SPELLS_CAST]++;
+	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	monster.HP -= temp;
 	statScreenRefresh();
@@ -16375,15 +14041,15 @@ public function spellWhitefire():void {
 }
 
 public function spellPerkUnlock():void {
-	if(flags[SPELLS_CAST] >= 5 && player.hasPerk("Spellcasting Affinity") < 0) {
+	if(flags[kFLAGS.SPELLS_CAST] >= 5 && player.hasPerk("Spellcasting Affinity") < 0) {
 		outputText("<b>You've become more comfortable with your spells, unlocking the Spellcasting Affinity perk and reducing fatigue cost of spells by 20%!</b>\n\n");
 		player.createPerk("Spellcasting Affinity",20,0,0,0);
 	}
-	if(flags[SPELLS_CAST] >= 15 && player.perkv1("Spellcasting Affinity") < 35) {
+	if(flags[kFLAGS.SPELLS_CAST] >= 15 && player.perkv1("Spellcasting Affinity") < 35) {
 		outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 15%!</b>\n\n");
 		player.changePerkValue("Spellcasting Affinity",1,35);
 	}
-	if(flags[SPELLS_CAST] >= 45 && player.perkv1("Spellcasting Affinity") < 50) {
+	if(flags[kFLAGS.SPELLS_CAST] >= 45 && player.perkv1("Spellcasting Affinity") < 50) {
 		outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 15%!</b>\n\n");
 		player.changePerkValue("Spellcasting Affinity",1,50);
 	}
@@ -16494,7 +14160,7 @@ public function kick():void {
 	//(bipedal hoof-kick) 
 	else if(player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("You twist and lurch as you raise a leg and slam your hoof forward in a kick.  ", false);
 
-	if(flags[PC_FETISH] >= 3) {
+	if(flags[kFLAGS.PC_FETISH] >= 3) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;
@@ -17111,8 +14777,8 @@ public function runAway():void {
 		doNext(5000);
 		return;
 	}
-	if(flags[UNKNOWN_FLAG_NUMBER_00329] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
-		flags[UNKNOWN_FLAG_NUMBER_00329] = 0;
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
 		//(Free run away) 
 		outputText("You slink away while the pack of brutes is arguing.  Once they finish that argument, they'll be sorely disappointed!", true);
 		gameState = 0;
