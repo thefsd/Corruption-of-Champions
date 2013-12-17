@@ -1,4 +1,9 @@
 package coc.view {
+	import flash.display.MovieClip;
+	import flash.display.Sprite;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
+
 	public class StatBar extends MovieClip {
 		public static const
 			DEFAULT_WIDTH :Number = 196,
@@ -19,7 +24,7 @@ package coc.view {
 			_colonField :TextField,
 			_valueField :TextField,
 			_bar :Sprite,
-			_upDown :Sprite;
+			_upDown :MovieClip;
 
 		protected var
 			_currentValue :Number;
@@ -38,7 +43,7 @@ package coc.view {
 			labelField :TextField = null,
 			valueField :TextField = null,
 			bar :Sprite = null,
-			upDown :Sprite = null
+			upDown :MovieClip = null
 		) :void {
 			_wholeWidth = DEFAULT_WIDTH;
 			_wholeHeight = DEFAULT_HEIGHT;
@@ -88,7 +93,7 @@ package coc.view {
 			this.bar = bar;
 		};
 
-		protected function setupUpDown( upDown :Sprite ) :void {
+		protected function setupUpDown( upDown :MovieClip ) :void {
 			if( ! upDown ) {
 				upDown = createUpDown();
 			}
@@ -104,26 +109,93 @@ package coc.view {
 			}
 
 			if( valueField ) {
-				// ...
+				if( upDown )
+					valueField.x = this.width - upDown.width - valueField.width;
+				valueField.y = 0;
 			}
 
 			if( bar ) {
-				// ...
+				bar.x = 0;
+				bar.y = BAR_TOP_OFFSET;
+				bar.height = this.height - bar.y;
+
+				// This handles width.
 				updateBar();
 			}
 
 			if( upDown ) {
-				// ...
+				upDown.x = this.width - upDown.width;
+				upDown.y = (this.height - upDown.height) / 2;
 			}
 
 			// update colon TF.  ... Well, that sounds really kinky in the context of this game.
-			_colonField.x = barMaximumWidth - _colonField.width;
+			if( _colonField )
+				_colonField.x = barMaximumWidth - _colonField.width/2;
 		};
 
 		protected function updateBar() :void {
 			bar.width = currentValue / maximumValue * barMaximumWidth;
 		};
 
+		protected function updateCurrentValue() :void {
+			var val :Number = Math.floor( _currentValue );
+
+			if( val >= 10000 ) {
+				valueField.text = "++++";
+			}
+			else {
+				valueField.text = String( val );
+			}
+		};
+
+
+
+		//////// Creators ////////
+
+		protected function createLabelField() :TextField {
+			// boop
+			throw new Error( "Not implemented." );
+			return null;
+		};
+
+		protected function createValueField() :TextField {
+			// boop
+			throw new Error( "Not implemented." );
+			return null;
+		};
+
+		protected function createBar() :Sprite {
+			// body...
+			throw new Error( "Not implemented." );
+			return null;
+		};
+
+		protected function createUpDown() :MovieClip {
+			// body...
+			throw new Error( "Not implemented." );
+			return null;
+		};
+
+
+
+		//////// Public thingers ////////
+
+		public function showUp() :void {
+			upDown.up.visible = true;
+			upDown.down.visible = false;
+		};
+
+		public function showDown() :void {
+			upDown.up.visible = false;
+			upDown.down.visible = true;
+		};
+
+		public function hideUpDown() :void {
+			// Mysteriously enough, this function will hide the up and down arrows.
+			upDown.up.visible = false;
+			upDown.down.visible = false;
+
+		};
 
 
 
@@ -140,6 +212,17 @@ package coc.view {
 		override public function set width( value :Number ) :void {
 			// do other stuff here...
 			_wholeWidth = value;
+
+			layoutChildren();
+		};
+
+		override public function get height() :Number {
+			return _wholeHeight;
+		};
+
+		override public function set height( value :Number ) :void {
+			// do other stuff here...
+			_wholeHeight = value;
 
 			layoutChildren();
 		};
@@ -164,7 +247,18 @@ package coc.view {
 		public function get currentValue() :Number { return _currentValue; };
 
 		public function set currentValue( value :Number ) :void {
+			if( value > _currentValue ) {
+				showUp();
+			}
+			else if( value < _currentValue ) {
+				showDown();
+			}
+			else {
+				hideUpDown();
+			}
+
 			_currentValue = value;
+			updateCurrentValue();
 			updateBar();
 		};
 
@@ -202,9 +296,9 @@ package coc.view {
 			updateBar();
 		};
 
-		public function get upDown() :Sprite { return _upDown; };
+		public function get upDown() :MovieClip { return _upDown; };
 
-		public function set upDown( value :Sprite ) :void {
+		public function set upDown( value :MovieClip ) :void {
 			_upDown = value;
 
 			if( ! _upDown ) return;

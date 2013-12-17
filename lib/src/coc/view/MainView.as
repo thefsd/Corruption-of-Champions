@@ -25,6 +25,8 @@ package coc.view {
 
 	import coc.model.GameModel;
 
+	import classes.GlobalFlags.kFLAGS;
+
 	public class MainView extends MovieClip {
 		// Menu button names.
 		public static const MENU_NEW_MAIN :String = 'newGame';
@@ -554,7 +556,7 @@ package coc.view {
 			var scale :Number;
 
 			// TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
-			if( index < 0 || this.model.flags[kFLAGS. 273 ] ) // = SHOW_SPRITES_FLAG from flagDefs...
+			if( index < 0 || this.model.flags[ kFLAGS.SHOW_SPRITES_FLAG ] )
 				this.sprite.visible = false;
 			else {
 				this.sprite.visible = true;
