@@ -403,7 +403,7 @@ public function useTentacleJojo():void {
 			else outputText(".", false);
 		}
 		if(player.cockTotal() > 1) {
-			outputText("The tentacles working over your " + multiCockDescript() + " clamp down and wriggle deliciously around you.  You can't help but cum from the assault, feeding the tentacles your hot spoogy load.  They drinks it down eagerly", false);
+			outputText("The tentacles working over your " + multiCockDescript() + " clamp down and wriggle deliciously around you.  You can't help but cum from the assault, feeding the tentacles your hot spoogy load.  They drink it down eagerly", false);
 			if(player.cumQ() >= 100) {
 				outputText(", but after a few moments they begin to struggle with the sheer output.", false);
 				if(player.cumQ() >= 300) {
