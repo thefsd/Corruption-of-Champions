@@ -2832,7 +2832,7 @@ public function tease():void {
 		if(player.nippleLength >= 3) choices[choices.length] = 15;
 	}
 	//16 Anal gape
-	if(player.ass.analLooseness >= 4) {
+	if(player.ass.analLooseness >= 4 && !player.assholeOffLimits()) {
 		choices[choices.length] = 16;
 		if(player.ass.analLooseness >= 5) choices[choices.length] = 16;
 	}		

@@ -27,7 +27,7 @@ package classes.Scenes.Areas.Plains
 		public function getRapedByGnoll():void
 		{
 			//Oh shit get anal raped.
-			if (hasItem("S.Dream", 1)) {
+			if (hasItem("S.Dream", 1) && !player.assholeOffLimits()) {
 				yoDawgIHeardULiekGNollBallzzzdahdakjldh();
 				return;
 			}
