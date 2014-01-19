@@ -1179,6 +1179,9 @@ public function appearance(e:MouseEvent = null):void
 	{
 		outputText("\n", false);
 		outputText("You have one " + assholeDescript() + ", placed between your butt-cheeks where it belongs.\n", false);
+		if(player.assholeOffLimits()) {
+			outputText("A tiny, mesmerizing gem shines from the flared end of a small buttplug in your asshole; somehow, it's easy to overlook both the plug and the orifice it's in.\n");
+		}
 	}
 	//Piercings!
 	if(player.eyebrowPierced > 0) 

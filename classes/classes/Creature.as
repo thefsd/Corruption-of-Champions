@@ -3939,6 +3939,11 @@ package classes
 		{
 			return Appearance.breastSize(val);
 		}
+		
+		public function assholeOffLimits():Boolean
+		{
+			return this.hasVagina();
+		}
 	}
 }
 
