@@ -543,6 +543,9 @@ public function perkDescription(perkName:String = ""):String {
 		case "Brutal Blows":
 			if(player.str >= 75) return "Reduces enemy armor with each hit.";
 			else return "<b>You aren't strong enough to benefit from this anymore.</b>";
+		case "Ass Henna":
+			if(player.assholeOffLimits()) return "Your attractive fake tattoo also reduces the amount of anal attention you get.";
+			else return "Your attractive fake tattoo would reduce the amount of anal attention you got—<b>if you had something else for them to fuck</b>.";
 		default:
 			var checkChildren:String;
 			

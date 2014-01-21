@@ -1425,5 +1425,26 @@ package classes
 			}
 			while(hasStatusAffect("Izma Bleed") >= 0) removeStatusAffect("Izma Bleed");
 		}
+		
+		override public function get hasAssHenna():Boolean {
+			return hasPerk("Ass Henna") >= 0;
+		}
+		
+		public function set hasAssHenna(value:Boolean):void {
+			if(value == this.hasAssHenna) {
+				return;
+			}
+			
+			if(value) {
+				createPerk("Ass Henna", kGAMECLASS.model.time.days, 0, 0, 0, "");
+			}
+			else {
+				removePerk("Ass Henna");
+			}
+		}
+		
+		public function get hadAssHennaSinceDay():Number {
+			return perkv1("Ass Henna");
+		}
 	}
 }
