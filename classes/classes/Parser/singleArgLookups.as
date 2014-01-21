@@ -61,7 +61,8 @@
 				"vagina"					: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
 				"vagorass"					: function(thisPtr:*):* { return (thisPtr.player.hasVagina() ? thisPtr.vaginaDescript() : thisPtr.assholeDescript()); },
 				"weapon"					: function(thisPtr:*):* { return thisPtr.player.weaponName;},
-				"weaponname"				: function(thisPtr:*):* { return thisPtr.player.weaponName;}
+				"weaponname"				: function(thisPtr:*):* { return thisPtr.player.weaponName;},
+				"hennatone"				: function(thisPtr:*):* { return thisPtr.player.hennaTone; }
 				//"ecockdescript"				: function(thisPtr:*):* { return thisPtr.eCockDescript(0);}
 
 		}
