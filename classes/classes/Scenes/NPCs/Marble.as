@@ -1,8 +1,10 @@
 ﻿package classes.Scenes.NPCs
 {
 	import classes.Monster;
+	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -14,7 +16,7 @@
 			//Special1: Heavy overhead swing, high chance of being avoided with evasion, does heavy damage if it hits.
 			var damage:Number = 0;
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0) {
 				outputText("Marble unwisely tries to make a massive swing while blinded, which you are easily able to avoid.", false);
 				combatRoundOver();
 				return;
@@ -26,7 +28,7 @@
 				return;
 			}
 			//Determine if evaded
-			if(player.hasPerk("Evade") >= 0 && rand(100) < 60) {
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
 				outputText("You easily sidestep as Marble tries to deliver a huge overhand blow.", false);
 				combatRoundOver();
 				return;
@@ -47,11 +49,11 @@
 			//Special2: Wide sweep; very high hit chance, does low damage.
 			var damage:Number = 0;
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0) {
 				outputText("Marble makes a wide sweeping attack with her hammer, which is difficult to avoid even from a blinded opponent.\n", false);
 			}
 			//Determine if evaded
-			if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("You barely manage to avoid a wide sweeping attack from marble by rolling under it.", false);
 				combatRoundOver();
 				return;
@@ -96,6 +98,7 @@
 			init11Armor("tough hide",5);
 			init12Combat(0,0,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(7,rand(5) + 25);
+			init14FixedDrop(weapons.L_HAMMR);
 			initX_Tail(TAIL_TYPE_COW);
 			initX_Specials(marbleSpecialAttackOne,marbleSpecialAttackTwo);
 

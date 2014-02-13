@@ -5,9 +5,12 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
 	import classes.CockTypesEnum;
+	import classes.PerkLib;
 	import classes.Scenes.Areas.Forest.Tamani;
 	import classes.Scenes.Monsters.GoblinAssassinScene;
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -23,7 +26,7 @@
 			if(temp2 == 3) color = "white";
 			if(temp2 == 4) color = "black";
 			//Throw offensive potions at the player
-			if(color != "blue") {
+			if (color != "blue") {
 				outputText(capitalA + short + " uncorks a glass bottle full of " + color + " fluid and swings her arm, flinging a wave of fluid at you.", false);
 			}
 			//Drink blue pots
@@ -36,24 +39,24 @@
 				else outputText("  There doesn't seem to be any effect.\n", false);
 			}
 			//Dodge chance!
-			if((player.hasPerk("Evasion") >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n", false);		
 			}
 			//Get hit!
 			//Temporary heat
 			if(color == "red") {
 				outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
-				if(player.hasStatusAffect("Temporary Heat") < 0) player.createStatusAffect("Temporary Heat",0,0,0,0);
+				if(player.findStatusAffect(StatusAffects.TemporaryHeat) < 0) player.createStatusAffect(StatusAffects.TemporaryHeat,0,0,0,0);
 			}
 			//Green poison
 			if(color == "green") {
 				outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
-				if(player.hasStatusAffect("Poison") < 0) player.createStatusAffect("Poison",0,0,0,0);
+				if(player.findStatusAffect(StatusAffects.Poison) < 0) player.createStatusAffect(StatusAffects.Poison,0,0,0,0);
 			}
 			//sticky flee prevention
 			if(color == "white") {
 				outputText("\nYou try to avoid it, but it splatters the ground around you with very sticky white fluid, making it difficult to run.  You'll have a hard time escaping now!\n", false);
-				if(player.hasStatusAffect("NoFlee") < 0) player.createStatusAffect("NoFlee",0,0,0,0);
+				if(player.findStatusAffect(StatusAffects.NoFlee) < 0) player.createStatusAffect(StatusAffects.NoFlee,0,0,0,0);
 			}
 			//Increase fatigue
 			if(color == "black") {
@@ -111,13 +114,11 @@
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
-			trace("defeated goblin assassin");
 			game.goblinAssassinScene.gobboAssassinRapeIntro();
 			
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			trace("beat by goblin assassin")
 			if (player.gender == 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"", false);
 				game.cleanupAfterCombat();
@@ -128,7 +129,6 @@
 		}
 		public function GoblinAssassin(noInit:Boolean=false)
 		{
-			trace("Goblin Assassin Constructor!");
 			init01Names("the ", "goblin assassin", "goblinassassin", "Her appearance is that of a regular goblin, curvy and pale green, perhaps slightly taller than the norm. Her wavy, untamed hair is a deep shade of blue, covering her pierced ears and reaching just above her shoulders. Her soft curves are accentuated by her choice of wear, a single belt lined with assorted needles strapped across her full chest and a pair of fishnet stockings reaching up to her thick thighs. She bounces on the spot, preparing to dodge anything you might have in store, though your eyes seem to wander towards her bare slit and jiggling ass. Despite her obvious knowledge in combat, she’s a goblin all the same – a hard cock can go a long way.");
 			init02Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL, 90);
 			init03BreastRows("E");
@@ -140,13 +140,20 @@
 			init09PrimaryStats(45,55,110,95,65,35,60);
 			init10Weapon("needles","stabbing needles");
 			init11Armor("leather straps");
-			init12Combat(0,50,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
+			init12Combat(70,50,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(10,rand(50) + 25);
+			init14WeightedDrop().
+					add(consumables.GOB_ALE, 5).
+					addMany(1, consumables.L_DRAFT,
+							consumables.PINKDYE,
+							consumables.BLUEDYE,
+							consumables.ORANGDY,
+							consumables.PURPDYE, 1);// TODO this is a copy of goblin drop. consider replacement with higher-lever stuff
 		}
 
 		override protected function performCombatAction():void
 		{
-			var actions:Array = [eOneAttack,goblinDrugAttack,lustNeedle,dualShot,goblinExplosion];
+			var actions:Array = [eAttack,goblinDrugAttack,lustNeedle,dualShot,goblinExplosion];
 			actions[rand(actions.length)]();
 		}
 	}

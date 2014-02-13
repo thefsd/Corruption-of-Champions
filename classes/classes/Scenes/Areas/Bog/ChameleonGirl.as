@@ -2,6 +2,8 @@ package classes.Scenes.Areas.Bog
 {
 	import classes.Appearance;
 	import classes.Monster;
+import classes.StatusAffects;
+import classes.internals.Utils;
 
 	/**
 	 * ...
@@ -12,14 +14,14 @@ package classes.Scenes.Areas.Bog
 
 		public function chameleonTongueAttack():void
 		{
-			weaponName = "tongue";
-			weaponVerb = "tongue-slap";
-			weaponAttack = 10;
-			createStatusAffect("attacks", 1, 0, 0, 0);
+			setWeaponName("tongue");
+			setWeaponVerb("tongue-slap");
+			setWeaponAttack(10);
+			createStatusAffect(StatusAffects.Attacks, 1, 0, 0, 0);
 			eAttack();
-			weaponAttack = 30;
-			weaponName = "claws";
-			weaponVerb = "claw";
+			setWeaponAttack(30);
+			setWeaponName("claws");
+			setWeaponVerb("claw");
 			combatRoundOver();
 		}
 
@@ -27,7 +29,7 @@ package classes.Scenes.Areas.Bog
 		public function chameleonClaws():void
 		{
 			//Blind dodge change
-			if (hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
+			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind claw-attack!\n", false);
 			}
 			//Evade:
@@ -48,7 +50,7 @@ package classes.Scenes.Areas.Bog
 		public function rollKickClawWhatTheFuckComboIsThisShit():void
 		{
 			//Blind dodge change
-			if (hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
+			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind roll-kick!\n", false);
 			}
 			//Evade:
@@ -124,7 +126,7 @@ package classes.Scenes.Areas.Bog
 
 		public function ChameleonGirl()
 		{
-			var skinToneAdj:Array = Appearance.randomChoice(SKIN_VARIATIONS);
+			var skinToneAdj:Array = randomChoice(SKIN_VARIATIONS);
 			init01Names("the ", "chameleon girl", "chameleongirl", "You're faced with a tall lizard-like girl with smooth " + skinToneAdj[0] + " skin and long, " + skinToneAdj[1] + " stripes that run along her body from ankle to shoulder.  An abnormally large tail swishes behind her, and her hands are massive for her frame, built for easily climbing the trees.  A pair of small, cute horns grow from her temples, and a pair of perky B-cups push out through her skimpy drapings.  Large, sharp claws cap her fingers, gesturing menacingly at you.");
 			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
 			init03BreastRows("B");
@@ -138,6 +140,7 @@ package classes.Scenes.Areas.Bog
 			init11Armor("skin", 20);
 			init12Combat(350, 30, .25, TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(14, 10 + rand(50));
+			skipInit(14);
 		}
 
 	}

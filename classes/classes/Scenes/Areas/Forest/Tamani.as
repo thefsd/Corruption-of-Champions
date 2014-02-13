@@ -3,8 +3,9 @@ package classes.Scenes.Areas.Forest
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
 	import classes.Scenes.Monsters.Goblin;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -93,7 +94,7 @@ package classes.Scenes.Areas.Forest
 				var temp2:Function = null;
 				if(player.hasCock() && player.cockThatFits(analCapacity()) >= 0) temp = game.forest.tamaniScene.tamaniAnalShits;
 				//NOT PREGGERS
-				if(player.statusAffectv1("Tamani") <= -500 && player.canOvipositSpider()) {
+				if(player.statusAffectv1(StatusAffects.Tamani) <= -500 && player.canOvipositSpider()) {
 					temp2 = game.forest.tamaniScene.tamaniBeaten;
 				}
 				game.simpleChoices("Fuck",game.forest.tamaniScene.tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",game.cleanupAfterCombat);
@@ -142,6 +143,18 @@ package classes.Scenes.Areas.Forest
 			init11Armor("leather straps");
 			init12Combat(40,40,0.9,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(4,rand(25) + 5);
+			init14WeightedDrop()
+					.add(consumables.GOB_ALE,4)
+					.addMany(1,
+							consumables.L_DRAFT,
+							consumables.PINKDYE,
+							consumables.BLUEDYE,
+							consumables.ORANGDY,
+							consumables.PURPDYE,
+							consumables.INCUBID,
+							consumables.REDUCTO,
+							consumables.L_BLUEG,
+							null);
 			initX_Specials(goblinDrugAttack,goblinTeaseAttack);
 		}
 		

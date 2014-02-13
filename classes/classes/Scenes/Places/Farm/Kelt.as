@@ -6,8 +6,9 @@ package classes.Scenes.Places.Farm
 	import classes.Monster;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
-	
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -41,7 +42,7 @@ package classes.Scenes.Places.Farm
 
 		//Arrow Attack
 		private function keltShootBow():void {
-			createStatusAffect("Bow Cooldown",3,0,0,0);
+			createStatusAffect(StatusAffects.BowCooldown,3,0,0,0);
 			outputText("Kelt knocks and fires an arrow almost faster than you can track.  He's lost none of his talent with a bow, even after everything you've put him through.  ");
 
 			//Miss:
@@ -95,9 +96,9 @@ package classes.Scenes.Places.Farm
 
 		override protected function performCombatAction():void
 		{
-			if (statusAffectv1("Bow Cooldown") > 0) {
-				addStatusValue("Bow Cooldown", 1, -1);
-				if (statusAffectv1("Bow Cooldown") <= 0) removeStatusAffect("Bow Cooldown");
+			if (statusAffectv1(StatusAffects.BowCooldown) > 0) {
+				addStatusValue(StatusAffects.BowCooldown, 1, -1);
+				if (statusAffectv1(StatusAffects.BowCooldown) <= 0) removeStatusAffect(StatusAffects.BowCooldown);
 			}
 			else {
 				if (rand(2) == 0 && flags[kFLAGS.KELT_BREAK_LEVEL] >= 2) dayDreamKelly();
@@ -134,7 +135,7 @@ package classes.Scenes.Places.Farm
 			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY,50);
 			init05Body(84,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_CENTAUR);
 			init06Skin("tan");
-			init07Hair(Appearance.randomChoice("black","brown"),3);
+			init07Hair(randomChoice("black","brown"),3);
 			init08Face();
 			init09PrimaryStats(60,70,40,20,40,25,55);
 			init10Weapon("fist","punch",10);

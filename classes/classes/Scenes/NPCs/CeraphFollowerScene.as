@@ -6,8 +6,10 @@ package classes.Scenes.NPCs
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.PerkLib;
+import classes.StatusAffects;
 
-	public class CeraphFollowerScene extends NPCAwareContent
+public class CeraphFollowerScene extends NPCAwareContent
 	{
 		public function CeraphFollowerScene()
 		{
@@ -101,7 +103,7 @@ package classes.Scenes.NPCs
 			var marbles:Function =null;
 			var dominika:Function =null;
 			if (flags[kFLAGS.TIMES_FUCKED_URTA] > 0 && (player.hasCock() || player.hasVagina()) && player.lust >= 33) urta = ceraphUrtaRoleplay;
-			if (player.hasCock() && player.cockThatFits(70) >= 0 && player.hasStatusAffect("Marble") >= 0 && player.lust >= 33) marbles = sweetieNOOOO;
+			if (player.hasCock() && player.cockThatFits(70) >= 0 && player.findStatusAffect(StatusAffects.Marble) >= 0 && player.lust >= 33) marbles = sweetieNOOOO;
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0 && player.lust >= 33 && player.hasCock()) dominika = cerminika;
 			if (player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex.</b>", false);
 			menu();
@@ -642,7 +644,7 @@ package classes.Scenes.NPCs
 			outputText("", true);
 			//requires that the PC have a cock, just to keep it simple, no centaurs and probably not slimes
 			outputText("You call on Ceraph, but are a bit taken aback when she doesn't appear right away.  You look around to see if you might have missed her, then spot something else streaking towards you from the wastes.  It is kicking up so much dust that you don't have time to see what it is before it ", false);
-			if (player.hasPerk("Evade") < 0 && player.spe / 5 + rand(20) < 22) outputText("flies into you, knocking you to the ground.  After a moment, you find yourself faced with a pair of overeager cat-morphs grinning down at you.", false);
+			if (player.findPerk(PerkLib.Evade) < 0 && player.spe / 5 + rand(20) < 22) outputText("flies into you, knocking you to the ground.  After a moment, you find yourself faced with a pair of overeager cat-morphs grinning down at you.", false);
 			else outputText("just barely misses you and crashes into the ground behind you.  After a moment, two bodies disentangle themselves from the impact site.  Once they stand up, you can see that a pair of overeager cat morphs have arrived in your camp.", false);
 			outputText("\n\n", false);
 
@@ -1460,7 +1462,7 @@ package classes.Scenes.NPCs
 				player.balls = 0;
 				player.ballSize = 1;
 			}
-			if (player.cockTotal() == 1) player.removeStatusAffect("infested");
+			if (player.cockTotal() == 1) player.removeStatusAffect(StatusAffects.Infested);
 			outputText(" in her hand!  At the base there's smooth flesh and an arcane mark, somehow keeping the disembodied dick alive to pulse and squirm in her grasp.  The place on your groin is left completely smooth and featureless, as if it had never been there at all.", false);
 			outputText("\n\nCeraph runs a finger up and down the length, setting off fireworks in your brain – you can still feel it!  The demoness laughs and says, \"<i>Don't worry, that will fade once I get it further away, though you know what to expect at night, right?  For now, enjoy the pleasure!  Oh, and thank you again for this, you won't regret it.  If you do, no refunds.</i>\"", false);
 			outputText("\n\nShe pirouettes away, practically dancing into the sky while she strokes and teases the cock you just lost.  You shudder and shake as orgasm wracks your body, your cum falling like rain thousands of feet away.  You swear, you can hear your pet laughing.", false);

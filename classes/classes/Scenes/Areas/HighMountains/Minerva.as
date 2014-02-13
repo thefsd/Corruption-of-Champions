@@ -4,8 +4,9 @@ package classes.Scenes.Areas.HighMountains
 	import classes.Cock;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
-	
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -18,7 +19,7 @@ package classes.Scenes.Areas.HighMountains
 		{
 			outputText("The siren paces around you in circles, waiting for the right moment to strike.  Unexpectedly quick thanks to her clawed feet, she propels herself toward you at full speed.  Her maw opens wide to chomp on you, showing off multiple rows of glinting, razor-sharp teeth.");
 			var damage:int = int((str + 85) - rand(player.tou) - player.armorDef);
-			if (combatMiss() && combatEvade() && combatFlexibility() && combatMisdirect()) {
+			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
 				outputText("  You get out of the way just in time, Minerva making a loud chomping sound as she only catches the air.");
 			}
 			//[else block]
@@ -39,7 +40,7 @@ package classes.Scenes.Areas.HighMountains
 
 			var damage:int = int((str + weaponAttack + 100) - rand(player.tou) - player.armorDef);
 			spe -= 70;
-			if (combatMiss() && combatEvade() && combatFlexibility() && combatMisdirect()) {
+			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
 				outputText("  You jump out of the landing zone just in time, piles of dirt exploding in all directions as Minerva slams into the ground.");
 			}
 			//[else block]
@@ -70,8 +71,8 @@ package classes.Scenes.Areas.HighMountains
 				outputText("!");
 				damage = player.takeDamage(damage);
 				outputText(" (" + damage + ")");
-				if (hasStatusAffect("Tail Whip") >= 0) addStatusValue("Tail Whip", 1, 10);
-				else createStatusAffect("Tail Whip", 10, 0, 0, 0);
+				if (findStatusAffect(StatusAffects.TailWhip) >= 0) addStatusValue(StatusAffects.TailWhip, 1, 10);
+				else createStatusAffect(StatusAffects.TailWhip, 10, 0, 0, 0);
 			}
 			combatRoundOver();
 		}
@@ -82,7 +83,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Minerva charges at you, brandishing her halberd's sharp tip toward you.");
 			var damage:int = int((str + weaponAttack) - rand(player.tou));
 
-			if (combatMiss() && combatEvade() && combatFlexibility() && combatMisdirect()) outputText("  You sidestep the attack just as she thrusts the point past your face.");
+			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("  You sidestep the attack just as she thrusts the point past your face.");
 
 			//[else block]
 			else if (damage < 0) outputText("  With all your strength, you swing your [weapon], the blow landing on the side of Minerva's halberd and deflecting the goring strike away from you.");
@@ -102,7 +103,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("She moves in close, practically right in front of you and raises the halberd.");
 			var damage:int = int((str + 100) - rand(player.tou) - player.armorDef);
 
-			if (combatMiss() && combatEvade() && combatFlexibility() && combatMisdirect()) outputText("  You get out of the way quickly, her attack chopping deeply into the earth. ");
+			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("  You get out of the way quickly, her attack chopping deeply into the earth. ");
 
 			//[else block]
 			else if (damage < 0) outputText("  In a mad show of pure skill, you lift your hands, clamping them down on the cheeks of the halberd blade and stop Minerva's attack cold, bewildering the siren in the process.");
@@ -149,9 +150,9 @@ package classes.Scenes.Areas.HighMountains
 		{
 			//The Siren's Song (2-part attack) (Rarely used or when she's desperate aka: Less than 10% hp)
 			//[part 1]
-			if (hasStatusAffect("Siren Song") < 0) {
+			if (findStatusAffect(StatusAffects.SirenSong) < 0) {
 				outputText("Minerva begins to hum a pleasant tune.  It might be better to stand back to see what she's up to!");
-				createStatusAffect("Siren Song", 0, 0, 0, 0);
+				createStatusAffect(StatusAffects.SirenSong, 0, 0, 0, 0);
 			}
 			//[part 2]
 			else {
@@ -163,14 +164,14 @@ package classes.Scenes.Areas.HighMountains
 					outputText("  Your mind clouds over as the song flows through your ears and fills your mind with sweet bliss.  You lower your [weapon] and dreamily walk into the siren's sweet embrace.  You absent-mindedly disrobe yourself as you move in closer, the song getting louder with each step you take, until you finally bury yourself into the siren's soft bosom and she wraps her feathery arms around your body.  She stops singing her beautiful song and whispers into your ear, \"<i>You're all mine now.</i>\"");
 					player.lust = 100;
 				}
-				removeStatusAffect("Siren Song");
+				removeStatusAffect(StatusAffects.SirenSong);
 			}
 			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void
 		{
-			if (hasStatusAffect("Siren Song") >= 0) sirensSong();
+			if (findStatusAffect(StatusAffects.SirenSong) >= 0) sirensSong();
 			else if (rand(25) == 0 || (HP < 100 && rand(2) == 0)) sirensSong();
 			//Else choose randomly!
 			else {
@@ -212,8 +213,8 @@ package classes.Scenes.Areas.HighMountains
 			init11Armor("comfortable clothes",1,"",5);
 			init12Combat(470,20,.2,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(16,rand(25)+10,50);
+			init14FixedDrop(consumables.PURPEAC);
 			initX_Wings(WING_TYPE_HARPY,"fluffy feathery");
-			initX_Specials(11020,11021,11022);
 
 		}
 		

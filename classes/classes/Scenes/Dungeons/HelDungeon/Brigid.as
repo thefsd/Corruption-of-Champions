@@ -1,8 +1,10 @@
 package classes.Scenes.Dungeons.HelDungeon
 {
 	import classes.Monster;
-	
-	/**
+	import classes.PerkLib;
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -27,8 +29,8 @@ package classes.Scenes.Dungeons.HelDungeon
 			var damage:Number = 5;
 			damage = player.takeDamage(5);
 			outputText(" (" + damage + ")");
-			if(player.hasPerk("Resolute") >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
-			else player.createStatusAffect("Stunned",0,0,0,0);
+			if(player.findPerk(PerkLib.Resolute) >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
+			else player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
 			game.combatRoundOver();
 		}
 
@@ -40,8 +42,8 @@ package classes.Scenes.Dungeons.HelDungeon
 		}
 		override protected function performCombatAction():void
 		{
-			if(player.hasStatusAffect("Stunned") >= 0) {
-				player.removeStatusAffect("Stunned");
+			if(player.findStatusAffect(StatusAffects.Stunned) >= 0) {
+				player.removeStatusAffect(StatusAffects.Stunned);
 				if(rand(2) == 0) BrigidAssGrind();
 				else brigidPoke();
 				return;

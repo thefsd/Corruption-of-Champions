@@ -1,7 +1,10 @@
 ﻿package classes.Scenes.Places.TelAdre {
 	import classes.GlobalFlags.kFLAGS;
+	import classes.PerkLib;
+	import classes.Player;
+import classes.StatusAffects;
 
-	public class Niamh extends TelAdreAbstractContent {
+public class Niamh extends TelAdreAbstractContent {
 public function Niamh(){
 
 }
@@ -49,7 +52,7 @@ public function telAdreNiamh():void {
 //Approach:
 public function approachNiamh():void {
 	clearOutput();
-	if(rand(5) == 0 && flags[kFLAGS.MET_NIAMH] > 0 && (hasItem("BimboLq",1) || hasItem("SucMilk",1))) 
+	if(rand(5) == 0 && flags[kFLAGS.MET_NIAMH] > 0 && (player.hasItem(consumables.BIMBOLQ) || player.hasItem(consumables.SUCMILK)))
 	{
 		corruptOrBimboNiamhIntro();
 		return;
@@ -71,7 +74,7 @@ public function getANiamhBeer():void {
 	clearOutput();
 	outputText("\"<i>That'll be two gems,</i>\" she replies.  You hand over the payment, which she holds up to the light and scrutinizes thoroughly.  Satisfied, she drops the things into a sack at her waist.  \"<i>Sorry,</i>\" she mutters. \"<i>I do want to get this damned beer out o' me, but this is still my primary livelihood; I canno' afford to be cheated.  Anyway, here's your mug - you can keep that f'r another two gems; I get 'em cheap.  Go ahead and fill it up, but keep in mind what you're tweakin', right?</i>\"");
 	//Feeder
-	if(player.hasPerk("Feeder") >= 0) outputText("  You understand exactly what she's going through; the weight of a huge pair of breasts, the sensitivity as they engorge with fluids, the near-maddening sensation of the contents sloshing around underneath your straining skin...");
+	if(player.findPerk(PerkLib.Feeder) >= 0) outputText("  You understand exactly what she's going through; the weight of a huge pair of breasts, the sensitivity as they engorge with fluids, the near-maddening sensation of the contents sloshing around underneath your straining skin...");
 	//(Player has G-cups or bigger; 
 	else if(player.biggestTitSize() >= 15) 
 	{
@@ -111,14 +114,14 @@ public function getANiamhBeer():void {
 private function drinkNiamhsBeerInTelAdre():void {
 	clearOutput();
 	if(player.lactationQ() >= 300 && player.biggestTitSize() >= 5 && rand(2) == 0 && flags[kFLAGS.MET_NIAMH] > 0) {
-		outputText("\"<i>Skoal!</i>\" you cheer as you down the delicious mug of booze.  The incredibly potent beverage warms you down in to your chest and beyond.  The heat of the alcohol trailing like fire down in to your gut and warms your genitals, causing you to feel more aroused.  The buzz of the beverage makes you light headed, as if thinking had become a little more difficult.");
+		outputText("\"<i>Skoal!</i>\" you cheer as you down the delicious mug of booze.  The incredibly potent beverage warms you down to your chest and beyond.  The heat of the alcohol trails like fire down into your gut and warms your genitals, causing you to feel more aroused.  The buzz of the beverage makes you light headed, as if thinking had become a little more difficult.");
 		outputText("\n\nYou start to stumble as your sense of balance shifts and you realize the heat in your body is expanding outwards.  Looking down you see it isn't the heat that's expanding, but your own bountiful tits.  Each of your [fullChest] have gained two full cup sizes, and within seconds they've gained even more.  Beneath your clothes your areola darken in color and you can feel each nipple throbbing with the need to expel its milky contents.");
 		outputText("\n\n\"<i>Oh me, ma darlin'.</i>\"  Niamh comments, \"<i>Those beauties o' yours look to be burstin' out o' ye...</i>\"  Your [armor] falls open as your enlargening breasts swell too large to be contained.  Each of your nipples fatten up and begin squirting a liquid that looks unusual.");
 		outputText("\n\nYou lean back against the bar as the weight on your chest grows ever heavier.  You gasp for air as the growth arouses you even further.  You feel a hand on your wrist and Niamh pulls you around behind the bar.  She grabs a shot glass and holds it up to one of your sensitive nipples, collecting the beverage before sniffing it.");
 		// Description depends on Holiday.
 		// New Years
 		if(isHolidays() && date.date >= 31) {
-			outputText("\n\n\"<i>Cor, well ah'll be.  Sweetie you be leaking Champagne.</i>\"  She gives your other nipple a tweak to fill a second shot glass.  The same clear liquid pours out, and the little champagne bubbles tickle your nipples to new heights of sensitivity, causing your ");
+			outputText("\n\n\"<i>Cor, well ah'll be.  Sweetie, you be leaking Champagne.</i>\"  She gives your other nipple a tweak to fill a second shot glass.  The same clear liquid pours out, and the little champagne bubbles tickle your nipples to new heights of sensitivity, causing your ");
 			if(player.hasVagina()) outputText("pussy to wetten");
 			if(player.gender == 3) outputText(" and ");
 			if(player.hasCock()) outputText("[eachCock] to stiffen");
@@ -132,12 +135,12 @@ private function drinkNiamhsBeerInTelAdre():void {
 		}
 		// Christmas
 		else if(isHolidays()) {
-			outputText("\n\nThe off color indicates it isn't milk filling the shot glass, but you aren't sure what it is.  Niamh darts her tongue in to it and grins.  \"<i>Ooooh.  Mmmmm.  Egg nog.  So delicious.</i>\"  She slurps the whole shot glass backs and then blinks.  \"<i>Whoah.  An' rather strong shtuff to boot!</i>\"  She wraps an arm around your shoulders.  \"<i>Lass, I bet those puppies of yours are gonna be squirting that holiday joy for awhile.  Hows about ye let me prop ye up onna bar here and sell that liquid cheer of yours?  I bet it won't take long to drain them considering how delicious ye are.  Make you a fair bit o' gems too!</i>\"");
+			outputText("\n\nThe off color indicates it isn't milk filling the shot glass, but you aren't sure what it is.  Niamh darts her tongue into it and grins.  \"<i>Ooooh.  Mmmmm.  Egg nog.  So delicious.</i>\"  She slurps the whole shot glass backs and then blinks.  \"<i>Whoah.  An' rather strong shtuff to boot!</i>\"  She wraps an arm around your shoulders.  \"<i>Lass, I bet those puppies of yours are gonna be squirting that holiday joy for awhile.  Hows about ye let me prop ye up onna bar here and sell that liquid cheer of yours?  I bet it won't take long to drain them considering how delicious ye are.  Make you a fair bit o' gems too!</i>\"");
 			//[SELL YOUR BOOZE]  [LEAVE]
 		}
 		// Valentine's
 		else if(isValentine()) {
-			outputText("\n\nThe aroma is distinct and Niamh comments, \"<i>My, that's quite a delectable white wine you're leakin' there lass.</i>\"  She pulls on another nipple to drain a bit more from you.  \"<i>Mmmmm, and the other is a good red.</i>\"  She grins.  \"<i>I bet there are a bunch o' couples in town that'd pay good gems to for what you've got sloshin' around inside those babies there.</i>\"  She cuddles up close to you.  \"<i>What you say sweetie?  Gimme an hour o' your time?  See if the bar goers can drain you dry?  Ah'll make it worth ye worth.</i>\"  She winks.");
+			outputText("\n\nThe aroma is distinct and Niamh comments, \"<i>My, that's quite a delectable white wine you're leakin' there lass.</i>\"  She pulls on another nipple to drain a bit more from you.  \"<i>Mmmmm, and the other is a good red.</i>\"  She grins.  \"<i>I bet there are a bunch o' couples in town that'd pay good gems for what you've got sloshin' around inside those babies there.</i>\"  She cuddles up close to you.  \"<i>What you say sweetie?  Gimme an hour o' your time?  See if the bar goers can drain you dry?  Ah'll make it worth ye worth.</i>\"  She winks.");
 			//[SELL YOUR BOOZE]  [LEAVE]
 		}
 		// Non-Holiday, Generic
@@ -150,7 +153,7 @@ private function drinkNiamhsBeerInTelAdre():void {
 	}
 	outputText("You yell \"<i>Skoal!</i>\" and upend the mug into your mouth, drinking greedily.  The warmth of the booze quickly follows the liquid itself - potent stuff, this is.");
 	//PC is affected by Black Cat Beer item effects
-	blackCatBeerEffects(false,true);
+	blackCatBeerEffects(player,false,true);
 	//both output
 	if(model.time.hours <= 15) outputText("\n\n\"<i>Thanks for the business, " + player.mfn("laddie","lassie","customer") + "!  Remember, Niamh sells her Black Cat Beer every day from 8 until 4.</i>\"  You nod your head in thanks and step away from the table.");
 	//16:00 ending
@@ -182,9 +185,8 @@ private function blackCatBeerToGo():void {
 	outputText("\n\n");
 	flags[kFLAGS.MET_NIAMH]++;
 	//PC gains 1x BCB
-	shortName = "BC Beer";
 	menuLoc = 24;
-	takeItem();
+	inventory.takeItem(consumables.BC_BEER);
 }
 
 //Talk
@@ -227,27 +229,27 @@ private function leaveNiamh():void {
 
 //Black Cat Beer
 //is affected by Black Cat Beer item effects
-public function blackCatBeerEffects(clearScreen:Boolean = true,newLine:Boolean = false):void {
+public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,newLine:Boolean = false):void {
 	if(clearScreen) clearOutput();
 	if(newLine) outputText("\n\n");
 	outputText("Uncapping the mug, you swill the stuff down in a single swig, gasping as it burns a fiery trail into your belly.  It's rich and sweet, and damn, but it's strong stuff!");
-	outputText("\n\nA wonderful warmth fills your body, making your pain fade away.  However, it also makes your crotch tingle - combined with the relaxation imparted already, you feel <b>very</b> turned-on.  A beautiful, warm, fuzzy sensation follows and fills your head, like your brain is being wrapped in cotton wool.  You don't feel quite as smart as before, but that's alright, it feels so nice...");
+	outputText("\n\nA wonderful warmth fills your body, making your pain fade away.  However, it also makes your crotch tingle - combined with the relaxation imparted already, you feel <b>very</b> turned-on.  A beautiful, warm, fuzzy sensation follows and fills your head, like your brain is being wrapped in cotton wool.  You don't feel quite as smart as before, but that's all right, it feels so nice...");
 	outputText("\n\nYour balance suddenly feels off-kilter and you stumble, narrowly avoiding falling.  You just can't move as fast as you could, not with your head feeling so full of fluff and fuzz; your body prickles and tingles with the warmth once your head feels full, the sensation concentrating around your erogenous zones.  You just feel so fluffy... you want to hold somebody and share your warmth with them, too; it's just so wonderful.");
 	//Regain 40 to 60 lost health, increase lust by 10 to 20 points, decrease Intelligence and Speed by 5, increase Libido by 5//
 	HPChange(40 + rand(21),false);
 	var lib:Number = 0;
-	if(player.hasStatusAffect("Black Cat Beer") >= 0) {
+	if(player.findStatusAffect(StatusAffects.BlackCatBeer) >= 0) {
 		if(100 - player.lib >= 10) lib = 10;
 		else lib = 100 - player.lib;
-		player.addStatusValue("Black Cat Beer",1,4);
-		player.addStatusValue("Black Cat Beer",2,lib);
+		player.addStatusValue(StatusAffects.BlackCatBeer,1,4);
+		player.addStatusValue(StatusAffects.BlackCatBeer,2,lib);
 		outputText("\n\nDamn, it's even better with every extra drink!");
 		dynStats("spe", -1, "int", -1, "lib", lib, "lus", 30+rand(player.lib/4));
 	}
 	else {
 		if(100 - player.lib >= 10) lib = 10;
 		else lib = 100 - player.lib;
-		player.createStatusAffect("Black Cat Beer",8,lib,0,0);
+		player.createStatusAffect(StatusAffects.BlackCatBeer,8,lib,0,0);
 		dynStats("spe", -5, "int", -5, "lib", lib, "lus", 20+rand(player.lib/4));
 	}
 	player.slimeFeed();
@@ -255,8 +257,8 @@ public function blackCatBeerEffects(clearScreen:Boolean = true,newLine:Boolean =
 
 //Black Cat Beer Wears Off: This message is displayed eight hours after the last drink.
 public function blackCatBeerExpires():void {
-	dynStats("spe", 4.5, "int", 4.5, "lib", (-1 * player.statusAffectv2("Black Cat Beer")));
-	player.removeStatusAffect("Black Cat Beer");
+	dynStats("spe", 4.5, "int", 4.5, "lib", (-1 * player.statusAffectv2(StatusAffects.BlackCatBeer)));
+	player.removeStatusAffect(StatusAffects.BlackCatBeer);
 	outputText("\n<b>The warm, fuzzy feeling finally dissipates, leaving you thinking clearer, focusing better, and less horny.  It was nice while it lasted, but it's also good to be back to normal.  Still, a part of you kind of wants another beer.</b>\n");
 }
 
@@ -278,13 +280,13 @@ private function corruptOrBimboNiamhIntro():void {
 	outputText("\"<i>Heya, favored customer,</i>\" the busty kitty greets as you approach.  \"<i>I have a favor to ask!  My drink's empty, and I get bored of me own brew,</i>\" Niamh explains.  \"<i>Would ya mind fetchin' me somethin', or are ye gonna force me to sample me own goods once more?</i>\"");
 	
 	outputText("\n\nYou pause, contemplating your options.  While you know of many drinks The Wet Bitch sells, most of them... aren't exactly fit for human - or feline - consumption, in your opinion.  You're stricken with a particularly naughty thought.  Perhaps you could fetch something... ");
-	if(hasItem("BimboLq",1)) 
+	if(player.hasItem(consumables.BIMBOLQ))
 		outputText("'bubbly' for her, in the form of the Bimbo Liqueur you got from the imp lord, or ");
 	outputText("maybe even a Succubus Milk?  You'll have to consider your options.  On the other hand, of course, something that corruptive would probably mutate her booze-filled boobs, most likely forcing her out of Tel'Adre altogether... and may fall back on your own head, to boot.  What do you do?");	
 	
 	//[Bimbo][Succubus][Maybe Later] (spacebar should select 'Maybe Later' as long as it's a repeatable
 	var bimbo:int = 0;
-	if(hasItem("BimboLq",1)) bimbo = 3533;
+	if(player.hasItem(consumables.BIMBOLQ)) bimbo = 3533;
 	var succMilk:int = 0;
 	outputText("\n\n(Editors Note: Succubi Milk Option Currently in beta)\n\n\n");
 	simpleChoices("Bimbo",giveNiamphBimboLiquer,"S.Milk",giveNiamphSuccubiMilk,"",0,"",0,"Back",3532);
@@ -306,14 +308,14 @@ public function taintNiamh(bimbo:Boolean = false):void {
 	outputText("You grab Niamh's glass and one more and head off, making sure to turn a corner before commandeering an empty table.  Plunking the mugs down in front of you, you mutter to yourself as she moves away.");
 	//[if sucmilk] 
 	if(!bimbo) {
-		consumeItem("SucMilk",1);
-		outputText("\n\nYou uncork your bottle of Succubus Milk and pour half into each mug, loving the way the thick, creamy fluid flows.  With each containing a good amount of the stuff, you scoop them up and start towards Niamh.  Her expression brightens when she notices your approach, and she giggles when she regards the two glasses of milk in your hands.  \"<i>Are ye making fun of me?</i>\" she remarks coyly, patting one of her beer-filled boobs gently.  \"<i>Ah well, I haven't had a good glass o' milk in too long...this is milk, yeah?</i>\"");
+		player.consumeItem(consumables.SUCMILK);
+		outputText("\n\nYou uncork your bottle of Succubus Milk and pour half into each mug, loving the way the thick, creamy fluid flows.  With each containing a good amount of the stuff, you scoop them up and start towards Niamh.  Her expression brightens when she notices your approach, and she giggles when she regards the two glasses of milk in your hands.  \"<i>Are ye making fun of me?</i>\" she remarks coyly, patting one of her beer-filled boobs gently.  \"<i>Ah well, I haven't had a good glass o' milk in too long... this is milk, yeah?</i>\"");
 		outputText("\n\nNiamh reaches for a mug, but you draw it away from her questing hand, instead sinking it into her considerable expanse of cleavage.  A devious grin flits across your features as she subsequently shivers from the cold glass between her fluid-filled bosom.  \"<i>Wh-why you...</i>\" she gasps, quickly snatching the drink and rubbing warmth back into her goosebumped flesh.  \"<i>You scoundrel...</i>\"");
 		outputText("\n\nYou respond by raising your glass in toast, and she grudgingly complies.  Your mugs clink together, and she wastes no time in downing the creamy milk.  You raise your own drink to your lips and pretend to sip, not wanting anything to do with what's about to happen.  \"<i>Went down smooth,</i>\" she comments, licking her lips.  \"<i>Say, there... mind if I have a swig o' yours, too?</i>\"  You readily hand the flagon over, marveling at how fast she chugs it.  Niamh gives a happy little burp, and you scoot back a bit in anticipation.");
 	}
 	//[if bimbo liqueur] 
 	else {
-		consumeItem("BimboLq",1);
+		player.consumeItem(consumables.BIMBOLQ);
 		outputText("\n\nYou pop the seal of your bottle of Bimbo Liqueur, recoiling at the cloying, spiced scent that paints visions of a slutty slave-girl's slightly spread folds.  With a grimace, you pour the potent stuff evenly into the glasses.  Hefting the mugs, you rise and start towards Niamh.");
 		outputText("\n\nHer expression brightens when she notices your approach, and she giggles when she regards the quarter-full mugs of liqueur.  \"<i>What, that's it?</i>\" she quips curiously.  \"<i>This stuff had better pack some punch, " + player.mf("lad","lass") + ".</i>\"  You assure her that it will knock her socks off.");
 		outputText("\n\nNiamh reaches for a mug, but you draw it away from her questing hand, instead sinking it into her considerable expanse of cleavage.  A devious grin flits across your features as she subsequently shivers from the cold glass between her fluid-filled bosom.  \"<i>Wh-why you...</i>\" she gasps, quickly snatching the drink and rubbing warmth back into her goosebumped flesh.  \"<i>You scoundrel...</i>\"");
@@ -329,10 +331,10 @@ public function taintNiamh(bimbo:Boolean = false):void {
 	}
 	//[if bimbo liquor] 
 	else {
-		outputText("\n\nMoments pass by, and you begin to wonder if the bottle's label wasn't so much fancification... until she burps again, following the sound with a surprisingly bubbly giggle.  Niamh pauses, shaking her head vigorously, as if trying to clear out cobwebs from her skull.  \"<i>Now why'd I go and do that?</i>\" she mutters.  \"<i>What'd ya put in th-...oooooh...</i>\"  She raises both arms and presses her boobs together, wincing as sudden arousal washes over her, then moans again, fingers digging into her fluid-filled cleavage.  Niamh's eyes widen as the beer inside churns, then she yelps in delight as the flesh shivers as though the contents had begun to... bubble?  Indeed, her sumptuous bosom bounces gaily as its contents struggle against the skin.  The confused catgirl starts to giggle again as the insidious liqueur takes hold, stroking her cursed chest with increasingly passionate motions.  She does stop momentarily when her hair begins to lengthen, her bob growing into a waist-length ivory shock."); 
+		outputText("\n\nMoments pass by, and you begin to wonder if the bottle's label wasn't so much fancification... until she burps again, following the sound with a surprisingly bubbly giggle.  Niamh pauses, shaking her head vigorously, as if trying to clear out cobwebs from her skull.  \"<i>Now why'd I go and do that?</i>\" she mutters.  \"<i>What'd ya put in th- oooooh...</i>\"  She raises both arms and presses her boobs together, wincing as sudden arousal washes over her, then moans again, fingers digging into her fluid-filled cleavage.  Niamh's eyes widen as the beer inside churns, then she yelps in delight as the flesh shivers as though the contents had begun to... bubble?  Indeed, her sumptuous bosom bounces gaily as its contents struggle against the skin.  The confused catgirl starts to giggle again as the insidious liqueur takes hold, stroking her cursed chest with increasingly passionate motions.  She does stop momentarily when her hair begins to lengthen, her bob growing into a waist-length ivory shock."); 
 		outputText("\n\nBefore she can even recover from that surprise, her chalky coiffure darkens, streaks of platinum-blonde beginning at the scalp.  A little gasp issues from her bloating lips, and her eyelids droop slightly, as if weighed down by her collapsing mind.  Not long after, a rumbling from her seat draws her increasingly short-lived attention under her, and she pushes away hair and boob alike to get a clear view.  As you both watch, the flesh of her hips trembles, then puffs out to engulf the narrow armrests.  With a surprised cry, she staggers to her feet, then tumbles over her still-roiling tits.  The friction of her heavy bosom against the table topples it right along with her.  Niamh's rapidly increasing weight - plus the chair, firmly stuck to her butt - presses against the gurgling orbs, loosening a ground-shaking - and crotch-moistening, in the catgirl's case - blast of bubbly liqueur... champagne, you realize.  Delicious-looking champagne.");
 		outputText("\n\nOnly the sight of her still-swelling butt, pants tearing and hips swaying in blatant disregard of the chair stuck to her, prevents you from sampling the stuff.  Better to let bimbofied dogs lie, you figure.  The straining armrests finally splinter from the pressure, embedding a few wooden shards into her partially bared booty.  \"<i>Cripes!</i>\" she exclaims, trying to turn herself enough to reach the stinging slivers, \"<i>How did, like, me... big... wobbly... butt...</i>\"  She trails off, a blush of arousal flying across her features as she regards her new-and-improved posterior.  Ignoring her still-'lactating' nipples, she presses a hand deeply into her double-wide ass, cooing as it sinks into the blubbery bubble-butt.  Still applying considerable pleasure, she slides her hand down to her thickened thigh - causing the cheek to flop up and jiggle all about.");  
-		outputText("\n\nThe enamored catgirl's attentions inevitably shift to her unattended lady-bits, and she promptly begins rubbing her still-clothed groin.  \"<i>Fai-...Fae-...Omigosh, this feels good!</i>\" the increasingly-ditzy Niamh moans.  The catgirl's cries quicken, and you can fairly easily assume what that implies.  Fighting against the urge to give her some 'assistance', you decide instead to duck out, unwilling to be nearby when the inevitable Watch response happens.  As you slip out the door, four guardsmen slip in; you make sure to give them the benefit of a confused, scandalized expression.  Commotion and the sounds of upending furniture ring out from inside the bar, and after a few minutes, a struggling Niamh is carried out by three of the four.");
+		outputText("\n\nThe enamored catgirl's attentions inevitably shift to her unattended lady-bits, and she promptly begins rubbing her still-clothed groin.  \"<i>Fai... Fae... Omigosh, this feels good!</i>\" the increasingly-ditzy Niamh moans.  The catgirl's cries quicken, and you can fairly easily assume what that implies.  Fighting against the urge to give her some 'assistance', you decide instead to duck out, unwilling to be nearby when the inevitable Watch response happens.  As you slip out the door, four guardsmen slip in; you make sure to give them the benefit of a confused, scandalized expression.  Commotion and the sounds of upending furniture ring out from inside the bar, and after a few minutes, a struggling Niamh is carried out by three of the four.");
 		outputText("\n\nA crowd of spectators follow, allowing you to slip into the group and watch the proceedings.  A very confused Niamh is placed, firmly but surprisingly gently, outside of the bounds of the city.  A guard explains to her that, after that display and the transformative effects forced upon the poor watchman who was the subject of her... motherly affections... she and her bosom-brew can't be allowed in Tel'Adre.  She nods, her face curiously blank of any emotion... except maybe lust.  As the gates are closing, you hear her call, \"<i>Hey, can I masturbate now, pretty-please?</i>\" and then, with a slam, she's gone.  You linger around the city until you figure she'd have moved away from the gate, then make your own way out.");
 		flags[kFLAGS.NIAMH_STATUS] = 2;
 	}
@@ -379,12 +381,12 @@ private function niamhCorruptedMobileSnackDrinkTime():void {
 	outputText("Of course you do!  You went through the trouble of getting her boobs to their current condition; drinking from the tap is exactly what you had in mind.  A smile brightens Niamh's features, and she plops down heavily on the ground, waving you over to sit next to her.  ");
 	//[bimbo version]
 	if(flags[kFLAGS.NIAMH_STATUS] == 2) {
-		outputText("She does her best to jiggle her huge champagne-laden tits.  \"<i>Like, come 'n' get it!</i>\" she beckons.  \"<i>It's all bubbly and tickly and yummy.</i>\"  She giggles, belches hugely, then demurely puts her fingers across her mouth.  \"<i>Like, sorry; my tummy's all full of bubbles too.</i>\"  She giggles again; looks like that bimbo liqueur really down-shifted her mental gear.  But, hell, that's alright; she's only of any importance for what's in those gorgeous great boobs of her, not her brain.  You confidently stride over to her and sit down, positioning yourself where you can most easily access her breasts.");
+		outputText("She does her best to jiggle her huge champagne-laden tits.  \"<i>Like, come 'n' get it!</i>\" she beckons.  \"<i>It's all bubbly and tickly and yummy.</i>\"  She giggles, belches hugely, then demurely puts her fingers across her mouth.  \"<i>Like, sorry; my tummy's all full of bubbles too.</i>\"  She giggles again; looks like that bimbo liqueur really down-shifted her mental gear.  But, hell, that's all right; she's only of any importance for what's in those gorgeous great boobs of her, not her brain.  You confidently stride over to her and sit down, positioning yourself where you can most easily access her breasts.");
 		outputText("\n\nShe gives you an empty-headed smile and starts to purr, tail lazily swishing back and forth in anticipation.  You reach out and take hold of one weighty mammary, making her moan throatily; pale frothy liquor immediately starts to seep from it, and you waste no time in taking the nipple between your lips.  Mmm... the taste is like nothing you have ever tried before; sweet and sugary and rich... kinda gooey, actually.  It froths and fizzes madly in your mouth, tickling as you swallow and making you repress a giggle of delight.");
 		outputText("\n\n\"<i>Yummy, isn't it?</i>\" Niamh purrs.  \"<i>Like, drink up; I gots lots more where that came from!</i>\"  She giggles, trying to push her breast forward; with how big it is, she can't really reach around to force you into it like she'd like.");
 		outputText("\n\nStill, refusing such a delicious drink is not something a true connoisseur does; you nuzzle eagerly into her swollen breast.  A little too hard, in hindsight; the pressure makes the vast quantity of champagne inside come spurting into your mouth, filling you up with sweet richness and forcing you to chug it down to avoid choking.  Once you get the rhythm right, though, it's much easier; you hardly need to suckle, just keep squeezing jet after glorious jet down your thirsty gullet.");
 		outputText("\n\n...This stuff is, like, way too freaking good!  Er?  Did you really just think that?  Come to think of it, it's getting harder to think, like, about anything... but izzat really so bad?  What do you need to think about, other than this sweet, sweet booze?");
-		bimboChampagne(false,false);
+		bimboChampagne(player,false,false);
 		outputText("\n\nGiggling happily around your boozy boob of love, you start to scrape your crotch against the ground and rub your bouncy big boobs against Niamh's; that feels just sooo good!  Niamh is meowing and purring and occasionally burping; she, like, really likes you sucking on her... that's good, since you like sucking on her too.  You move one of your hands down between her legs... ooh, she's, like, not wearing any panties... what a naughty, naughty kitty-girl! You grin into her boob and, still sucking, start to play with her little pleasure button and her wet, sticky girly bits.");
 		outputText("\n\nNiamh yowls and shudders, her pussy-parts squeezing around your fingers, and then, all of a sudden, she clenches up and lets go.  Girly-goo drizzles into your hand, getting you all sticky, and her big boobies suddenly start spurting... uh, whatsit, sham-pain?  From her big ol' nipples.  The other breast starts spraying the grass, which is a waste of good bubbly brew, but you get more than your fair share since her other breast is gushing into your mouth and you swallow and gulp and slurp as fast as you can.  But, in the end, you just can't keep up and you, like, have to let go.  Have to.");
 		outputText("\n\nFinally, Niamh's boobgasm comes to an end and she falls back on her big jiggly butt.  \"<i>Like, that feels so much better than when I put my big ol' boob in my own mouth...  Hey, [name]... you, like, okay?</i>\" she asks.  She half-crawls over to you, then giggles.  \"<i>You, like, got a big sloshy belly on you now, [name]!  You look so funny with this giant gutty-gut.</i>\"");
@@ -406,30 +408,30 @@ private function niamhCorruptedMobileSnackDrinkTime():void {
 		outputText("\n\nGlancing around, you can't help but agree, judging by the lake of ale surrounding you both.  Luckily, her self-entertainment seems to have shrunk her normally-gigantic tits to a more manageable size, and with your assistance, she's soon back on her feet.  \"<i>I heard there was a form of refuge for... well, differently-blessed lassies like meself,</i>\" she says, somewhat drily, patting the top of her huge azure bosom for emphasis.  \"<i>I'm heading there.  Maybe I'll find you there eventually, hey?</i>\"");
 		outputText("\n\nShe gives you a little punch in the shoulder, shooting you a wink and walking away.  \"<i>Don't think I forgot about how I got like this,  " + player.mf("boy","gal") + ", ,</i>\" she yells over her shoulder, stopping you in your tracks as you turn to leave.  Several moments pass before she finally turns around and resumes her departure.");
 		outputText("\n\nJust before you move out of earshot, a last word from Niamh floats to your ears.  You can't be sure, but... did she say... \"<i>Thanks?</i>\"");
-		blackCatBeerEffects(false,true);
+		blackCatBeerEffects(player,false,true);
 		//[end encounter]*/
 	}
 	doNext(13);
 }
-public function bimboChampagne(clearScreen:Boolean,intro:Boolean):void {
+public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):void {
 	if(clearScreen) clearOutput();
 	if(intro) {
-		if((player.hasPerk("Futa Faculties") >= 0 && player.hasPerk("Futa Form") >= 0) || (player.hasPerk("Bimbo Body") >= 0 && player.hasPerk("Bimbo Brains") >= 0)) {
+		if((player.findPerk(PerkLib.FutaFaculties) >= 0 && player.findPerk(PerkLib.FutaForm) >= 0) || (player.findPerk(PerkLib.BimboBody) >= 0 && player.findPerk(PerkLib.BimboBrains) >= 0)) {
 			outputText("You could've swore the stuff worked when you saw Niamh do it to others, but for some reason, it had, like, no effect on you. How weird!");
 		}
-		else if(player.hasStatusAffect("Bimbo Champagne") < 0) outputText("You uncork the bottle and breathe in the fizzy, spicy aroma of the sparkling liquor.  Breathing deeply, you open your mouth and begin pouring the ever-effervescent fluid inside.  It's sweet and slightly gooey, and the feel of it sliding down your throat is intensely... awesome?  Like, totally!");
+		else if(player.findStatusAffect(StatusAffects.BimboChampagne) < 0) outputText("You uncork the bottle and breathe in the fizzy, spicy aroma of the sparkling liquor.  Breathing deeply, you open your mouth and begin pouring the ever-effervescent fluid inside.  It's sweet and slightly gooey, and the feel of it sliding down your throat is intensely... awesome?  Like, totally!");
 		else outputText("You find yourself falling even further into the dense bimbo mindset.  You do feel, like, super-good and all, though!\n\nMoaning lewdly, you begin to sway your hips from side to side, putting on a show for anyone who might manage to see you.   You just feel so... sexy.  Too sexy to hide it.  Your body aches to show itself and feel the gaze of someone, anyone upon it.  Mmmm, it makes you so wet!  You sink your fingers into your sloppy cunt with a groan of satisfaction.  Somehow, you feel like you could fuck anyone right now!");
 	}
-	if(player.hasStatusAffect("Bimbo Champagne") >= 0) {
-		player.addStatusValue("Bimbo Champagne",1,4);
+	if(player.findStatusAffect(StatusAffects.BimboChampagne) >= 0) {
+		player.addStatusValue(StatusAffects.BimboChampagne,1,4);
 		dynStats("spe", -2, "lib", 1, "lus", 10);
 	}
 	else {
-		player.createStatusAffect("Bimbo Champagne",8,0,0,0);
+		player.createStatusAffect(StatusAffects.BimboChampagne,8,0,0,0);
 		//(Player has breasts smaller than DD-cup: 
 		if(player.breastRows[0].breastRating < 5) {
 			outputText("\n\nYou feel this, like, totally sweet tingling in your boobies... And then your [armor] gets, like, tighter; wow, it seems like Niamh's booze is making your boobies grow!  That's so awesome!  You giggle and gulp down as much as you can... Aw; your boobies are <b>kinda</b> big now, but, like, you wanted great big bouncy sloshy boobies like Niamh has.  That'd be so hot!");
-			player.changeStatusValue("Bimbo Champagne",2,5-player.biggestTitSize());
+			player.changeStatusValue(StatusAffects.BimboChampagne,2,5-player.biggestTitSize());
 			player.breastRows[0].breastRating = 5;
 		}
 		//(Player does not have vagina: 
@@ -440,12 +442,12 @@ public function bimboChampagne(clearScreen:Boolean,intro:Boolean):void {
 			if(player.hasCock()) outputText("the flesh under your cock[if (hasBalls = true)  and behind your [balls]]");
 			else outputText("the blank expanse of flesh that is your crotch");
 			outputText(" start to tingle and squirm... mmm... that feels nice!  There's a sensation you, like, can't describe, and then your crotch feels all wet... but in a good, sticky sorta way.  Oh, wow!  <b>You've, like, just grown a new virgin pussy!</b>  Awesome!");
-			player.changeStatusValue("Bimbo Champagne",3,1);
+			player.changeStatusValue(StatusAffects.BimboChampagne,3,1);
 		}
 		//(player ass smaller than bimbo: 
 		if(player.buttRating < 12) {
 			outputText("\n\nYour butt jiggles deliciously - it feels like the bubbles from the drink are pushing out your plump rump, filling it like bagged sparkling wine!  Your bubbly booty swells and inflates until it feels as airy as your head.  Like, this is soooo plush!");
-			player.changeStatusValue("Bimbo Champagne",4,12-player.buttRating);
+			player.changeStatusValue(StatusAffects.BimboChampagne,4,12-player.buttRating);
 			player.buttRating = 12;
 			if(player.hipRating < 10) player.hipRating = 10;
 		}
@@ -457,19 +459,19 @@ public function bimboChampagne(clearScreen:Boolean,intro:Boolean):void {
 public function removeBimboChampagne():void {
 	outputText("\n<b>Whoah!  Your head is clearing up, and you feel like you can think clearly for the first time in forever.  Niamh sure is packing some potent stuff!  You shake the cobwebs out of your head, glad to once again be less dense than a goblin with a basilisk boyfriend.</b>");
 	dynStats("spe", 10, "lib", -1);
-	if(player.statusAffectv2("Bimbo Champagne") > 0) {
-		player.breastRows[0].breastRating -= player.statusAffectv2("Bimbo Champagne");
+	if(player.statusAffectv2(StatusAffects.BimboChampagne) > 0) {
+		player.breastRows[0].breastRating -= player.statusAffectv2(StatusAffects.BimboChampagne);
 		outputText("  As the trecherous brew fades, your [chest] loses some of its... bimboliciousness.  Your back feels so much lighter without the extra weight dragging down on it.");
 	}
-	if(player.statusAffectv3("Bimbo Champagne") > 0) {
+	if(player.statusAffectv3(StatusAffects.BimboChampagne) > 0) {
 		outputText("  At the same time, your [vagina] slowly seals itself up, disappearing as quickly as it came.  Goodbye womanhood.");
 		player.removeVagina();
 	}
-	if(player.statusAffectv4("Bimbo Champagne") > 0) {
-		player.buttRating -= player.statusAffectv4("Bimbo Champagne");
+	if(player.statusAffectv4(StatusAffects.BimboChampagne) > 0) {
+		player.buttRating -= player.statusAffectv4(StatusAffects.BimboChampagne);
 		outputText("  Of course, the added junk in your trunk fades too, leaving you back to having a [butt].");
 	}
-	player.removeStatusAffect("Bimbo Champagne");
+	player.removeStatusAffect(StatusAffects.BimboChampagne);
 	player.genderCheck();
 	outputText("\n");
 }
@@ -480,7 +482,7 @@ public function bazaarNiamh():void {
 	if(flags[kFLAGS.NIAMH_STATUS] == 2) {
 		if(flags[kFLAGS.TIMES_NIAMH_BAZAAR_MET] == 0) {
 			outputText("As you enter the bazaar, you hear a familiar voice calls out to you. \"<i>Hey!  [name]!  Over here!  Like, it's me!</i>\"");
-			outputText("You follow the sound and find Niamh seated in a corner of the bazaar.  She is totally naked save for a small strip of cloth around her loins; huge breasts lie exposed for all the world to admire.  She's surrounded by a small entourage of assorted beings; some are either hoping to earn a drink or else are simply here to ogle the massively buxom catgirl, others have evidently already drunk their fill, given their swollen bellies, feminine forms and platinum blonde coloration.  She grins as you approach.");
+			outputText("You follow the sound and find Niamh seated in a corner of the bazaar.  She is totally naked save for a small strip of cloth around her loins; her huge breasts lie exposed for all the world to admire.  She's surrounded by a small entourage of assorted beings; some are either hoping to earn a drink or else are simply here to ogle the massively buxom catgirl, others have evidently already drunk their fill, given their swollen bellies, feminine forms and platinum blonde coloration.  She grins as you approach.");
 			outputText("\"<i>Like, I was just roaming the plains, trying to, like, figure out where I was gonna go, and I found this place.  Isn't it, like, so neat here?</i>\"  She has apparently already forgotten that this was her destination all along!  \"<i>All these cool people who know how to have a totally good time!  Not like that dump in the desert, fulla buzzkills.  Yeah, I'm gonna, like, party all night and day here, [name].</i>\" She giggles yet again.  \"<i>But you're still, like, my number one customer.  So... you, like, wanna do something?</i>\" she asks.");
 		}
 		//[Bizarre Bazaar, repeat encounter]
@@ -535,7 +537,7 @@ private function drinkFromZeTap():void {
 	outputText("\n\nYou snap back to your senses with a jolt, finding yourself flat on your back and gazing up at the sky.  \"<i>Like, are you alright, [name]?</i>\" Niamh asks, amused.  \"<i>My fizzy titties, like, really hit some people harder than they can, y'know, deal with.  You okay?</i>\"");
 	
 	outputText("\n\nYou push yourself upright and assure the pretty catgirl that you feel, like, super-duper wonderful!  You punctuate this declaration with a burp as the sudden motion makes all the yummy bubbles in your belly dance, and then you giggle at how naughty that was.");
-	bimboChampagne(false,false);
+	bimboChampagne(player,false,false);
 	doNext(13);
 }
 	
@@ -547,9 +549,8 @@ private function getBimboChampFromNiamh():void {
 	outputText("\n\nPushing that slightly scary thought to the side, you lean in, firmly grasping one stiff nipple and forcing it to the mouth of your container.  Ignoring her increasingly loud and frequent groans, you dutifully milk the bubbly into the flask, stopper it up, and rise.  Niamh tries to follow you, too aroused by the milking to resist her carnal urges, but you easily push her to the side, her ponderous melons throwing her off balance.");
 	outputText("\n\nShe lands into a big pile of similarly blonde and giggling girls who waste no time in swarming her.  You chuckle and shake your head.  Perhaps you'll come back later.\n\n");
 	//bimbo champagne aqua-aired
-	shortName = "BimboCh";
 	menuLoc = 2;
-	takeItem();
+	inventory.takeItem(consumables.BIMBOCH);
 }
 
 //[Bazaar sex]
@@ -599,11 +600,11 @@ public function yeahSeanLetsBimbooze():void {
 	outputText("\n\n\"<i>Now shoo, I must do work!</i>\" he scolds, ushering you out of the cave.  \"<i>Come back tomorrow!</i>\"  Satisfied, you leave his shop.");
 	doNext(1);
 	player.gems -= 500;
-	consumeItem("BimboCh",1);
-	consumeItem("BimboCh",1);
-	consumeItem("BimboCh",1);
-	consumeItem("BimboCh",1);
-	consumeItem("BimboCh",1);
+	player.consumeItem(consumables.BIMBOCH);
+	player.consumeItem(consumables.BIMBOCH);
+	player.consumeItem(consumables.BIMBOCH);
+	player.consumeItem(consumables.BIMBOCH);
+	player.consumeItem(consumables.BIMBOCH);
 	statScreenRefresh();
 	flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] = 25;
 }
@@ -618,16 +619,15 @@ public function getBimboozeFromSean():void {
 	outputText("He scoops a familiar-looking bottle from a tabletop, passing it off to you.  \"<i>Be somewhat careful with this,</i>\" he warns as you take it.  \"<i>The original's deleterious effect on the mind has been duplicated, I assure you.</i>\"\n\n");
 	outputText("You drop the vial into a pouch on your person.\n\n");
 	//bimbo liqueur aqcquired
-	shortName = "BimboLq";
 	menuLoc = 16;
 	flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] = 0;
-	takeItem();
+	inventory.takeItem(consumables.BIMBOLQ);
 }
 
 // [LEAVE]
 private function leaveWithBeerTits():void {
 	clearOutput();
-	outputText("The offer is tempting but right now you'd much rather deal with your boozy boobs privately.  You take off while trying to keep your [armor] modestly in place over your tits but it's difficult.  Your nipples constantly leak and drip a trail of alcohol all the way back to camp.  Thankfully by the time you arrive the effects seem to have mostly worn off.  Your nipples return to dripping milk, although they've shrunk back down a bit they don't quite shrink all the way, leaving you with somewhat larger endowments than you had before.");
+	outputText("The offer is tempting but right now you'd much rather deal with your boozy boobs privately.  You take off while trying to keep your [armor] modestly in place over your tits but it's difficult.  Your nipples constantly leak and drip a trail of alcohol all the way back to camp.  Thankfully by the time you arrive the effects seem to have mostly worn off.  Your nipples return to dripping milk, but although they've shrunk back down a bit they don't quite shrink all the way, leaving you with somewhat larger endowments than you had before.");
 	player.growTits(2, player.bRows(), false, 2);
 	doNext(13);
 }
@@ -709,7 +709,7 @@ private function barBeerOrgyTits():void {
 	//===============
 	//IF player has pussy and Urta is in the bar and sex with her is unlocked.
 	if(model.time.hours < 15 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0 && player.hasVagina()) {
-		outputText("\n\nA pair of familiar paws grab your ankles and spread your legs wide.  Your labia practically spurt out girl cum in anticipation of what's about to happen.  \"<i>Oh, looks like someone's overly eager.</i>\"  You struggle to look over the mounds of your own tits to see who's standing between your legs.  The familiar sight of an oversized horse-cock waving in the air catches your attention shortly before the grinning smile of Urta comes in to view.  \"<i>My aren't you going to get reamed, lover.</i>\"  No sooner than she says that than the flared head of her cock plunges with a wet squish between your nether lips.  You feel her stretching your entrance apart as her massive horse meat bores into your body.  Blissful screams of pleasure are heard and it isn't until the head of Urta's cock breaks into your womb that you realize it's you that's screaming in ecstasy.");
+		outputText("\n\nA pair of familiar paws grab your ankles and spread your legs wide.  Your labia practically spurt out girl cum in anticipation of what's about to happen.  \"<i>Oh, looks like someone's overly eager.</i>\"  You struggle to look over the mounds of your own tits to see who's standing between your legs.  The familiar sight of an oversized horse-cock waving in the air catches your attention shortly before the grinning smile of Urta comes into view.  \"<i>My, aren't you going to get reamed, lover.</i>\"  No sooner than she says that does the flared head of her cock plunges with a wet squish between your nether lips.  You feel her stretching your entrance apart as her massive horse meat bores into your body.  Blissful screams of pleasure are heard and it isn't until the head of Urta's cock breaks into your womb that you realize it's you that's screaming in ecstasy.");
 		if(player.pregnancyIncubation == 0) outputText("  Some folks give yelps and cheers when they see the bulge that repeatedly forms in your abdomen each time Urta thrusts herself inside you.");
 		player.cuntChange(60,true,true,false);
 	}
@@ -770,8 +770,8 @@ private function barBeerOrgyTits():void {
 	//Varies based on body type and characters present
 	//================================================
 	// IF [Edryn and Urta are present in the bar and free sex with both is unlocked and character is a herm]
-	if(player.statusAffectv1("Edryn") >= 5 && player.gender == 3 && model.time.hours == 14 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
-		outputText("\n\nYou're so dizzy on pleasure that you barely notice it when you're lifted off the table and carried through the bar again.  You can hardly feel your feet and legs when the crowd stands you up, and with a weak lifting of your head you see why the sudden change of position.  Right in front of you is Edryn's womanly hindquarters with her black cunt lips jiggling back and forth, dripping her girly horse juices from their sopping wet folds.  You don't even have to do anything has several hands angle [eachCock] and guide you forwards.");
+	if(player.statusAffectv1(StatusAffects.Edryn) >= 5 && player.gender == 3 && model.time.hours == 14 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
+		outputText("\n\nYou're so dizzy on pleasure that you barely notice it when you're lifted off the table and carried through the bar again.  You can hardly feel your feet and legs when the crowd stands you up, and with a weak lifting of your head you see the reason for the sudden change of position.  Right in front of you is Edryn's womanly hindquarters with her black cunt lips jiggling back and forth, dripping her girly horse juices from their sopping wet folds.  You don't even have to do anything as several hands angle [eachCock] and guide you forwards.");
 		// IF [player has a single cock]
 		if(player.cockTotal() == 1) outputText("  Edryn moans out loud in ecstasy as your [cock] fills her up.");
 		// If [player has multiple cocks] 
@@ -792,11 +792,11 @@ private function barBeerOrgyTits():void {
 		//IF [player has giant ass]
 		if(player.buttRating >= 22) outputText("  The fat of your ass cheeks jiggles and quakes even as Urta practically stuffs her hips into your crack.  \"<i>Damn, you've got a bigger ass than Edryn,</i>\" she chides as she spanks you.  \"<i>Hey!</i>\"  Edryn calls out with a false tone of hurt pride.");
 		
-		outputText("\n\nThe two of them fuck you senseless while the rest of the bar watches and cheers.  You start cumming without control which only eggs the two of them on to even rougher thrusts and grinds.  Long after the " + boozeBoobsType() + " stops leaking from your nipples and is replaced with your normal flow of milk, the two of them continue fuck you hard enough to make your heavy tits shake and bounce for the crowd's enjoyment.");
+		outputText("\n\nThe two of them fuck you senseless while the rest of the bar watches and cheers.  You start cumming without control which only eggs the two of them on to even rougher thrusts and grinds.  Long after the " + boozeBoobsType() + " stops leaking from your nipples and is replaced with your normal flow of milk, the two of them continue to fuck you hard enough to make your heavy tits shake and bounce for the crowd's enjoyment.");
 		
 		outputText("\n\nFinally Edryn calls out in pleasure, presumably from a particularly strong orgasm, and raises her hindquarters as high as she can.  As Urta finally reaches her own climax and thrusts upwards your body is held aloft solely by the sexes, with your legs dangling above the floor of the bar.");
 		
-		outputText("\n\nUrta's cock feels as if it'll tear your torso apart as cum surges through it before finally erupting with a messy torrent inside your womb.  You can hardly breathe as a jet of her spunk gushes against the underside of your diaphragm.  Your belly swells and swells until it presses against Edryn's ass.  You feel as if it'll burst at any second, and hoops and hollars go up from the crowd.  A few particularly intense bar goers are actually egging Urta on, calling for her to burst you.  Heavy amounts of jizz spill out from both yours and Edryn's cunt as Urta and you cum your collective brains out.  Stretch marks appear on the sides of your belly, but the pleasure of getting filled beyond capacity while gushing your own seed into the hot gash of Edryn's cunt paralyzes your higher brain functions from allowing you to do anything to stop the orgiastic sex.  A little bit of pain ripples through your sides, and right before you think you're gonna meet your end in a belly explosion of cum your eyes roll back and everything goes black.");
+		outputText("\n\nUrta's cock feels as if it'll tear your torso apart as cum surges through it before finally erupting with a messy torrent inside your womb.  You can hardly breathe as a jet of her spunk gushes against the underside of your diaphragm.  Your belly swells and swells until it presses against Edryn's ass.  You feel as if it'll burst at any second, and hoops and hollars go up from the crowd.  A few particularly intense bar goers are actually egging Urta on, calling for her to burst you.  Heavy amounts of jizz spill out from both yours and Edryn's cunt as Urta and you cum your collective brains out.  Stretch marks appear on the sides of your belly, but the pleasure of getting filled beyond capacity while gushing your own seed into the hot gash of Edryn's cunt paralyzes your higher brain functions from allowing you to do anything to stop the orgiastic sex.  A little bit of pain ripples through your sides, and right before you think you're gonna to meet your end in a belly explosion of cum your eyes roll back and everything goes black.");
 		outputText("\n\nThe next thing you're aware of is feeling an intense pressure in your gut.  As your vision returns you weakly make out the desert outside Tel'Adre passing you by.  As your senses return you realize you're riding on Edryn's back and Urta is sitting behind you.  \"<i>Hellooooo...</i>\"  A very drunk Urta whispers in your ear.  \"<i>Looks like you're awake.</i>\"  She reaches around and pats your bloated belly.  \"<i>You really took a lot.  We sort of felt we overdid it, so we decided to give you a lift back to your camp.</i>\"  Urta's cum is still spilling out of your crotch, soaking Edryn's sides.  Edryn's own hindquarters are leaking from the many loads you gave her.");
 		// IF [Player is pregnant but not with eggs] You pat your pregnant belly and silently hope Urta's ocean of cum hasn't drowned the child, if that's even possible.
 		outputText("\n\nThe two of them drop you off along with your clothes and gear back at camp.  Each of them winks and blows you a kiss as they travel back to Tel'Adre.  Your breasts are leaking milk again, and they appear to have grown permanently larger.");
@@ -806,7 +806,7 @@ private function barBeerOrgyTits():void {
 	else if(player.hasVagina() && model.time.hours < 15 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
 		outputText("\n\nYou hear passionate cries of lustful need from Urta as her horse-cock reams you with greater ferocity.  Her orgasm nearly knocks her off her feet as her shaft swells wider, stretching you apart as the cum surges up through it.");
 		// IF [player is not pregnant]  
-		if(player.pregnancyIncubation == 0) outputText("  The eruption of cum from her horsecock out does every other ejaculating dick in the room.  Your belly button pops outward as your stomach swells from the surging torrent of sperm pumping directly into your womb.  The hands of strangers grab your legs to keep you pinned in place while Urta struggles to keep her gushing cock inside your cunt despite the building pressure.  A couple voices call out, \"<i>She's gonna pop!  Is she gonna pop?  I think she is!</i>\"  Niamh is forced to sit up higher as your cum bloated belly pushes up against her.  Urta looks as if she's having a seizure from the sheer effort of unloading herself into you.  You scream out loud from the ecstasy of swelling but cries of pleasure are lost within Niamh's pussy folds, urging her to come again.  Her girl cum squirts down your throat, making your belly feel all the more tight and fit to burst.");
+		if(player.pregnancyIncubation == 0) outputText("  The eruption of cum from her horsecock out does every other ejaculating dick in the room.  Your belly button pops outward as your stomach swells from the surging torrent of sperm pumping directly into your womb.  The hands of strangers grab your legs to keep you pinned in place while Urta struggles to keep her gushing cock inside your cunt despite the building pressure.  A couple voices call out, \"<i>She's gonna pop!  Is she gonna pop?  I think she is!</i>\"  Niamh is forced to sit up higher as your cum bloated belly pushes up against her.  Urta looks as if she's having a seizure from the sheer effort of unloading herself into you.  You scream out loud from the ecstasy of swelling but your cries of pleasure are lost within Niamh's pussy folds, urging her to come again.  Her girl cum squirts down your throat, making your belly feel all the more tight and fit to burst.");
 		// ELSE IF [player is pregnant]
 		else outputText("  Urta feels as if she's going to tear you apart as the surging torrent of her horse cum shoots through the shaft of her cock.  She pulls it out just in time to plaster your abused pussy and the underside of your pregnant belly with her seed.  Ropes of cum spray across your thighs, belly, the undersides of your tits, and all over Niamh's chest and face.  \"<i>Oi!  Oh yes!</i>\"  Niamh calls out happily as Urta drowns the two of you in sperm.  Squirts of pussy juice pour down your throat and Niamh climaxes just from the sensation of being coated in Urta's hot jizz.");
 		

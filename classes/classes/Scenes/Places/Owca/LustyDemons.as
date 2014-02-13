@@ -7,18 +7,19 @@ package classes.Scenes.Places.Owca
 	import classes.Cock;
 	import classes.CockTypesEnum;
 	import classes.Monster;
+import classes.StatusAffects;
 
-	public class LustyDemons extends Monster
+public class LustyDemons extends Monster
 	{
 
 		override protected function performCombatAction():void
 		{
 			str = 40;
-			weaponAttack = 10;
-			createStatusAffect("attacks", 4, 0, 0, 0);
+			setWeaponAttack(10);
+			createStatusAffect(StatusAffects.Attacks, 4, 0, 0, 0);
 			eAttack();
 			str = 80;
-			weaponAttack = 40;
+			setWeaponAttack(40);
 			eAttack();
 			combatRoundOver();
 		}
@@ -66,7 +67,7 @@ package classes.Scenes.Places.Owca
 			initX_Specials(5043,5044);
 			initX_Tail(TAIL_TYPE_DEMONIC);
 			initX_Horns(HORNS_DEMON);
-			createStatusAffect("Vapula",0,0,0,0);
+			createStatusAffect(StatusAffects.Vapula,0,0,0,0);
 		}
 	}
 }

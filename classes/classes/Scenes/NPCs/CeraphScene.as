@@ -5,8 +5,10 @@ package classes.Scenes.NPCs
 {
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Items.Armors.LustyMaidensArmor;
+import classes.StatusAffects;
 
-	public class CeraphScene extends NPCAwareContent
+public class CeraphScene extends NPCAwareContent
 	{
 		public function CeraphScene()
 		{
@@ -89,7 +91,7 @@ package classes.Scenes.NPCs
 			spriteSelect(7);
 			outputText("", true);
 			//UBER-Fullbodypenetration
-			if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR && player.biggestCockArea() > 500 && (player.statusAffectv1("Exgartuan") == 1 || monk >= 5)) {
+			if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR && player.biggestCockArea() > 500 && (player.statusAffectv1(StatusAffects.Exgartuan) == 1 || monk >= 5)) {
 				hugeCorruptionForceFuckCeraph();
 				return;
 			}
@@ -660,8 +662,8 @@ package classes.Scenes.NPCs
 				}
 				var cunting:Function =null;
 				if (player.hasVagina()) cunting = rideCeraphsCockLikeaBAWSSexclamation11eleven;
-				var bikiniTits:int = 0;
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = 3988;
+				var bikiniTits:Function = null;
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
 
 				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "B.Titfuck", bikiniTits, "Leave", leave);
 				/*
@@ -760,7 +762,7 @@ package classes.Scenes.NPCs
 			outputText("You drop the swollen mass of dick-flesh on top her, pinning her under the weight of your lust.  Ceraph gasps in shock and pain, but her hard nipples are pressing tightly into your " + cockDescript(x) + "'s underside.  The slut is loving it – could she secretly be a submissive?  It doesn't matter one way or the other; this demon is going to pay.  You shimmy back, dragging the elephantine fuck-stick over the defeated demon's body until the bloated tip is resting on her purplish demon-snatch.  She screams, \"<i><i>OH FUCK NO!  That would kill me!  Please, don't!</i></i>\"\n\n", false);
 
 			outputText("Please?  She said the magic words.  ", false);
-			if (player.statusAffectv1("Exgartuan") == 1) outputText("You pat your " + cockDescript(x) + " and say, \"<i><i>A little help please Exgartuan?</i></i>\"  ", false);
+			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) outputText("You pat your " + cockDescript(x) + " and say, \"<i><i>A little help please Exgartuan?</i></i>\"  ", false);
 			else outputText("You blink your eyes closed and focus your corruptive powers in your crotch.  ", false);
 			outputText("Pleasure blooms in your midsection, spreading through your over-sized prick until it begins to dribble from the tip in the form of black ooze.  The viscous, dark substance splashes into Ceraph's demonic cunt, wicking into her drippy hole in in an instant.  She moans, probably getting off on the influx of perverse magic.  The effect is immediate and gravity is able to pull your tip into her unassisted.  The demon's corrupted cunt starts to stretch around you, and you haven't even started to push!\n\n", false);
 
@@ -807,10 +809,10 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.PC_FETISH] > 0) outputText("I'll remove some of my magic from you if you want, and I'll even let you keep the piercing.  Would you like that?", false);
 			else outputText("I'd be willing to give you a few extra gems to keep you motivated to do something like this again.  I LIKE surprises. How about it?", false);
 			outputText("</i></i>\"\n\n", false);
-			if (player.statusAffectv1("Exgartuan") == 1) {
+			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) {
 				outputText("Exgartuan mumbles, \"<i>Yeah I love me too.  Now while you two bitches kiss and make up, I'm gonna take a nap.</i>\"\n\n", false);
 				//Put Exgartuan to bed.  Awww he's so cute!
-				player.addStatusValue("Exgartuan", 2, 5);
+				player.addStatusValue(StatusAffects.Exgartuan, 2, 5);
 			}
 			outputText("(Do you accept Ceraph's Offer?)", false);
 			//Y/N – remove 1 fetish level or +10 gems
@@ -910,7 +912,7 @@ package classes.Scenes.NPCs
 			var armor:Function =null;
 			outputText("Ceraph looks you up and down like an appraiser examining an antique, never stopping her languid masturbation.  You stand there, hands on your hips, waiting for her to finish while you try not to stare too long at her beading pre-cum or dripping twat-juice.\n\n", false);
 			//(BIMBO LIQUER) 
-			if (hasItem("BimboLq", 1)) {
+			if (player.hasItem(consumables.BIMBOLQ)) {
 				outputText("She finishes and smiles widely.  \"<i>Is that bimbo liqueur?  That stuff is so hard to find, even for a demon like me.  I tell you what, I'll release you from ", false);
 				if (flags[kFLAGS.PC_FETISH] > 1) outputText("all the fetishes", false);
 				else outputText("the fetish", false);
@@ -947,13 +949,12 @@ package classes.Scenes.NPCs
 			outputText("", true);
 			spriteSelect(7);
 			outputText("Ceraph smiles knowingly at your response.  \"<i>You'll find this to be quite sexy.  Just be careful putting it on.  If you don't fit it right it'll pinch,</i>\" the demoness instructs while tossing you a set of armor.\n\n", false);
-			//(Get trapped armor and go home)
-			shortName = "SeductA";
 			//Pass time
 			menuLoc = 2;
 			//just in case...
 			doNext(13);
-			takeItem();
+			//(Get trapped armor and go home)
+			inventory.takeItem(armors.SEDUCTA);
 		}
 
 //[Trade Bimbo Liquer]
@@ -964,7 +965,7 @@ package classes.Scenes.NPCs
 			outputText("Ceraph grins as wide as the Cheshire Cat, groaning with happiness as she pulls her dripping tail from her snatch.  The pungent scent of her lusty, tainted puss hangs in the air while her tail extends towards you, looping around the liquer's top and pulling it from your pouch.  Ceraph plucks the bottle from her lust-drenched tail with great care and undoes the top.  She gives the liquer a tiny sniff, but it rocks her back on her heels all the same.  The demon starts giggling as she corks it, smiling with a slightly dopy look.  \"<i>Wheeeeeewww... heheheheee.. that stuff has got some kick!</i>\"\n\n", false);
 
 			outputText("You mention the deal and she glares back at you in irritation.  Her beautiful features curl with anger, a hand coming out of nowhere to slap you squarely on the side of the temple.  \"<i>Don't interrupt me, pet.</i>\"  Ears ringing, you stagger back, clutching at your head in surprise.  By the time you glare back at her, she's walking away.  You briefly consider giving her payback, but you realize your head feels clearer, more normal.  The artificial fetishes are gone!  While you catalogue lewd acts in your head and marvel at how little they affect you, Ceraph makes good on her escape.", false);
-			consumeItem("BimboLq", 1);
+			player.consumeItem(consumables.BIMBOLQ);
 			player.takeDamage(4);
 			flags[kFLAGS.PC_FETISH] = 0;
 			dynStats("lus", -20);
@@ -977,7 +978,7 @@ package classes.Scenes.NPCs
 			outputText("", true);
 			spriteSelect(7);
 			//(EXGARTUAN PISSED) 
-			if (player.statusAffectv1("Exgartuan") == 1) {
+			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) {
 				outputText("A disembodied voice roars out, \"<i>FUCK NO!  You are NOT giving me to that crazy bitch!</i>\"  Exgartuan doesn't seem to want to run the risk of being taken by Ceraph, and he completely assumes control of your " + player.legs() + " to make you flee with all due haste.  He taunts, \"<i>Rip off your own little dick, why doncha!  You'd look better with just a pussy anyhow ya dried out old sow!</i>\"\n\n", false);
 				outputText("Ceraph seems perturbed but doesn't bother to pursue you.", false);
 				dynStats("lus", -20);
@@ -1097,7 +1098,7 @@ package classes.Scenes.NPCs
 					player.balls = 0;
 					player.ballSize = 1;
 				}
-				if (player.cockTotal() == 1) player.removeStatusAffect("infested");
+				if (player.cockTotal() == 1) player.removeStatusAffect(StatusAffects.Infested);
 				outputText(" in her hand!  At the base there's smooth flesh and an arcane mark, somehow keeping the disembodied dick alive to pulse and squirm in her grasp.  The place on your groin is left completely smooth and featureless, as if it had never been there at all.\n\n", false);
 
 				outputText("Ceraph runs a finger up and down the length, setting off fireworks in your brain – you can still feel it!  The demoness laughs and says, \"<i>Don't worry, you won't feel the sensations constantly once I bond it elsewhere, though you may get a hint of feeling when unconscious.  For now, enjoy the pleasure!  Oh, I packed that tasty fetish into the cock for later.  Ta-ta, my pet!  Now go find me some more delicious dicks!</i>\"\n\n", false);
