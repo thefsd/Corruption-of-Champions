@@ -1903,7 +1903,7 @@ use namespace kGAMECLASS;
 		}
 		
 		override public function get hasAssHenna():Boolean {
-			return hasPerk("Ass Henna") >= 0;
+			return findPerk(PerkLib.AssHenna) >= 0;
 		}
 		
 		public function set hasAssHenna(value:Boolean):void {
@@ -1912,15 +1912,15 @@ use namespace kGAMECLASS;
 			}
 			
 			if(value) {
-				createPerk("Ass Henna", kGAMECLASS.model.time.days, 0, 0, 0, "");
+				createPerk(PerkLib.AssHenna, kGAMECLASS.model.time.days, 0, 0, 0, "");
 			}
 			else {
-				removePerk("Ass Henna");
+				removePerk(PerkLib.AssHenna);
 			}
 		}
 		
 		public function get hadAssHennaSinceDay():Number {
-			return perkv1("Ass Henna");
+			return perkv1(PerkLib.AssHenna);
 		}
 	}
 }
