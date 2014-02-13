@@ -1,0 +1,40 @@
+My girlfriend loves CoC, but hates receiving anal. Since CoC is now open source, I thought I'd take a crack at allowing users to disable receiving anal sex, at least in certain circumstances.
+
+Basically, it occurred to me that it wouldn't be too difficult to rewrite (by hand) most anal content to be vaginal instead—a penetration is a penetration, after all. So it should be possible to add an item or something that, when held by a female or hermaphrodite character, would switch most anal scenes to vaginal instead. The main exception is some double or triple penetration scenes, but happily, my girlfriend thinks those are pretty hot!
+
+I've started work on this in a branch at https://github.com/rentazilla/Corruption-of-Champions/tree/feature/asshole-off-limits. I've converted a lot of scenes across the entire game, and disabled access to certain others, but I haven't yet tackled certain classes which are heavily anal-oriented:
+
+AkbalScene
+BeeGirlScene
+KitsuneScene
+HellHoundScene
+InfestedHellHoundScene
+Heckel
+I also haven't yet decided what this item should be. The general idea I have is that it should be some kind of magical object near the character's ass; when someone looks at it, they're just sort of distracted by it and forget they were going to use the character's ass instead of their vagina.
+
+A piercing would be great since we already have a piercing shop it could be sold in, but as far as I know there are no piercings anywhere near your ass. A tramp stamp could work, but we don't have tattoos in CoC currently, and I noticed some signs that they were going to be added later. It's currently written as some kind of butt plug, but besides being sort of uncomfortable for people who want to avoid anal content, I've also noticed that when you do decide to do something anal, you have to add a line where the plug is removed, which is kind of a pain in the ass.
+
+Finally, since I don't know what the item is yet, I also don't have a way to turn this behavior on or off; in the current code, it's simply on if your character has a vagina and off if they don't.
+
+Feel free to clone and build my branch if you want to check it out, and please let me know if you have any ideas about this!
+
+
+
+
+
+@thefsd If you want to fork my repo and start hacking on the feature/asshole-off-limits branch, feel free. If you get something reasonable going, I'll be happy to accept a pull request.
+
+The first thing you'll want to do is remove the this.hasVagina() call on Creature.as line 3945; that's what keeps a henna'd male/agender from trying to avoid anal scenes. (If you don't want to worry about genderless characters, I'd change it from hasVagina() to (hasVagina() || hasCock()).) You'll also need to change the hasVagina() call in TelAdre.as line 247, and the [if (hasvagina = true) ] command in line 251, so you can actually get the henna on your character.
+
+After that, you'll basically have to scour the codebase for anal sex and branch on the return value of assholeOffLimits() to either avoid those scenes or output alternate ones. I found that searching for references to buttChange finds a lot of these scenes, but not necessarily all, particularly if you want to remove things like rimming. You may have to search for a number of different ass-related strings to find them all.
+
+Here's an example of some hellhound scenes I rewrote with alternate non-anal content; it shows a few different approaches you can use:
+
+On line 46, I pass two alternative strings to assholeOffLimits() (first the no-ass version, then the ass version) and let it return the appropriate one.
+On line 50, I call assholeOffLimits() as the condition of an if statement.
+On line 345, I use an [if (assholeOffLimits = true) no-anal content|anal content] command within a string.
+Which way you decide to do it is mostly a matter of coding taste, but remember to always use the if(assholeOffLimits()) approach when you're deciding whether to run code with side effects, such as a call to buttChange(); a statement like assholeOffLimits(cuntChange(...), buttChange(...)) will actually call both of those functions and simply choose to return the value of one or the other depending on the user's anal preference.
+
+One technique that isn't used in HellHoundScene.as is that I sometimes arrange to avoid a scene entirely if there are alternatives that don't have any anal content. One example of this is MinotaurMobScene.as line 258, which normally shows an oral/anal scene for lightly pregnant characters; I add a check for assholeOffLimits() to the condition, so players with anal turned off are instead given an oral-only scene that would normally be used for heavily pregnant characters.
+
+Happy hacking, and try not to break your dick.
