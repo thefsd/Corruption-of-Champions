@@ -6,7 +6,9 @@
 	import classes.CockTypesEnum;
 	import classes.Cock;
 	import classes.Appearance;
-	
+import classes.StatusAffects;
+import classes.internals.Utils;
+
 	/**
 	 * ...
 	 * @author Fake-Name
@@ -20,8 +22,8 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusAffect("PhyllaFight") >= 0) {
-				removeStatusAffect("PhyllaFight");
+			if(findStatusAffect(StatusAffects.PhyllaFight) >= 0) {
+				removeStatusAffect(StatusAffects.PhyllaFight);
 				outputText("You defeat a minotaur!  ", true);
 				game.desert.antsScene.phyllaBeatAMino();
 			} else {
@@ -31,8 +33,8 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(hasStatusAffect("PhyllaFight") >= 0) {
-				removeStatusAffect("PhyllaFight");
+			if(findStatusAffect(StatusAffects.PhyllaFight) >= 0) {
+				removeStatusAffect(StatusAffects.PhyllaFight);
 				game.desert.antsScene.phyllaPCLostToMino();
 			} else if (pcCameWorms){
 				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.", false);
@@ -48,11 +50,11 @@
 					(hasAxe?"<b>This minotaur seems to have found a deadly looking axe somewhere!</b>":"");
 		}
 
-		public function Minotaur()
+		public function Minotaur(axe:Boolean=false)
 		{
 			//Most times they dont have an axe
-			hasAxe = rand(3)==0;
-			var furColor:String = Appearance.randomChoice("black","brown");
+			hasAxe = axe || rand(3)==0;
+			var furColor:String = randomChoice("black","brown");
 
 			trace("Minotaur Constructor!");
 			trace(game.flags);
@@ -70,6 +72,14 @@
 			init11Armor("thick fur");
 			init12Combat(20 + rand(this.ballSize*2),this.ballSize * 3,hasAxe?0.84:0.87,TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(hasAxe?6:5,rand(5) + 5);
+			if (hasAxe) {
+				init14FixedDrop(consumables.MINOBLO);
+			} else {
+				init14ChainedDrop()
+						.add(consumables.MINOCUM, 1 / 5)
+						.add(consumables.MINOBLO, 1 / 2)
+						.elseDrop(null);
+			}
 			initX_Specials(game.mountain.minotaurScene.minoPheromones);
 			initX_Tail(TAIL_TYPE_COW);
 		}

@@ -3,6 +3,8 @@ package classes.Scenes.Areas.Swamp
 	import classes.Appearance;
 	import classes.Cock;
 	import classes.CockTypesEnum;
+	import classes.PerkLib;
+	import classes.StatusAffects;
 
 	/**
 	 * ...
@@ -16,7 +18,7 @@ package classes.Scenes.Areas.Swamp
 			var temp:int;
 			outputText("The corrupted drider closes in on your web-bound form, cooing happily at you while you struggle with the sticky fibres.\n\n", false);
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("She's too blind to get anywhere near you.\n", false);
 			}
 			//Dodge
@@ -29,7 +31,7 @@ package classes.Scenes.Areas.Swamp
 				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n", false);
 			}
 			//Determine if evaded
-			else if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Somehow, you manage to evade her lusty attack.  She sighs and licks her lips.  \"<i>", false);
 				temp = rand(4);
 				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n", false);
@@ -38,7 +40,7 @@ package classes.Scenes.Areas.Swamp
 				else outputText("Just look at my glossy, dripping lips.  Imagine how great it feel to have them locked against you.  Why resist?</i>\"\n", false);
 			}
 			//("Misdirection"
-			else if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("You manage to misdirect her lusty attack, avoiding it at the last second.  She sighs and licks her lips.  \"<i>", false);
 				temp = rand(4);
 				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n", false);
@@ -47,7 +49,7 @@ package classes.Scenes.Areas.Swamp
 				else outputText("Just look at my glossy, dripping lips.  Imagine how great it feel to have them locked against you.  Why resist?</i>\"\n", false);
 			}
 			//Determine if cat'ed
-			else if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("You manage to twist your cat-like body out of the way at the last second, avoiding it at the last second.  She sighs and licks her lips.  \"<i>", false);
 				temp = rand(4);
 				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n", false);
@@ -56,7 +58,7 @@ package classes.Scenes.Areas.Swamp
 				else outputText("Just look at my glossy, dripping lips.  Imagine how great it feel to have them locked against you.  Why resist?</i>\"\n", false);
 			}
 			
-			else if(player.hasStatusAffect("Drider Kiss") < 0) {
+			else if(player.findStatusAffect(StatusAffects.DriderKiss) < 0) {
 				//(HIT? + 10 lust)
 				game.dynStats("lus", 10);
 				outputText("Before you can move, she's right on top of you, leaning ", false);
@@ -64,12 +66,12 @@ package classes.Scenes.Areas.Swamp
 				else outputText("over", false);
 				outputText(" to plant a sloppy, wet kiss upon your lips.  Her glossy lip-venom oozes everywhere, dribbling down your collective chins and sliding into your mouth.  You shudder, trying to resist, but your tongue betrays you.  It slides between her moist, puffy entrance, lapping at her venom and making love to her tongue.", false);
 				if(player.lust <= 99) outputText("  Somehow, you work up the willpower to back away, but your body slowly begins to burn hotter and harder, afflicted with a slowly-building lust.", false);
-				player.createStatusAffect("Drider Kiss",0,0,0,0);
+				player.createStatusAffect(StatusAffects.DriderKiss,0,0,0,0);
 			}
 			//Get hit 2nd time) 
 			else {
-				player.addStatusValue("Drider Kiss",1,1);
-				if(player.statusAffectv1("Drider Kiss") == 1) {
+				player.addStatusValue(StatusAffects.DriderKiss,1,1);
+				if(player.statusAffectv1(StatusAffects.DriderKiss) == 1) {
 					//(HIT? + 15 lust)
 					game.dynStats("lus", 15);
 					outputText("Again, the drider ties your mouth up in her syrupy lip-lock, seeming to bind your mouth as effectively as her webs bind your body.  Her sweet venom bubbles and froths at the corners of the oral embrace, dripping over her many-breasted bosom and your " + player.chestDesc() + ".", false);
@@ -114,15 +116,15 @@ package classes.Scenes.Areas.Swamp
 			game.spriteSelect(77);
 			if (lust > 70 && rand(4) == 0) driderMasturbate();
 			//1/4 chance of silence if pc knows spells
-			else if (game.hasSpells() && player.hasStatusAffect("Web-Silence") < 0 && rand(4) == 0) {
+			else if (game.hasSpells() && player.findStatusAffect(StatusAffects.WebSilence) < 0 && rand(4) == 0) {
 				spiderSilence();
 			}
 			//1/4 chance of disarm
-			else if (player.hasStatusAffect("Disarmed") < 0 && player.weaponName != "fists" && rand(4) == 0) {
+			else if (player.findStatusAffect(StatusAffects.Disarmed) < 0 && player.weaponName != "fists" && rand(4) == 0) {
 				spiderDisarm();
 			}
 			//Always web unless already webbed
-			else if (player.spe >= 2 && (player.hasStatusAffect("Web") < 0 || rand(2) == 0)) {
+			else if (player.spe >= 2 && (player.findStatusAffect(StatusAffects.Web) < 0 || rand(2) == 0)) {
 				spiderMorphWebAttack();
 			}
 			//Kiss!
@@ -147,8 +149,8 @@ package classes.Scenes.Areas.Swamp
 		public function CorruptedDrider()
 		{
 
-			var hairColor:String = Appearance.randomChoice("red", "orange", "green");
-			var skinTone:String = Appearance.randomChoice("yellow", "purple", "red", "turquoise");
+			var hairColor:String = randomChoice("red", "orange", "green");
+			var skinTone:String = randomChoice("yellow", "purple", "red", "turquoise");
 
 			var pierced:Boolean = rand(2)==0;
 			init01Names("the ", "corrupted drider", "corrupteddrider",
@@ -172,6 +174,10 @@ package classes.Scenes.Areas.Swamp
 				init12Combat(250,30,.4,TEMPERMENT_RANDOM_GRAPPLES);
 				init13Level(14,rand(10) + 20);
 			}
+			init14WeightedDrop()
+					.add(consumables.B_GOSSR,5)
+					.add(useables.T_SSILK,1)
+					.add(null,4);
 		}
 
 	}

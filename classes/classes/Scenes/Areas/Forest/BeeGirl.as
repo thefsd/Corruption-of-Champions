@@ -6,7 +6,9 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
+import classes.StatusAffects;
+import classes.internals.Utils;
+
 	/**
 	 * ...
 	 * @author Fake-Name
@@ -29,12 +31,12 @@
 				game.dynStats("lus", 1);
 				var temp2:Function =null;
 				var temp3:Function =null;
-				if(player.hasStatusAffect("Feeder") >= 0) temp3 = game.forest.beeGirlScene.milkAndHoneyAreKindaFunny;
+				if(player.findStatusAffect(StatusAffects.Feeder) >= 0) temp3 = game.forest.beeGirlScene.milkAndHoneyAreKindaFunny;
 				if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = kGAMECLASS.beeGirlsGetsDildoed;
 				game.simpleChoices("Rape",game.forest.beeGirlScene.rapeTheBeeGirl,"Dildo Rape",temp2,"",0,"B. Feed",temp3,"Leave",game.cleanupAfterCombat);
 			}
 			//Genderless can still breastfeed
-			else if(player.hasStatusAffect("Feeder") >= 0) {
+			else if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
 				if (hpVictory){
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?", true);
 				} else {
@@ -65,13 +67,19 @@
 			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL);
 			init05Body(rand(14) + 59,HIP_RATING_CURVY+3,BUTT_RATING_EXPANSIVE,LOWER_BODY_TYPE_BEE);
 			init06Skin("yellow");
-			init07Hair(Appearance.randomChoice("black","black and yellow"),6);
+			init07Hair(randomChoice("black","black and yellow"),6);
 			init08Face();
 			init09PrimaryStats(30,30,30,20,60,55,0);
 			init10Weapon("chitin-plated fist","armored punch");
 			init11Armor("chitin",9);
 			init12Combat(0,20 + rand(40),0.9,TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(4,rand(15) + 1);
+			init14WeightedDrop()
+					.add(consumables.BEEHONY,4)
+					.add(consumables.OVIELIX,1)
+					.addMany(1,consumables.W__BOOK,
+							useables.B_CHITN,
+							null,1);
 			initX_Antennae(ANTENNAE_BEE);
 			initX_Wings(WING_TYPE_BEE_LIKE_SMALL);
 			initX_Tail(TAIL_TYPE_BEE_ABDOMEN,100);

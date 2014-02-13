@@ -6,8 +6,10 @@ package classes.Scenes.Areas.Plains
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
-	/**
+	import classes.PerkLib;
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -17,7 +19,7 @@ package classes.Scenes.Areas.Plains
 		private function satyrAttack():void {
 			outputText("The satyr swings at you with one knuckled fist.  ");
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind punch!\n", false);
 			}
 			//Evade: 
@@ -45,7 +47,7 @@ package classes.Scenes.Areas.Plains
 		
 		internal function satyrCharge():void {
 			outputText("Lowering his horns, the satyr digs his hooves on the ground and begins snorting; he's obviously up to something.  ");
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you due to blindness!\n", false);
 			}
 			else if(combatMiss()) {
@@ -69,9 +71,9 @@ package classes.Scenes.Areas.Plains
 				if(damage > 0) {
 					damage = player.takeDamage(damage);
 					outputText("He charges at you with a loud bleat, catching you off-guard and sending you flying into the ground.");
-					if(player.hasPerk("Resolute") < 0) {
+					if(player.findPerk(PerkLib.Resolute) < 0) {
 						outputText("  The pain of the impact is so big you feel completely dazed, almost seeing stars.");
-						player.createStatusAffect("Stunned",0,0,0,0);
+						player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
 					}
 					//stun PC + hp damage if hit, hp damage dependent on str if miss
 					outputText(" (" + damage + ")");
@@ -92,7 +94,7 @@ package classes.Scenes.Areas.Plains
 		//5:(Only executed at high lust) 
 		private function highLustChugRape():void {
 			outputText("Panting with barely-contained lust, the Satyr charges at you and tries to ram you into the ground.  ");
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you due to blindness!\n", false);
 			}
 			else if(combatMiss() || combatFlexibility() || combatMisdirect() || combatEvade()) {
@@ -114,10 +116,10 @@ package classes.Scenes.Areas.Plains
 				if(rand(2) == 0) satyrBate();
 				else bottleChug();
 			}
-			else if(hasStatusAffect("Charged") < 0) satyrCharge();
+			else if(findStatusAffect(StatusAffects.Charged) < 0) satyrCharge();
 			else {
 				satyrAttack();
-				removeStatusAffect("Charged");
+				removeStatusAffect(StatusAffects.Charged);
 			}
 		}
 
@@ -146,13 +148,14 @@ package classes.Scenes.Areas.Plains
 			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL,20);
 			init05Body(rand(37) + 64,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_HOOFED);
 			init06Skin("tan");
-			init07Hair(Appearance.randomChoice("black","brown"),3+rand(20));
+			init07Hair(randomChoice("black","brown"),3+rand(20));
 			init08Face(FACE_COW_MINOTAUR);
 			init09PrimaryStats(75,70,110,70,60,35,45);
 			init10Weapon("fist","punch");
 			init11Armor("thick fur");
 			init12Combat(300,20,0.30,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(14,rand(25) + 25);
+			init14ChainedDrop().add(consumables.INCUBID,1/2);
 			initX_Tail(TAIL_TYPE_COW);
 
 		}

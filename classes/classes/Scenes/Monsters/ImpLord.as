@@ -11,7 +11,53 @@ package classes.Scenes.Monsters
 	 */
 	public class ImpLord extends Imp
 	{
-		override protected function performCombatAction():void
+		//Special Attack 1
+		protected function impFire():void
+		{
+			outputText("The imp mutters something to himself, before you have time to react the demonic creature's hand is filled with a bright red fire that he hurls at you.  The flames lick at your body leaving a painful burn or you torso, as well as an arousing heat in your groin.");
+			//[-HP // +Lust(minor)]
+			var damage:int = 40 + rand(10);
+			player.takeDamage(damage);
+			game.dynStats("lus", 20 + player.cor / 10);
+			combatRoundOver();
+		}
+		
+		//Heavy Attack
+		protected function impLordHeavyEncounter():void
+		{
+			var damage:int = int((str + weaponAttack + 20) - rand(player.tou) - player.armorDef);
+			outputText("The demonic creature slashes a clawed hand towards your stomach,");
+			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText(" but you handily avoid it.");
+			else if (damage <= 0) outputText(" but the attack proves ineffectual.");
+			else {
+				outputText("leaving a large gash. The attack leaves you slightly stunned, but you recover. ");
+				damage = player.takeDamage(damage);
+				outputText("(" + damage + ")");
+			}
+			combatRoundOver();
+		}
+
+		//Lust Attack
+		protected function impLordLustAttack():void
+		{
+			outputText("Lowering his loincloth the imp reveals his inhumanly thick shaft.  He smirks and licks his lips as he gives his cock a squeeze, milking a few beads of clear pre from the tip.  You shake your head and try to ignore your growing need.");
+			//[+Lust]
+			game.dynStats("lus", 5 + player.lib / 5 + player.cor / 5);
+			combatRoundOver();
+		}
+
+		//Lust and Light Attack
+		protected function impLordLustAttack2():void
+		{
+			outputText("Reaching into his satchel the devilish creature pulls out a leather riding crop.  He quickly rushes forward, but somehow manages to get behind you.  Before you can react the imp lashes out, striking your [butt] twice with the riding crop.  The strikes leave a slight burning feeling, as well as a strange sense of arousal.");
+			var damage:int = 3 + rand(10);
+			damage = player.takeDamage(damage);
+			outputText(" (" + damage + ")");
+			//[-HP(minor) // +Lust]
+			game.dynStats("lus", 5 + player.sens / 4 + player.cor / 10);
+			combatRoundOver();
+		}
+        override protected function performCombatAction():void
 		{
 			var choices:Array = [impFire, impLordLustAttack2, impLordLustAttack, impLordHeavyEncounter, eAttack];
 			choices[rand(choices.length)]();
@@ -47,6 +93,10 @@ package classes.Scenes.Monsters
 			init11Armor("leathery skin",5);
 			init12Combat(100,30,.65,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(7,rand(15) + 25);
+			init14WeightedDrop().
+					add(consumables.MINOBLO,1).
+					add(consumables.LABOVA_,1).
+					add(consumables.INCUBID,6);
 			initX_Wings(WING_TYPE_IMP);
 			initX_Specials(5019);
 

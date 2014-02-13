@@ -2,12 +2,14 @@ package classes.Scenes.NPCs
 {
 	import classes.CoC;
 	import classes.Monster;
-	
-	/**
+	import classes.PerkLib;
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author ...
 	 */
-	public class Kiha extends Monster 
+	public class Kiha extends Monster
 	{
 		private function kihaTimeWaster():void {
 			game.spriteSelect(72);
@@ -49,15 +51,15 @@ package classes.Scenes.NPCs
 				outputText("You manage to jump to the side, intense heat rushing past you as you narrowly avoid her advance.  You twist around, finding that she's reunited with her axe and angrier than before.", false);
 			}
 			//Determine if evaded
-			else if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evasion, you manage to jump to the side, intense heat rushing past you as you narrowly avoid her advance.  You twist around, finding that she's reunited with her axe and angrier than before.", false);
 			}
 			//("Misdirection"
-			else if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using your skills at misdirection, you manage to make Kiha think you're going to dodge one way before stepping in the other direction.  You turn back, finding she has her axe in hand and looks rather steamed.", false);
 			}
 			//Determine if cat'ed
-			else if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("Using your cat-like reflexes, you manage to jump to the side, intense heat rushing past you as you narrowly avoid her advance.  You twist around, finding that she's reunited with her axe and angrier than before.", false);
 			}
 			//HIT!
@@ -76,15 +78,15 @@ package classes.Scenes.NPCs
 			outputText("Kiha throws her arms back and roars, exhaling a swirling tornado of fire directly at you!\n", false);
 			//Miss:
 			//Determine if evaded
-			if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your talent for evasion, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.", false);
 			}
 			//("Misdirection"
-			else if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using your talent for misdirection, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.", false);
 			}
 			//Determine if cat'ed
-			else if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("Using your cat-like flexibility, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.", false);
 			}
 			else {
@@ -105,7 +107,7 @@ package classes.Scenes.NPCs
 		*/
 		override protected function handleFear():Boolean
 		{
-			removeStatusAffect("Fear");
+			removeStatusAffect(StatusAffects.Fear);
 			outputText("Kiha shudders for a moment, then looks your way with a clear head.  \"<i>Fear was the first thing the demons taught us to overcome.  Do you think it would stay my blade?</i>\"\n", false);
 			return true;
 		}
@@ -138,11 +140,11 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusAffect("spiderfight") >= 0)
+			if(findStatusAffect(StatusAffects.spiderfight) >= 0)
 				game.kihaFollower.playerBeatsUpKihaPreSpiderFight();
-			else if(hasStatusAffect("domfight") >= 0)
+			else if(findStatusAffect(StatusAffects.DomFight) >= 0)
 				game.kihaFollower.pcWinsDomFight();
-			else if(hasStatusAffect("spar") >= 0)
+			else if(findStatusAffect(StatusAffects.Spar) >= 0)
 				game.kihaFollower.winSparWithKiha();
 			else game.kihaScene.kihaVictoryIntroduction();
 		}
@@ -150,11 +152,11 @@ package classes.Scenes.NPCs
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(hasStatusAffect("spiderfight") >= 0)
+			if(findStatusAffect(StatusAffects.spiderfight) >= 0)
 				game.kihaFollower.loseKihaPreSpiderFight();
-			else if(hasStatusAffect("domfight") >= 0)
+			else if(findStatusAffect(StatusAffects.DomFight) >= 0)
 				game.kihaFollower.pcLosesDomFight();
-			else if(hasStatusAffect("spar") >= 0)
+			else if(findStatusAffect(StatusAffects.Spar) >= 0)
 				game.kihaFollower.sparWithFriendlyKihaLose();
 			else if (pcCameWorms){
 				outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");
@@ -179,11 +181,12 @@ package classes.Scenes.NPCs
 			init11Armor("thick scales",30);
 			init12Combat(430,10,0.4,TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(16,rand(15) + 95);
+			skipInit(14);
 			initX_Wings(WING_TYPE_IMP,"huge");
 			initX_Tail(TAIL_TYPE_LIZARD);
 
 		}
-		
+
 	}
 
 }

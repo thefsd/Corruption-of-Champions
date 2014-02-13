@@ -3,8 +3,10 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
+	import classes.PerkLib;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author aimozg
 	 */
@@ -28,7 +30,7 @@ package classes.Scenes.NPCs
 				outputText(" (" + damage + ")");
 			}
 			//Miss:
-			else if(combatMiss() || combatFlexibility() || combatEvade() || combatMisdirect() || hasStatusAffect("Blind") >= 0) {
+			else if(combatMiss() || combatFlexibility() || combatEvade() || combatMisdirect() || findStatusAffect(StatusAffects.Blind) >= 0) {
 				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils with fist raised, but you lean away from the uppercut, catching a faceful of her breasts instead!  Sheila squeals and pushes away from you");
 				//[(libido>40)
 				if(player.lib > 40) {
@@ -44,8 +46,8 @@ package classes.Scenes.NPCs
 				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils just as quickly, launching herself at your face with a fist raised in front of her.  She lands a staggering crack on your jaw which knocks your head back and blurs your vision!");
 				//deals minor concussion which adds 5-10 pts fatigue, may stun pc and prevent attack, misses while blinded or misfires on pcs under 3'6")
 				kGAMECLASS.fatigue(5+rand(5));
-				if(rand(2) == 0 && player.hasPerk("Resolute") < 0) {
-					player.createStatusAffect("Stunned",1,0,0,0);
+				if(rand(2) == 0 && player.findPerk(PerkLib.Resolute) < 0) {
+					player.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
 					outputText("  <b>You are stunned!</b>");
 				}
 				damage = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
@@ -62,7 +64,7 @@ package classes.Scenes.NPCs
 			var damage:Number = 0;
 			spe -= 60;
 			//Miss:
-			if(combatMiss() || combatFlexibility() || combatEvade() || combatMisdirect() || (hasStatusAffect("Blind") >= 0 && rand(3) == 0)) {
+			if(combatMiss() || combatFlexibility() || combatEvade() || combatMisdirect() || (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) == 0)) {
 				outputText("Sheila squats down, then bounds explosively toward you!  She swings her leg out in front to kick, but you roll to the side and she slips past your shoulder.  You hear an \"<i>Oof!</i>\" as she lands on her butt behind you.  When you turn to look, she's already back to her feet, rubbing her smarting posterior and looking a bit embarrassed.");
 				//(small Sheila HP loss)
 				damage = 3 + rand(10);
@@ -73,8 +75,8 @@ package classes.Scenes.NPCs
 			else {
 				outputText("Sheila squats down, then bounds explosively toward you feet-first!  She snaps one leg out softly just as she reaches your chest, then twists her body to the side, bringing her other leg over and landing a kick to the rear of your skull!  Your vision blurs and you wobble on your feet as she pushes off your chest.");
 				//Stun triggered:
-				if(player.hasPerk("Resolute") < 0) {
-					player.createStatusAffect("Stunned",2,0,0,0);
+				if(player.findPerk(PerkLib.Resolute) < 0) {
+					player.createStatusAffect(StatusAffects.Stunned,2,0,0,0);
 					outputText("  <b>You are stunned!</b>");
 				}
 				damage = int((str + 50 + weaponAttack) - rand(player.tou) - player.armorDef);
@@ -104,7 +106,7 @@ package classes.Scenes.NPCs
 		//Demon Sheila Combat - Special Attacks
 		//1: Suspicious Glint (int-based hit chance)
 		private function suspiciousGlint():void {
-			if(hasStatusAffect("Blind") >= 0 && rand(2) == 0) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) {
 				outputText("Sheila's blind eyes glint suspiciously as she focuses her power, trying to send her fantasy to anything caught in their stare.  It seems to work - the rock next to you vibrates a little.");
 			}
 			//Miss:
@@ -118,8 +120,8 @@ package classes.Scenes.NPCs
 				else outputText("riding your dick to the hilt");
 				outputText(" run rampant inside your head and crowd out everything else.  \"<i>Did you see it, [name]?  My love for you?</i>\" Sheila asks, smiling.  God, did you ever!  You can hardly focus on anything!");
 				//big (20+) int drop and big lib-based lust gain if successful, locks Infest command for the fight if successful, always misses if Sheila is blinded
-				if(hasStatusAffect("Twu Wuv") < 0) {
-					createStatusAffect("Twu Wuv",0,0,0,0);
+				if(findStatusAffect(StatusAffects.TwuWuv) < 0) {
+					createStatusAffect(StatusAffects.TwuWuv,0,0,0,0);
 					var counter:int = 40+rand(5);
 					showStatDown( 'inte' );
 					// inteDown.visible = true;
@@ -127,7 +129,7 @@ package classes.Scenes.NPCs
 					while(counter > 0) {
 						if(player.inte >= 2) {
 							player.inte--;
-							addStatusValue("Twu Wuv",1,1);
+							addStatusValue(StatusAffects.TwuWuv,1,1);
 						}
 						counter--;
 					}
@@ -163,8 +165,8 @@ package classes.Scenes.NPCs
 			//Hit:
 			if(!combatMiss() && !combatEvade() && !combatMisdirect() && !combatFlexibility()) {
 				outputText("It lands on target, and you're forced to close your eyes lest it get in them!");
-				player.createStatusAffect("Blind",1,0,0,0);
-				player.createStatusAffect("Sheila Oil",0,0,0,0);
+				player.createStatusAffect(StatusAffects.Blind,1,0,0,0);
+				player.createStatusAffect(StatusAffects.SheilaOil,0,0,0,0);
 			}
 			else {
 				outputText("You easily lean away from the path of her tainted fluids, and she sighs.  \"<i>You're no fun, mate.</i>\"");
@@ -238,15 +240,15 @@ package classes.Scenes.NPCs
 
 		private function demonSheilaAI():void {
 			//Count up till give up!
-			if(hasStatusAffect("Counter") < 0) createStatusAffect("Counter",0,0,0,0);
-			addStatusValue("Counter",1,1);
-			if(statusAffectv1("Counter") >= 5) {
+			if(findStatusAffect(StatusAffects.Counter) < 0) createStatusAffect(StatusAffects.Counter,0,0,0,0);
+			addStatusValue(StatusAffects.Counter,1,1);
+			if(statusAffectv1(StatusAffects.Counter) >= 5) {
 				sitAndPout();
 				return;
 			}
 			var choices:Array = [];
 
-			if(player.hasStatusAffect("Sheila Oil") < 0) {
+			if(player.findStatusAffect(StatusAffects.SheilaOil) < 0) {
 				choices = [suspiciousGlint,
 					tittyMonsterAttack,
 					splashAttackLookOutShellEvolveIntoGyrados];
@@ -317,6 +319,13 @@ package classes.Scenes.NPCs
 			init11Armor("clothes",4);
 			init12Combat(bonusHP,lust,lustVuln,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(14,rand(5) + 5);
+			if (game.flags[kFLAGS.SHEILA_DEMON]>0){
+				init14FixedDrop(consumables.KANGAFT);
+			} else {
+				init14ChainedDrop(consumables.KANGAFT).
+						add(consumables.SUCMILK,1/3).
+						add(consumables.INCUBID,1/2);
+			}
 			initX_Tail(TAIL_TYPE_KANGAROO);
 
 		}

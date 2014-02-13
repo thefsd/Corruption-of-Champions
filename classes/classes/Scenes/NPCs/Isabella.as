@@ -1,9 +1,10 @@
 package classes.Scenes.NPCs
 {
-	import classes.CoC;
 	import classes.Monster;
-	
-	/**
+	import classes.PerkLib;
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author ...
 	 */
@@ -18,7 +19,7 @@ package classes.Scenes.NPCs
 			outputText("Isabella snorts and lowers a shield a moment before she begins to charge towards you. Her hooves tear huge divots out of the ground as she closes the distance with surprising speed!  ", false);
 
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n", false);
 			}
 			//Determine if dodged!
@@ -26,23 +27,22 @@ package classes.Scenes.NPCs
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n", false);
 			}
 			//Determine if evaded
-			else if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("You easily evade her incredibly linear attack.\n", false);
 			}
 			//("Misdirection"
-			else if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("You easily misdirect her and step aside at the last moment.\n", false);
 			}
 			//Determine if cat'ed
-			else if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding her attack.\n", false);
 			}
 			else {
-				var damage:Number = 0;
+				var damage:Number;
 				damage = Math.round((weaponAttack + str + 20) - rand(player.tou+player.armorDef));
 				if(damage < 0) {
 					outputText("You brace yourself and catch her shield in both hands, dragging through the dirt as you slow her charge to a stop.  She gapes down, completely awestruck by the show of power.", false);
-					damage = 0;
 				}
 				else {
 					damage = player.takeDamage(damage);
@@ -57,7 +57,7 @@ package classes.Scenes.NPCs
 			outputText("Isabella spins her shield back at you in a potent, steel-assisted backhand.  ", false);
 
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n", false);
 			}
 			//Determine if dodged!
@@ -65,15 +65,15 @@ package classes.Scenes.NPCs
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n", false);
 			}
 			//Determine if evaded
-			else if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("You easily evade her incredibly linear attack.\n", false);
 			}
 			//("Misdirection"
-			else if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("You easily misdirect her and step aside at the last moment.\n", false);
 			}
 			//Determine if cat'ed
-			else if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("You bend backward with cat-like agility to avoid her attack.\n", false);
 			}
 			else {
@@ -83,14 +83,14 @@ package classes.Scenes.NPCs
 					outputText("You deflect her blow away, taking no damage.\n", false);
 					damage = 0;
 				}
-				else if(player.hasPerk("Resolute") >= 0 && player.tou >= 75) {
+				else if(player.findPerk(PerkLib.Resolute) >= 0 && player.tou >= 75) {
 					outputText("You resolutely ignore the blow thanks to your immense toughness.\n");
 					damage = 0;
 				}
 				else {
 					damage = player.takeDamage(damage);
 					outputText("You try to avoid it, but her steely attack connects, rocking you back.  You stagger about while trying to get your bearings, but it's all you can do to stay on your feet.  <b>Isabella has stunned you!</b> (" + damage + ")\n", false);
-					player.createStatusAffect("Isabella Stunned",0,0,0,0);
+					player.createStatusAffect(StatusAffects.IsabellaStunned,0,0,0,0);
 				}
 			}
 			combatRoundOver();
@@ -100,7 +100,7 @@ package classes.Scenes.NPCs
 			outputText("Isabella punches out from behind her shield in a punch aimed right at your throat!  ", false);
 
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n", false);
 			}
 			//Determine if dodged!
@@ -108,32 +108,30 @@ package classes.Scenes.NPCs
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n", false);
 			}
 			//Determine if evaded
-			else if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+			else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("You easily evade her incredibly linear attack.\n", false);
 			}
 			//("Misdirection"
-			else if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("You easily misdirect her and step aside at the last moment.\n", false);
 			}
 			//Determine if cat'ed
-			else if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("You bend backward with cat-like agility to avoid her attack.\n", false);
 			}
 			else {
-				var damage:Number = 0;
+				var damage:Number;
 				damage = Math.round(str - rand(player.tou+player.armorDef));
 				if(damage <= 0) {
 					outputText("You manage to block her with your own fists.\n", false);
-					damage = 0;
 				}
-				else if(player.hasPerk("Resolute") >= 0 && player.tou >= 75) {
+				else if(player.findPerk(PerkLib.Resolute) >= 0 && player.tou >= 75) {
 					outputText("You resolutely ignore the blow thanks to your immense toughness.\n");
-					damage = 0;
 				}
 				else {
 					damage = player.takeDamage(damage);
 					outputText("You try your best to stop the onrushing fist, but it hits you square in the throat, nearly collapsing your windpipe entirely.  Gasping and sputtering, you try to breathe, and while it's difficult, you manage enough to prevent suffocation. <b>It will be impossible to focus to cast a spell in this state!</b> (" + damage + ")\n", false);
-					player.createStatusAffect("Throat Punch",2,0,0,0);
+					player.createStatusAffect(StatusAffects.ThroatPunch,2,0,0,0);
 				}
 			}
 			combatRoundOver();
@@ -153,11 +151,11 @@ package classes.Scenes.NPCs
 			//-If below 70% HP, 50% chance of milk drinking
 			if (HPRatio() < .7 && rand(3) == 0) drankMalkYaCunt();
 			//if PC has spells and isn't silenced, 1/3 chance of silence.
-			else if (player.hasSpells() && player.hasStatusAffect("Throat Punch") < 0 && rand(3) == 0) {
+			else if (player.hasSpells() && player.findStatusAffect(StatusAffects.ThroatPunch) < 0 && rand(3) == 0) {
 				isabellaThroatPunch();
 			}
 			//if PC isn't stunned, 1/4 chance of stun
-			else if (player.hasStatusAffect("Isabella Stunned") < 0 && rand(4) == 0) {
+			else if (player.findStatusAffect(StatusAffects.IsabellaStunned) < 0 && rand(4) == 0) {
 				isabellaStun();
 			}
 			else isabellaAttack();

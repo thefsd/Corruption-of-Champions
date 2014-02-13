@@ -5,8 +5,10 @@
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
-	/**
+	import classes.PerkLib;
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -16,25 +18,25 @@
 	{
 		protected function hellhoundFire():void {
 			//Blind dodge change
-			if(hasStatusAffect("Blind") >= 0) {
+			if(findStatusAffect(StatusAffects.Blind) >= 0) {
 				outputText(capitalA + short + " completely misses you with a wave of dark fire! Thank the gods it's blind!", false);
 				combatRoundOver();
 				return;
 			}
-			/*if(player.hasStatusAffect("Web-Silence") >= 0) {
+			/*if(player.hasStatusAffect(StatusAffects.Web_dash_Silence) >= 0) {
 				outputText("You reach inside yourself to breathe flames, but as you ready to release a torrent of fire, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat.\n", false);
 				changeFatigue(10);
 				takeDamage(10+rand(20));
 				enemyAI();
 				return;
 			}*/
-			if(player.hasPerk("Evade") >= 0 && player.spe >= 35 && rand(3) != 0) {
+			if(player.findPerk(PerkLib.Evade) >= 0 && player.spe >= 35 && rand(3) != 0) {
 				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you.  You easily avoid the wave, diving to the side and making the most of your talents at evasion.", false);
 			}
-			else if(player.hasPerk("Misdirection") >= 0 && rand(100) < 20 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 20 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s fire.\n", false);
 			}
-			else if(player.hasPerk("Flexibility") >= 0 && player.spe > 30 && rand(10) != 0) {
+			else if(player.findPerk(PerkLib.Flexibility) >= 0 && player.spe > 30 && rand(10) != 0) {
 				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you.  You twist and drop with incredible flexibility, watching the fire blow harmlessly overhead.", false);
 			}
 			else {
@@ -56,7 +58,7 @@
 			doNext(1);	
 		}
 		protected function hellhoundScent():void {
-			if(player.hasStatusAffect("NoFlee") >= 0) {
+			if(player.findStatusAffect(StatusAffects.NoFlee) >= 0) {
 				if(spe == 100) {
 					hellhoundFire();
 					return;
@@ -69,7 +71,7 @@
 			else {
 				spe += 40;
 				outputText("The hellhound keeps his four eyes on you as he sniffs the ground where you were moments ago. He raises his heads back up and gives you a fiery grin - he seems to have acquired your scent!  It'll be hard to get away now...", false);
-				player.createStatusAffect("NoFlee",0,0,0,0);
+				player.createStatusAffect(StatusAffects.NoFlee,0,0,0,0);
 			}
 			combatRoundOver();
 			/*if(spe >= 80) {
@@ -156,6 +158,13 @@
 			init11Armor("thick fur");
 			init12Combat(0,25,1,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(5,10+rand(10));
+			init14WeightedDrop()
+					.add(consumables.CANINEP, 3)
+					.addMany(1, consumables.BULBYPP,
+							consumables.KNOTTYP,
+							consumables.BLACKPP,
+							consumables.DBLPEPP,
+							consumables.LARGEPP);
 			initX_Tail(TAIL_TYPE_DOG);
 			initX_Specials(hellhoundFire,hellhoundScent);
 		}

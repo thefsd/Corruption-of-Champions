@@ -5,8 +5,9 @@
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
+import classes.StatusAffects;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -20,7 +21,7 @@
 		{
 			outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.", true);
 			//Boobfeed.
-			if(player.hasStatusAffect("Feeder") >= 0) {
+			if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
 				//Eligable to rape
 				if(player.lust >= 33 && player.gender > 0) {
 					outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?", false);
@@ -69,6 +70,10 @@
 			init11Armor("gelatinous skin");
 			init12Combat(30, 30, 1, Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(2, rand(5) + 1);
+			init14ChainedDrop()
+					.add(weapons.PIPE, 1 / 10)
+					.add(consumables.WETCLTH, 1 / 2)
+					.elseDrop(useables.GREENGL);
 			initX_Specials(5040, 5039, 5039);
 		}
 

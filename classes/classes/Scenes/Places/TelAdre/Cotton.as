@@ -2,8 +2,9 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kGAMECLASS;
+import classes.StatusAffects;
 
-	public class Cotton extends TelAdreAbstractContent {
+public class Cotton extends TelAdreAbstractContent {
 public function Cotton(){
 
 }
@@ -378,7 +379,7 @@ private function cottonChat():void {
 	if(flags[kFLAGS.TIMES_FUCKED_URTA] > 0) 
 		chats[chats.length] = 1;
 	//Edryn chance
-	if(player.hasStatusAffect("Edryn") >= 0) 
+	if(player.findStatusAffect(StatusAffects.Edryn) >= 0)
 		chats[chats.length] = 2;
 	//(Scylla chat)
 	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) 
@@ -412,9 +413,9 @@ private function cottonChat():void {
 	//(Scylla chat)
 	else if(choice == 3) {
 		//(if Scylla hasn't formed support group) 
-		if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] < 5 && player.hasCock() && player.balls > 0 && player.hasStatusAffect("DungeonShutDown") >= 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Scylla?</i>\" Cotton says, \"<i>She's the oddly dressed woman at the Wet Bitch, right? Can't say I know much about her. She's so secretive.</i>\"\n\n", false);
+		if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] < 5 && player.hasCock() && player.balls > 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Scylla?</i>\" Cotton says, \"<i>She's the oddly dressed woman at the Wet Bitch, right? Can't say I know much about her. She's so secretive.</i>\"\n\n", false);
 		//(if Scylla has formed support group)
-		else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 5 && player.hasCock() && player.balls > 0 && player.hasStatusAffect("DungeonShutDown") >= 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Scylla?</i>\" Cotton says, \"<i>I hear she formed an addiction support group. Good on her, there's a lot of people in and around town who need help. I'm glad she's stepping up.</i>\"\n\n", false);
+		else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 5 && player.hasCock() && player.balls > 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Scylla?</i>\" Cotton says, \"<i>I hear she formed an addiction support group. Good on her, there's a lot of people in and around town who need help. I'm glad she's stepping up.</i>\"\n\n", false);
 	}
 	//(Vala chat)
 	else if(choice == 4) {
@@ -854,7 +855,7 @@ private function cottonFucksYouInShowerRepeat():void {
 		outputText("Finally breaking the kiss, Cotton reaches down and hooks her arms under both your legs. You quickly wrap your arms around her neck as she lifts you off the ground. You carefully grip her with your legs as she uses one arm to position her dick at your waiting entrance. You give her a kiss just as she presses into you, and moan into her mouth. She gives a couple careful thrusts before her free hand returns to holding you.\n\n", false);
 		
 		outputText("At this angle she can't quite get her entire girth into you, but that doesn't matter, as it feels absolutely exquisite.", false);
-		buttChange(72,true,true,false);
+		player.buttChange(72,true,true,false);
 		outputText("  You take turns kissing each other's necks and nibbling each other's ears while she thrusts in and out. And after several minutes neither of you can take much more. She gives one last thrust, pulling you down further onto her cock as it explodes within you. Your whole body shudders with orgasmic energy and you bury your head into her neck, stifling a scream.\n\n", false);
 	
 		outputText("After a moment, Cotton pulls you up, letting her shrinking member flop to the floor, and sets you down. Only now you notice your flaccid cock also came at some point, covering both your bodies in seed. You share a deep kiss again and wash each other up before redressing and leaving the gym.\n\n", false);
@@ -865,7 +866,7 @@ private function cottonFucksYouInShowerRepeat():void {
 		outputText("You decide to take her up on her offer, and she pulls you towards the showers, quickly disrobing the both of you. She turns only one shower-head on and pulls you into an embrace underneath the rapidly heating stream. Cotton's cock stirs between you, and your " + vaginaDescript() + " burns with anticipation.\n\n", false);
 
 		outputText("Finally breaking the kiss, Cotton reaches down and hooks her arms under both your legs. You quickly wrap your arms around her neck as she lifts you off the ground. You carefully grip her with your legs as she uses one arm to position her dick at your waiting entrance. You give her a kiss just as she presses into you, and moan into her mouth. She gives a couple careful thrusts before her free hand returns to holding you.", false);
-		cuntChange(72,true,true,false);
+		player.cuntChange(72,true,true,false);
 		outputText("\n\n", false);
 
 		outputText("At this angle she can't quite get her entire girth into you, but that doesn't matter, as it feels absolutely exquisite. You take turns kissing each other's necks and nibbling each other's ears while she thrusts in and out. And after several minutes neither of you can take much more. She gives one last thrust, pulling you down further onto her cock as it explodes within you. Your whole body shudders with orgasmic energy and you bury your head into her neck, stifling a scream.\n\n", false);
@@ -1019,7 +1020,7 @@ public function cottonTantricSex():void {
 	outputText("She leads you to a private room in the gym and sets up a larger mat. She disrobes and you do the same. She sits on the mat and you sit opposite her. You spend a couple minutes just breathing, exploring your partner's body with your eyes only. Then Cotton slips her legs outwards, and leans backwards, letting her enormous member to waggle freely in the air. She curls a finger at you, and gives you your instructions.\n\n", false);
 
 	outputText("You stand and straddle her hips, facing her, carefully lowering yourself down onto her length. You take your time, matching your breathing with hers, until you're completely impaled. Then you stretch your legs out behind your partner and also lean back. You both gyrate your hips as your bodies glisten with a light sheen of sweat.", false);
-	buttChange(72,true,true,false);
+	player.buttChange(72,true,true,false);
 	outputText("\n\n", false);
 
 	outputText("After several minutes of this you switch positions, with Cotton leaning forward and grabbing you under the waist while you curl your legs under you. Then Cotton pulls herself up into a kneeling position while still inside you, pushing your head and shoulders down onto the mat and your legs up into the ceiling. Several more positions later, your breathing is a little ragged but still in sync, and it's clear neither of you can take much more of this.\n\n", false);
@@ -1148,9 +1149,9 @@ public function nomSomeTitMilkCereal():void {
 	dynStats("lib", -0.5, "sen", -.5, "lus", -5);
 	player.boostLactation(0.05);
 	//You've now been milked, reset the timer for that
-	if(player.hasStatusAffect("Feeder") >= 0) {
-		player.addStatusValue("Feeder",1,1);
-		player.changeStatusValue("Feeder",2,0);
+	if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+		player.addStatusValue(StatusAffects.Feeder,1,1);
+		player.changeStatusValue(StatusAffects.Feeder,2,0);
 	}
 	doNext(1);
 }
@@ -1867,9 +1868,9 @@ private function feedYourCottonKids():void {
 	outputText("\n\nYou kiss your equine lover, ruffle the sleeping child's hair, and quietly head back to camp, leaving Cotton to take care of things.");
 	dynStats("lus", -10);
 	//You've now been milked, reset the timer for that
-	if(player.hasStatusAffect("Feeder") >= 0) {
-		player.addStatusValue("Feeder",1,1);
-		player.changeStatusValue("Feeder",2,0);
+	if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+		player.addStatusValue(StatusAffects.Feeder,1,1);
+		player.changeStatusValue(StatusAffects.Feeder,2,0);
 	}
 	player.boostLactation(0.5);
 	

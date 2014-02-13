@@ -5,8 +5,9 @@
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
-	/**
+import classes.StatusAffects;
+
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -30,7 +31,7 @@
 			} else {
 				outputText("The demons stop attacking, and reach out to touch your body. Some are already masturbating like it's the only thing in the world and you know that right now, if you wanted to, you could make each and every one of them fuck you.");
 			}
-			if(hasStatusAffect("phyllafight") >= 0) {
+			if(findStatusAffect(StatusAffects.phyllafight) >= 0) {
 				doNext(game.desert.antsScene.consolePhylla);
 			} else if (hpVictory){
 				game.cleanupAfterCombat();
@@ -105,6 +106,12 @@
 			init11Armor("demonic skin");
 			init12Combat(200,30,1,TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(6,rand(25)+10);
+			init14WeightedDrop()
+					.addMany(1,
+							consumables.SUCMILK,
+							consumables.INCUBID,
+							consumables.OVIELIX,
+							consumables.B__BOOK);
 			initX_Specials(5043,5044);
 			initX_Tail(TAIL_TYPE_DEMONIC);
 			initX_Horns(HORNS_DEMON);
